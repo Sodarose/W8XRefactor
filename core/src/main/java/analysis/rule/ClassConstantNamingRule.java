@@ -1,0 +1,40 @@
+package analysis.rule;
+
+import analysis.AbstractRuleVisitor;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import model.Issue;
+import model.IssueContext;
+import model.JavaModel;
+
+import java.util.List;
+
+public class ClassConstantNamingRule extends AbstractRuleVisitor {
+
+    public void checkConstantName(JavaModel javaModel){
+        List<FieldDeclaration> fieldDeclarationList=javaModel.getUnit().findAll(FieldDeclaration.class);
+        for (FieldDeclaration fieldDeclaration:fieldDeclarationList) {
+            if (fieldDeclaration.isFinal() && fieldDeclaration.isStatic()) {
+                String constantName = fieldDeclaration.getVariable(0).getNameAsString();
+                if (!(constantName.equals(constantName.toUpperCase()))) {
+                    Issue issue = new Issue();
+                    issue.setIssueNode(fieldDeclaration);
+                    issue.setJavaModel(javaModel);
+                    issue.setRefactorName(getSolutionClassName());
+                    issue.setDescription(getDescription());
+                    issue.setRuleName(getRuleName());
+                    getContext().getIssues().add(issue);
+                }
+            }
+        }
+    }
+    @Override
+    public IssueContext apply(List<JavaModel> javaModels) {
+        for (JavaModel javaModel:javaModels){
+            checkConstantName(javaModel);
+        }
+        return getContext();
+    }
+    public static void main(String[] args) {
+
+    }
+}

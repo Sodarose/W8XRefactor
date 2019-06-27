@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>W8X代码重构</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+    <link rel="stylesheet" href="/styles/default.css" th:href="@{/styles/default.css}">
+    <link rel="stylesheet" href="/css/zTreeStyle/zTreeStyle.css" th:href="@{/css/zTreeStyle/zTreeStyle.css}"
+          type="text/css">
+    <link rel="stylesheet" href="/styles/default.css" th:href="@{/styles/default.css}">
+
+
+    <script src="/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" src="/js/jquery-1.4.4.min.js" th:href="@{/js/jquery-1.4.4.min.js}"></script>
+    <script type="text/javascript" src="/js/jquery.ztree.core.js"
+            th:href="@{/js/jquery.ztree.core.js}"></script>
+
+</head>
+<style type="text/css">
+.source-line-code-issue {
+    display: inline-block;
+    background-image: url(/images/topic.png);
+    background-repeat: repeat-x;
+    background-size: 4px;
+    background-position: bottom;
+}
+    .ztree li span.button.pIcon01_ico_open {
+        margin-right: 2px;
+        background: url(/images/warn.png);
+        vertical-align: top;
+        *vertical-align: middle
+    }
+    .ztree li span.button.icon01_ico_docu {
+        margin-right: 2px;
+        background: url(/images/warn.png);
+        vertical-align: top;
+        vertical-align: middle;
+    }
+</style>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div th:insert="~{pages/header :: header}"></div>
+    <div class="layui-body" style="left: 0">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md2">
+                    <div class="layui-card">
+                        <div class="layui-card-header">项目目录</div>
+                        <div class="layui-card-body" style="overflow-y:auto; overflow-x:auto;">
+                            <ul id="treeDemo" class="ztree"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md10 layui-row">
+
+                    <div id="oldCode" class="layui-card layui-col-md10">
+                        <div class="layui-card-header">源码预览</div>
+                        <div class="layui-card-body">
+                            <div id="code" style="background-color:darkgray; overflow-x:auto;">....</div>
+                        </div>
+                    </div>
+
+                    <div id="newCode" class="layui-card layui-col-md6" style="display: none;">
+                        <div class="layui-card-header">重构后代码</div>
+                        <div class="layui-card-body">
+                            <div id="refactorcode" style="background-color:darkgray; overflow-x:auto;">...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-footer" style="left: 0">
+        <!-- 底部固定区域 -->
+        底部固定区域
+    </div>
+</div>
+<script src="/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+<script src="/layui/me.js" th:src="@{/layui/me.js}"></script>
+<script src="/js/highlight.pack.js" th:src="@{/js/highlight.pack.js}"></script>
+<script>
+
+    $(document).ready(function () {
+        layui.use('element', function () {
+            var element = layui.element;
+        });
+        layui.use('layer', function () { //独立版的layer无需执行这一句
+            var $ = layui.jquery, layer = layui.layer;
+        });
+        var setting = {
+            view: {
+                showIcon: true
+            },
+            callback: {
+                beforeClick: check,
+                onClick: getJavaFileDetail
+            }
+        };
+
+        var zNodes = [];
+        $.ajax({
+            url: '/core/projectTree',
+            type: 'get',
+            dataType: 'json',
+            success: function (res) {
+
+                if (res == null) {
+                    layer.msg('请先扫描项目', {icon: 5});
+                    return
+                }
+                sloveJson(res)
+                zNodes.push(res)
+                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            }, error: function (res) {
+
+            }
+
+        })
+
+    });
+
+    function sloveJson(json) {
+        if (json.children == null) {
+            if (json.hasIssue === true && json.file === true) {
+                json.iconSkin = "icon01";
+            }
+        } else {
+            let el = json.children
+            for (let i in el) {
+                sloveJson(el[i])
+            }
+        }
+    }
+
+    function check(treeId, treeNode, clickFlag) {
+        return treeNode.file;
+    }
+
+    function getJavaFileDetail(event, treeId, treeNode, clickFlag) {
+        let data = treeNode.realPath;
+        $.ajax({
+            url: '/core/javaFileDetail',
+            type: 'post',
+            dataType: 'json',
+            data: {filePath: data},
+            success: function (res) {
+                res.originalCode = res.originalCode.replace('<', '&lt;')
+               res.originalCode = res.originalCode.replace('>', '&gt;')
+               res.originalCode = res.originalCode.replace(/\n/g,'<br>')
+               res.originalCode = res.originalCode.replace(/\s/g,'&nbsp;')
+                 if (res.refactCode != null) {
+                   res.refactCode = res.refactCode.replace('<', '&lt;')
+                   res.refactCode = res.refactCode.replace('>', '&gt;')
+                   res.refactCode = res.refactCode.replace(/\n/g,'<br>')
+                   res.refactCode = res.refactCode.replace(/\s/g,'&nbsp;')
+                   }
+                   if(res.issueShows != null){
+                res.originalCode = contrast(res.originalCode,res.issueShows)
+                }
+                $("#code").html(res.originalCode)
+                if (res.refactCode != null) {
+                    $("#oldCode").addClass("layui-col-md6");
+                    $("#oldCode").removeClass("layui-col-md10");
+                    $("#newCode").css("display", "block");
+                    $("#refactorcode").html(res.refactCode);
+                }else{
+                    $("#newCode").css("display", "none");
+                }
+            }, error: function (res) {
+
+            }
+        });
+    }
+    function scan() {
+        let path = $("#filePath").val()
+        scanner(path);
+    }
+    
+    function refactorAll() {
+        refactor();
+    }
+function contrast(originalCode,issueShows){
+        var arry=originalCode.split('<br>')
+        if(issueShows.length>0){
+        for(var i=0;i<issueShows.length;i++){
+               for(var j=issueShows[i].beginLine;j<=issueShows[i].endLine;j++){
+                        arry[j]='<span class="source-line-code-issue">'+arry[j]+'</span>'
+
+               }
+        }
+        originalCode=""
+        for(var k=0;k<arry.length;k++){
+                   if(typeof(arry[k]) != "undefined"){
+                originalCode=originalCode+arry[k]+"<br>"
+                }
+        }
+        }
+        return originalCode
+}
+</script>
+</body>
+</html>

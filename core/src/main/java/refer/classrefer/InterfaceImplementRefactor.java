@@ -1,0 +1,36 @@
+package refer.classrefer;
+
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import model.Store;
+
+import java.util.List;
+
+public class InterfaceImplementRefactor {
+    public static void implementRefactor(String oldInferfaceName, String newInferfaceName) {
+        List<CompilationUnit> units = Store.javaFiles;
+        for (CompilationUnit unit : units) {
+            List<ClassOrInterfaceDeclaration> classOrInterfaceDeclarations = unit.findAll(ClassOrInterfaceDeclaration.class);
+            if (!(classOrInterfaceDeclarations.isEmpty())) {
+                for (ClassOrInterfaceDeclaration classOrInterfaceDeclaration : classOrInterfaceDeclarations) {
+                    List<ClassOrInterfaceType> classOrInterfaceTypeList = classOrInterfaceDeclaration.getImplementedTypes();
+                    if (!(classOrInterfaceTypeList.isEmpty())) {
+                        int index = 0;//位置索引
+                        for (ClassOrInterfaceType classOrInterfaceType : classOrInterfaceTypeList) {
+                            if (classOrInterfaceType.getNameAsString().equals(oldInferfaceName)) {
+                                classOrInterfaceType.setName(newInferfaceName);
+                                classOrInterfaceDeclaration.setImplementedType(index, classOrInterfaceType);
+                            }
+                            index++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public static void main(String args[]){
+       InterfaceImplementRefactor.implementRefactor("infertest","Infertest");
+    }
+}
+

@@ -1,0 +1,17 @@
+VoidForTransFromWhile
+ComplexGuardStmtRefactor
+GuardStmtRefactorTestOne
+GuardStmtRefactorTwo
+EnumCondition
+EnumClass
+EnumT
+MoreCoditionTest
+NoHaveElse
+SampleIfTrandFromsSwitch
+EnumSwitchTrandsFromIf
+SwitchChangeFromIf
+WhileTrandsFromFor
+ForEachRule
+HashCodeRule
+StringComparisonRule
+CodeStyleRule
