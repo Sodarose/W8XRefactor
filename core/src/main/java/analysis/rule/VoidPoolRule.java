@@ -1,11 +1,18 @@
 package analysis.rule;
 
 import analysis.AbstractRuleVisitor;
+import analysis.BaseVisitor;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.expr.Name;
 import com.github.javaparser.ast.stmt.ForStmt;
+import com.github.javaparser.ast.stmt.IfStmt;
+import io.FileUlits;
 import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -1,16 +1,16 @@
 package analysis.rule;
 
 import analysis.AbstractRuleVisitor;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.VariableDeclarator;
-import com.github.javaparser.ast.expr.AssignExpr;
-import com.github.javaparser.ast.expr.Expression;
-import com.github.javaparser.ast.expr.SimpleName;
-import com.github.javaparser.ast.expr.UnaryExpr;
-import com.github.javaparser.ast.stmt.Statement;
-import com.github.javaparser.ast.stmt.WhileStmt;
+import com.github.javaparser.ast.expr.*;
+import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.symbolsolver.javaparser.Navigator;
+import io.FileUlits;
+import javassist.expr.Expr;
 import model.Issue;
 import model.IssueContext;
 import model.JavaModel;

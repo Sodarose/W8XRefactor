@@ -2,6 +2,7 @@ package model;
 
 import analysis.AbstractRuleVisitor;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.symbolsolver.javaparsermodel.JavaParserFacade;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.utils.ProjectRoot;

@@ -1,12 +1,17 @@
 package refactor.refactorimpl;
 
+import analysis.rule.VoidPoolRule;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.expr.BooleanLiteralExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.stmt.*;
+import io.FileUlits;
 import model.Issue;
 import refactor.AbstractRefactor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

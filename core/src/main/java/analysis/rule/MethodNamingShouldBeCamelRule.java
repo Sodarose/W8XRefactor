@@ -1,13 +1,18 @@
 package analysis.rule;
 
 import analysis.AbstractRuleVisitor;
+import analysis.BaseVisitor;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import io.FileUlits;
 import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
 import ulits.SplitName;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MethodNamingShouldBeCamelRule extends AbstractRuleVisitor {

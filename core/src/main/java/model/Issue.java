@@ -1,10 +1,14 @@
 package model;
 
+import com.github.javaparser.Range;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import refactor.Refactor;
 
+import java.util.List;
 import java.util.Map;
 
 /**

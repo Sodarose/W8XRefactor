@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.Map;
 
 public class FilesNameRename {
-    public static void nameRename(Issue issue, String oldFileName, String newFileName){
+    public static void nameRename(Issue issue,String oldFileName,String newFileName){
         JavaModel javaModel=issue.getJavaModel();
         String path=javaModel.getReadPath();
         File file=new File(path);

@@ -1,12 +1,17 @@
 package refactor.refactorimpl;
 
+import analysis.rule.LowerCamelCaseVariableNaming;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
+import io.FileUlits;
 import model.Issue;
 import refactor.AbstractRefactor;
 import ulits.SplitName;
 import ulits.VariableReferUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VariableNameRefactor extends AbstractRefactor {

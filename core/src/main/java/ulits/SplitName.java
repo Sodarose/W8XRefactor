@@ -3,6 +3,7 @@ package ulits;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class SplitName {
 
@@ -36,21 +37,17 @@ public class SplitName {
         }
         return nameList;
     }
-
+//SplitName.class.getResource("/static/data.txt").toString()
     public static List<String> readData() throws FileNotFoundException, IOException {
         List<String> nameList = new ArrayList<String>();
-        System.out.println();
-        File file = new File("");
-        System.out.println(file.getPath());
-        if (true) {
-            return null;
-        }
-        BufferedReader br = new BufferedReader(new InputStreamReader(SplitName.class.getResource("/static/data.txt").openStream()));
+       InputStreamReader fileReader = new InputStreamReader(SplitName.class.getResource("/static/data").openStream());
+       BufferedReader br = new BufferedReader(fileReader);
         String data = null;
         while ((data = br.readLine()) != null) {
             nameList.add(data);
         }
         br.close();
+        fileReader.close();
         return nameList;
     }
 

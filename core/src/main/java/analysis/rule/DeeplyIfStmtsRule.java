@@ -4,20 +4,22 @@ package analysis.rule;
 import analysis.AbstractRuleVisitor;
 import analysis.BaseVisitor;
 import com.github.javaparser.Range;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.stmt.IfStmt;
-import com.github.javaparser.ast.stmt.Statement;
+import com.github.javaparser.ast.stmt.*;
+import io.FileUlits;
+import io.ParserProject;
+import jdk.nashorn.internal.ir.IfNode;
 import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
+import refactor.refactorimpl.IfTransformSwitchRefactor;
 import ulits.AnalysisUlits;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**

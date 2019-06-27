@@ -1,14 +1,16 @@
 package formatter;
 
+import io.FileUlits;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.eclipse.jdt.core.formatter.DefaultCodeFormatterConstants;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class FormatOptions {
 

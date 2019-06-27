@@ -1,6 +1,9 @@
 package analysis.rule;
 
 import analysis.AbstractRuleVisitor;
+import api.AnalysisApi;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.LineComment;
@@ -10,6 +13,7 @@ import com.github.javaparser.ast.stmt.ForEachStmt;
 import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
 import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserMethodDeclaration;
 import com.github.javaparser.symbolsolver.model.resolution.SymbolReference;
+import io.FileUlits;
 import model.Issue;
 import model.IssueContext;
 import model.JavaModel;

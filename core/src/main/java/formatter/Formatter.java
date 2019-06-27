@@ -1,5 +1,8 @@
 package formatter;
 
+import java.text.Normalizer;
+import java.util.Map;
+
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
@@ -7,8 +10,6 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.text.edits.TextEdit;
-
-import java.util.Map;
 
 public class Formatter {
 

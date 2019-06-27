@@ -1,5 +1,8 @@
 package refactor.refactorimpl;
 
+import analysis.rule.WhileChangeForRule;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.VariableDeclarator;
@@ -9,9 +12,11 @@ import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.stmt.WhileStmt;
+import io.FileUlits;
 import model.Issue;
 import refactor.Refactor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

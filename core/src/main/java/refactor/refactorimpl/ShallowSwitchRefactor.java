@@ -1,19 +1,16 @@
 package refactor.refactorimpl;
 
 import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.expr.BinaryExpr;
-import com.github.javaparser.ast.expr.Expression;
-import com.github.javaparser.ast.expr.FieldAccessExpr;
-import com.github.javaparser.ast.expr.NameExpr;
+import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.resolution.types.ResolvedType;
 import com.github.javaparser.symbolsolver.model.resolution.SymbolReference;
+import io.ParserProject;
 import model.Issue;
 import model.Store;
 import refactor.AbstractRefactor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 将case小于等于3的switch语句转换为if

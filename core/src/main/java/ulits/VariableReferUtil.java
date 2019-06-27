@@ -1,6 +1,7 @@
 package ulits;
 
 import refer.classrefer.FieldNameReferRefactor;
+import refer.classrefer.VariNameReferRefactor;
 
 public class VariableReferUtil {
     public static void referUtil(String oldVariName,String newVariName){

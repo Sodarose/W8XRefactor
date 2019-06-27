@@ -1,5 +1,7 @@
 package refactor.refactorimpl;
 
+import analysis.rule.DeeplyIfStmtsRule;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
@@ -9,7 +11,9 @@ import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.*;
+import io.FileUlits;
 import model.Issue;
+import model.JavaModel;
 import refactor.AbstractRefactor;
 import refactor.ExpressionTool;
 import ulits.AnalysisUlits;

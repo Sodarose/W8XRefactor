@@ -1,11 +1,16 @@
 package analysis.rule;
 
 import analysis.AbstractRuleVisitor;
+import analysis.BaseVisitor;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.PackageDeclaration;
+import io.FileUlits;
 import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

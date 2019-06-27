@@ -1,6 +1,7 @@
 package analysis.rule;
 
 import analysis.AbstractRuleVisitor;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.stmt.*;
 import model.Issue;
 import model.IssueContext;
@@ -57,7 +58,7 @@ public class CodeStyleRule extends AbstractRuleVisitor {
         }
     }
 
-    private Issue createIssue(Statement statement, JavaModel javaModel){
+    private Issue createIssue(Statement statement,JavaModel javaModel){
         Issue issue = new Issue();
         issue.setRuleName(getRuleName());
         issue.setJavaModel(javaModel);

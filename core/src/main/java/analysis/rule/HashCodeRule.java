@@ -1,11 +1,16 @@
 package analysis.rule;
 
 import analysis.AbstractRuleVisitor;
+import api.AnalysisApi;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.BlockComment;
 import com.github.javaparser.ast.type.PrimitiveType;
+import com.github.javaparser.symbolsolver.javaparser.Navigator;
+import io.FileUlits;
 import model.Issue;
 import model.IssueContext;
 import model.JavaModel;

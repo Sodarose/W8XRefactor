@@ -8,7 +8,7 @@ import model.Store;
 import java.util.List;
 
 public class PackageNameReferRefactor {
-    public static void nameRefactor(Issue issue, String oldPackageName, String newPackageName) {
+    public static void nameRefactor(Issue issue,String oldPackageName, String newPackageName) {
         List<CompilationUnit> units = Store.javaFiles;
         CompilationUnit issueUnit = issue.getJavaModel().getUnit();
         for (CompilationUnit unit : units) {

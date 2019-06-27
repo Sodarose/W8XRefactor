@@ -1,11 +1,15 @@
 package refer.classrefer;
 
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import model.Store;
+import refactor.refactorimpl.ClassNameRefactor;
+import ulits.ImportDeclarationUtil;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ClassExtendsReferRefactor {
     public static void extendsRefactor(String oldClassName,String newClassName) {

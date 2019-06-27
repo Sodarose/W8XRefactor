@@ -11,7 +11,7 @@ public class PackageNameRefactor extends AbstractRefactor {
         PackageDeclaration packageDeclaration=(PackageDeclaration) issue.getIssueNode();
         packageNameRefactor(packageDeclaration,issue);
     }
-    public void packageNameRefactor(PackageDeclaration packageDeclaration, Issue issue){
+    public void packageNameRefactor(PackageDeclaration packageDeclaration,Issue issue){
         String newName=packageDeclaration.getNameAsString().toLowerCase();
         String oldName=packageDeclaration.getNameAsString();
         packageDeclaration.setName(packageDeclaration.getNameAsString().toLowerCase());

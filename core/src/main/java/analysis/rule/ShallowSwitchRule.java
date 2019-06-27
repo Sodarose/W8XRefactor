@@ -1,10 +1,13 @@
 package analysis.rule;
 
 import analysis.AbstractRuleVisitor;
+import analysis.BaseVisitor;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.stmt.SwitchStmt;
 import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
+import refactor.refactorimpl.ShallowSwitchRefactor;
 
 import java.util.List;
 

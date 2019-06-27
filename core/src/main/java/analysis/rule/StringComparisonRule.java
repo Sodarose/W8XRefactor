@@ -1,9 +1,12 @@
 package analysis.rule;
 
 import analysis.AbstractRuleVisitor;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.MethodCallExpr;
+import io.FileUlits;
 import model.IssueContext;
 import model.JavaModel;
 

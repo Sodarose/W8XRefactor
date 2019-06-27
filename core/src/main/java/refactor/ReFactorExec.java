@@ -4,9 +4,7 @@ import lombok.Data;
 import model.Issue;
 import model.JavaModel;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * 重构执行类

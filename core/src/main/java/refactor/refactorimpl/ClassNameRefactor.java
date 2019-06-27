@@ -1,6 +1,11 @@
 package refactor.refactorimpl;
 
+import analysis.rule.ClassNamingShouldBeCamelRule;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.TypeDeclaration;
+import io.FileUlits;
 import model.Issue;
 import model.JavaModel;
 import refactor.AbstractRefactor;
@@ -8,7 +13,11 @@ import ulits.ClassReferUtil;
 import ulits.FilesNameRename;
 import ulits.SplitName;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

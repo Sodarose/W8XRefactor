@@ -5,13 +5,14 @@ import model.Issue;
 import model.JavaModel;
 import model.Store;
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class DirNameRename {
-    public static void nameRename(Issue issue, String oldPackageName, String newPackageName){
+    public static void nameRename(Issue issue,String oldPackageName,String newPackageName){
        String[] oldName=oldPackageName.split("\\.");
        String[] newName=newPackageName.split("\\.");
        oldPackageName="";
@@ -53,7 +54,7 @@ public class DirNameRename {
     }
     public static List<String> readFildName(String path){
         List<String> fileList=new ArrayList<>();
-        Map<String, JavaModel> javaModelMap= Store.javaModelMap;
+        Map<String,JavaModel> javaModelMap= Store.javaModelMap;
         for (String file:javaModelMap.keySet()){
             BoyerMoore boyerMoore=new BoyerMoore();
             int pos=boyerMoore.match(file,path);

@@ -1,5 +1,7 @@
 package analysis;
 
+import com.github.javaparser.ast.CompilationUnit;
+import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
 

@@ -1,11 +1,16 @@
 package refactor.refactorimpl;
 
+import analysis.rule.IFTransformSwitchRule;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.resolution.types.ResolvedType;
 import com.github.javaparser.symbolsolver.model.resolution.SymbolReference;
+import io.FileUlits;
+import io.ParserProject;
 import model.Issue;
 import model.Store;
 import refactor.AbstractRefactor;

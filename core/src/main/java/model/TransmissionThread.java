@@ -4,9 +4,7 @@ package model;
 import formatter.FormatOptions;
 import formatter.Formatter;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 /**
  *  写文件线程

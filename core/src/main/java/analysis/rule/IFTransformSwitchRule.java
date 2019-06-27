@@ -11,10 +11,7 @@ import model.IssueContext;
 import model.JavaModel;
 import ulits.AnalysisUlits;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * if转换为transform
@@ -22,7 +19,7 @@ import java.util.Map;
  * @author kangkang
  */
 public class IFTransformSwitchRule extends AbstractRuleVisitor {
-    private final int min = 4;
+    private final int min = 3;
     private JavaModel javaModel;
 
     @Override
@@ -186,4 +183,5 @@ public class IFTransformSwitchRule extends AbstractRuleVisitor {
             return ifStmt;
         }
     }
+
 }
