@@ -41,7 +41,7 @@ public class ParameterNameRefactor extends AbstractRefactor {
 
         }
         parameter.setName(newName);
-        VariableReferUtil.VariNameUtil(oldName,newName);
+        VariableReferUtil.VariableNameUtil(oldName,newName);
     }
 
 }

@@ -14,7 +14,7 @@ public class VariNameReferRefactor {
             List<NameExpr> nameExprs = unit.findAll(NameExpr.class);
             if (!(nameExprs.isEmpty())) {
                 for (NameExpr nameExpr : nameExprs) {
-                    if (nameExpr.getName().equals(oldVariName)) {
+                    if (nameExpr.getName().toString().equals(oldVariName)) {
                         nameExpr.setName(newVariName);
                     }
                 }

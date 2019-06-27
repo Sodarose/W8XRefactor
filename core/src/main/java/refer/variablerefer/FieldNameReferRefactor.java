@@ -18,7 +18,7 @@ public class FieldNameReferRefactor {
             List<FieldAccessExpr> fieldAccessExprs = unit.findAll(FieldAccessExpr.class);
             if (!(fieldAccessExprs.isEmpty())) {
                 for (FieldAccessExpr fieldAccessExpr : fieldAccessExprs) {
-                    if (fieldAccessExpr.getName().equals(oldVariName)) {
+                    if (fieldAccessExpr.getName().toString().equals(oldVariName)) {
                         fieldAccessExpr.setName(newVariName);
                     }
                 }
