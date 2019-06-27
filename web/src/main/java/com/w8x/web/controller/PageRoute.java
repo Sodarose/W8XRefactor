@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/route")
 public class PageRoute {
-/**/
+    /**
+     *  路由处理
+     * */
     @GetMapping("/{pageName}")
     public String route(@PathVariable String pageName){
-        String temp = "pages";
-        return temp+"/"+pageName;
+        return "pages/"+pageName;
     }
+
 }

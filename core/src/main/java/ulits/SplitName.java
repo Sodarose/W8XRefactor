@@ -1,5 +1,7 @@
 package ulits;
 
+import io.FileUlits;
+
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,7 +42,7 @@ public class SplitName {
 //SplitName.class.getResource("/static/data.txt").toString()
     public static List<String> readData() throws FileNotFoundException, IOException {
         List<String> nameList = new ArrayList<String>();
-       InputStreamReader fileReader = new InputStreamReader(SplitName.class.getResource("/static/data").openStream());
+       InputStreamReader fileReader = new InputStreamReader(FileUlits.readFilesByClassLoader("static/data"));
        BufferedReader br = new BufferedReader(fileReader);
         String data = null;
         while ((data = br.readLine()) != null) {

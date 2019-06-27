@@ -5,7 +5,10 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -15,7 +18,7 @@ import java.util.List;
  * 读取xml中的信息 然后根据反射生成对象 生成规则链
  */
 public class RuleLink {
-    private static final String RULE_XML_PATH = "/static/rule.xml";
+    private static final String RULE_XML_PATH = "static/rule.xml";
 
     private static RuleLink ruleLink = null;
 
@@ -29,8 +32,9 @@ public class RuleLink {
     public List<Rule> readRuleLinkByXML() {
         List<Rule> rules = new ArrayList<>();
         try {
+            Resource resource = new ClassPathResource(RULE_XML_PATH);
             SAXReader reader = new SAXReader();
-            Document document = reader.read(RuleLink.class.getResource(RULE_XML_PATH).toString());
+            Document document = reader.read(resource.getInputStream());
             Element root = document.getRootElement();
             Iterator<Element> it = root.elementIterator();
             Store.rules = new ArrayList<>();
@@ -47,6 +51,8 @@ public class RuleLink {
             });
             rules.addAll(Store.rules);
         } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

@@ -1,6 +1,9 @@
 package io;
 
+import org.springframework.core.io.ClassPathResource;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -44,5 +47,12 @@ public class FileUlits {
 
       }
       return sources;
+    }
+
+    /**
+     *  获得数据信息 已类加载的方式
+     * */
+    public static InputStream readFilesByClassLoader(String path) throws IOException {
+        return new ClassPathResource(path).getInputStream();
     }
 }
