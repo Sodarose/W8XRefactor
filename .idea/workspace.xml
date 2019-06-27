@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d687a54f-dc7f-46e8-a8a8-fedaf926e86a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/analysis/RuleLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/analysis/RuleLink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/formatter/FormatOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/formatter/FormatOptions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/io/FileUlits.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/io/FileUlits.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/ulits/SplitName.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/ulits/SplitName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/w8x/web/controller/PageRoute.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/w8x/web/controller/PageRoute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/pages/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/pages/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/pages/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/pages/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/pages/nofollow.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/pages/nofollow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/pages/scanner.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/pages/scanner.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -41,7 +31,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/src/main/java/com/w8x/web/controller/PageRoute.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="324">
@@ -50,6 +40,15 @@
                 <element signature="e#446#447#0" expanded="true" />
                 <element signature="e#477#478#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/ulits/SplitName.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="44" column="109" selection-start-line="44" selection-start-column="109" selection-end-line="44" selection-end-column="109" />
             </state>
           </provider>
         </entry>
@@ -81,10 +80,10 @@
         <option value="$PROJECT_DIR$/core/pom.xml" />
         <option value="$PROJECT_DIR$/core/src/main/java/analysis/RuleLink.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/io/FileUlits.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/ulits/SplitName.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/formatter/FormatOptions.java" />
         <option value="$PROJECT_DIR$/web/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/web/src/main/java/com/w8x/web/controller/PageRoute.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/ulits/SplitName.java" />
       </list>
     </option>
   </component>
@@ -159,6 +158,51 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="formatter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="W8XRefactor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="W8XRefactor" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="io" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="W8XRefactor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="W8XRefactor" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ulits" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="W8XRefactor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="W8XRefactor" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ulits" type="462c0819:PsiDirectoryNode" />
+              <item name="SplitName.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
+            <path>
+              <item name="W8XRefactor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="W8XRefactor" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="W8XRefactor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="W8XRefactor" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="W8XRefactor" type="b2602c69:ProjectViewProjectNode" />
@@ -308,17 +352,18 @@
       <option name="presentableId" value="Default" />
       <updated>1561547509237</updated>
       <workItem from="1561547512894" duration="1425000" />
-      <workItem from="1561621713536" duration="5299000" />
+      <workItem from="1561621713536" duration="5402000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6724000" />
+    <option name="totallyTimeSpent" value="6827000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25375536" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25375536" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -335,7 +380,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32976446" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32976446" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
@@ -343,7 +388,7 @@
       <window_info anchor="bottom" id="Version Control" order="13" />
       <window_info anchor="bottom" id="Flutter Performance" order="14" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="15" weight="0.32976446" />
-      <window_info active="true" anchor="bottom" id="Run Dashboard" order="16" visible="true" weight="0.32976446" />
+      <window_info anchor="bottom" id="Run Dashboard" order="16" weight="0.32976446" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -567,16 +612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/ulits/SplitName.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-567">
-          <caret line="44" column="94" lean-forward="true" selection-start-line="44" selection-start-column="94" selection-end-line="44" selection-end-column="94" />
-          <folding>
-            <element signature="e#517#534#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/formatter/FormatOptions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -599,6 +634,13 @@
             <element signature="e#446#447#0" expanded="true" />
             <element signature="e#477#478#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/ulits/SplitName.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="44" column="109" selection-start-line="44" selection-start-column="109" selection-end-line="44" selection-end-column="109" />
         </state>
       </provider>
     </entry>
