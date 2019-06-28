@@ -11,6 +11,8 @@ import java.util.List;
  * 文件树
  *
  * @author Administrator*/
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class TreeNode {
     private String realPath;

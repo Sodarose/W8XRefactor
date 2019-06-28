@@ -59,9 +59,6 @@ public class ReFactorExec {
                     continue;
                 }
                 Refactor refactor = (Refactor) Class.forName(issue.getRefactorName()).newInstance();
-                if (javaModel.getCopyUnit() == null) {
-                    javaModel.setCopyUnit(javaModel.getUnit().clone());
-                }
                 refactor.refactor(issue);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
