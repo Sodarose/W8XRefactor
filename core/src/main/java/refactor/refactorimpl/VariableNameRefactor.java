@@ -40,6 +40,6 @@ public class VariableNameRefactor extends AbstractRefactor {
             newName=newName+data;
         }
         variableDeclarationExpr.getVariable(0).setName(newName);
-        VariableReferUtil.VariNameUtil(oldName,newName);
+        VariableReferUtil.VariableNameUtil(oldName,newName);
     }
 }

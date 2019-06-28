@@ -22,7 +22,7 @@ public class ContantNameRefactor extends AbstractRefactor {
             String constantName = fieldDeclaration.getVariable(0).getNameAsString();
             String newName = constantName.toUpperCase();
             fieldDeclaration.getVariable(0).setName(newName);
-            VariableReferUtil.referUtil(constantName, newName);
+            VariableReferUtil.FieldNameUtil(constantName,newName);
         }
     }
 

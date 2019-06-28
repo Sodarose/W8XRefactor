@@ -1,13 +1,14 @@
 package ulits;
 
-import refer.classrefer.FieldNameReferRefactor;
-import refer.classrefer.VariNameReferRefactor;
+import refer.variablerefer.FieldNameReferRefactor;
+import refer.variablerefer.VariNameReferRefactor;
 
 public class VariableReferUtil {
-    public static void referUtil(String oldVariName,String newVariName){
+    public static void FieldNameUtil(String oldVariName,String newVariName){
         FieldNameReferRefactor.nameReferRefactor(oldVariName,newVariName);
+        refer.variablerefer.VariNameReferRefactor.nameExprRefactor(oldVariName,newVariName);
     }
-    public static void VariNameUtil(String oldVariName,String newVariName){
-        VariableReferUtil.referUtil(oldVariName,newVariName);
+    public static void VariableNameUtil(String olaVariName,String newVariName){
+        VariNameReferRefactor.nameExprRefactor(olaVariName,newVariName);
     }
 }
