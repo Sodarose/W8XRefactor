@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -22,7 +23,7 @@ public class WebRedux {
      */
     @RequestMapping(value = "/analysis", method = RequestMethod.POST)
     @ResponseBody
-    public Code analysis(@RequestParam(value = "fileName") String fileName) {
+    public Code analysis(@RequestParam(value = "fileName") String fileName) throws FileNotFoundException {
         //System.out.println(fileName);
         Code code = refactCoreService.runAnalysis(fileName);
         return code;
@@ -54,7 +55,7 @@ public class WebRedux {
 
     @GetMapping("/analysisagin")
     @ResponseBody
-    Code<String> analysisAgin() {
+    Code<String> analysisAgin() throws FileNotFoundException {
         return refactCoreService.analysisAgin();
     }
 }

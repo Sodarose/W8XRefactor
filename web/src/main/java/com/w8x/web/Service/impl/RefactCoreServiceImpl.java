@@ -11,6 +11,7 @@ import model.JavaModel;
 import model.Store;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class RefactCoreServiceImpl implements RefactCoreService {
      * 进行 分析
      */
     @Override
-    public Code runAnalysis(String filePath) {
+    public Code runAnalysis(String filePath) throws FileNotFoundException {
         if (analysisApi.analysis(filePath)) {
             return Code.createCode(200, null, "扫描成功");
         }
@@ -45,15 +46,12 @@ public class RefactCoreServiceImpl implements RefactCoreService {
     public CodeShown getJavaFileDetail(String filePath) throws UnsupportedEncodingException {
         JavaModel vo = analysisApi.getJavaModelVo(filePath);
         if (vo == null) {
+            System.out.println("有为空的代码片段");
             return null;
         }
         CodeShown codeShown = new CodeShown();
-        codeShown.setOriginalCode(vo.getUnit().toString());
-        //判断是否重构了
-        if (vo.getCopyUnit() != null) {
-            codeShown.setRefactCode(vo.getUnit().toString());
-            codeShown.setOriginalCode(vo.getCopyUnit().toString());
-        }
+        codeShown.setRefactCode(vo.getUnit().toString());
+        codeShown.setOriginalCode(vo.getFileContent());
         if (vo.getIssues() != null && vo.getIssues().size() != 0) {
             List<IssueShow> issueShows = new ArrayList<>();
             for (Issue issue : vo.getIssues()) {
@@ -99,7 +97,7 @@ public class RefactCoreServiceImpl implements RefactCoreService {
     }
 
     @Override
-    public Code<String> analysisAgin() {
+    public Code<String> analysisAgin() throws FileNotFoundException {
         if (analysisApi.analysisagin()) {
             return Code.createCode(200, null, "扫描成功");
         }

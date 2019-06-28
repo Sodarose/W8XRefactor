@@ -22,6 +22,7 @@ public class Store {
     public static String path;
     //状态
     public static boolean run = false;
+
     public static TreeNode rootNode;
     //项目
     public static ProjectRoot projectRoot;
@@ -36,5 +37,10 @@ public class Store {
     public static List<CompilationUnit> javaFiles;
 
     public static List<AbstractRuleVisitor> rules;
+
+    /**
+     *  为了更方便的更改文件树的数据
+     * */
+    public static Map<String,TreeNode> treeNodeMap;
 
 }

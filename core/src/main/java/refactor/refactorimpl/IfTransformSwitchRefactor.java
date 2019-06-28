@@ -7,6 +7,7 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.stmt.*;
+import com.github.javaparser.resolution.UnsolvedSymbolException;
 import com.github.javaparser.resolution.types.ResolvedType;
 import com.github.javaparser.symbolsolver.model.resolution.SymbolReference;
 import io.FileUlits;
@@ -194,13 +195,26 @@ public class IfTransformSwitchRefactor extends AbstractRefactor {
             isString = true;
             return;
         }
-        ResolvedType s = Store.javaParserFacade.getType(selector);
-        //搜索根据类限定名称搜索
-        SymbolReference v = Store.combinedTypeSolver.tryToSolveType(s.describe());
+        ResolvedType s = null;
+        SymbolReference v = null;
+        try {
+            s = Store.javaParserFacade.getType(selector);
+            //搜索根据类限定名称搜索
+            v = Store.combinedTypeSolver.tryToSolveType(s.describe());
+        }catch (UnsolvedSymbolException e){
+
+        }
+
+        if(s==null||v==null){
+            isOther = true;
+            return;
+        }
+
         if (!v.isSolved()) {
             isOther = true;
             return;
         }
+
         if (v.getCorrespondingDeclaration().isType()) {
             if (v.getCorrespondingDeclaration().asType().getQualifiedName().contains("java.lang.String")) {
                 isString = true;

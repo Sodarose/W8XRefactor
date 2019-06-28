@@ -2,6 +2,7 @@ package io;
 
 import org.springframework.core.io.ClassPathResource;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -23,6 +24,16 @@ public class FileUlits {
         e.printStackTrace();
       }
       return source;
+    }
+
+    public static String readFile(File file){
+        String source = null;
+        try{
+            source = new String(Files.readAllBytes(file.toPath()),"UTF-8");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return source;
     }
 
     public static void writeFile(String filePath,String source){
