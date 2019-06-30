@@ -20,4 +20,7 @@ public class JavaModel {
     private boolean hasIssue;
     List<Issue> issues;
 
+    public JavaModel(CompilationUnit unit){
+        this.unit = unit;
+    }
 }
