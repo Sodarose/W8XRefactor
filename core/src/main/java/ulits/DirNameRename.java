@@ -4,8 +4,10 @@ package ulits;
 import model.Issue;
 import model.JavaModel;
 import model.Store;
+import model.TreeNode;
 
 
+import javax.xml.soap.Node;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,12 @@ public class DirNameRename {
         int pathindex=parentPath.indexOf(oldPackageName);
         if(pathindex!=-1) {
             String newParentPath = parentPath.substring(0, pathindex) + newPackageName;
-            renameDirectory(parentPath, newParentPath);
+            Map<String, TreeNode> treeNode = Store.treeNodeMap;
+            TreeNode dirNode = treeNode.get(parentPath);
+            dirNode.setFileName(newName[newName.length-1]);
+            treeNode.remove(parentPath.substring(0, pathindex)+oldPackageName);
+            treeNode.put(newParentPath,dirNode);
+            //renameDirectory(parentPath, newParentPath);
             Map<String, JavaModel> modelMap = Store.javaModelMap;
             List<String> fileList = readFildName(parentPath);
             for (String filePath : fileList) {
@@ -48,8 +55,18 @@ public class DirNameRename {
                 JavaModel model = modelMap.get(filePath);
                 model.setReadPath(newFilePath);
                 modelMap.remove(filePath);
-                modelMap.put(newFilePath, javaModel);
+                modelMap.put(newFilePath,model);
+                //System.out.println(filePath);
+                //System.out.println(newFilePath);
+                TreeNode fileNode=treeNode.get(filePath);
+                //System.out.println(fileNode.getRealPath());
+                fileNode.setRealPath(newFilePath);
+                treeNode.remove(filePath);
+                treeNode.put(newFilePath,fileNode);
+
             }
+            Store.treeNodeMap = treeNode;
+            Store.javaModelMap=modelMap;
         }
     }
     public static List<String> readFildName(String path){
@@ -64,6 +81,7 @@ public class DirNameRename {
         }
         return fileList;
     }
+    /*
     public static void renameDirectory(String fromDir,String toDir){
         File from=new File(fromDir);
         if(!from.exists()){
@@ -82,7 +100,7 @@ public class DirNameRename {
         else {
             System.out.println("Error");
         }
-    }
+    }*/
     /*
     public static void main(String[] args){
         nameRename("C:\\Users\\Administrator\\Desktop\\MyBlog");

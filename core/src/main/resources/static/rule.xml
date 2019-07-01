@@ -112,7 +112,7 @@
         <description>类名使用UpperCamelCase风格，必须遵从驼峰形式，</description>
         <className>analysis.rule.ClassNamingShouldBeCamelRule</className>
         <solutionClassName>refactor.refactorimpl.ClassNameRefactor</solutionClassName>
-        <rule-status>false</rule-status>
+        <rule-status>true</rule-status>
         <rule-message>类名应遵从驼峰形式</rule-message>
         <rule-level>12</rule-level>
         <example>
@@ -126,7 +126,7 @@
         <description>成员变量名字应遵从小驼峰模式</description>
         <className>analysis.rule.ClassVariNamingRule</className>
         <solutionClassName>refactor.refactorimpl.ClassVariNameRefactor</solutionClassName>
-        <rule-status>false</rule-status>
+        <rule-status>true</rule-status>
         <rule-message>成员变量名应遵从小驼峰形式</rule-message>
         <rule-level>12</rule-level>
         <example>
@@ -142,7 +142,7 @@
         <description>常量命名应该全部大写</description>
         <className>analysis.rule.ClassConstantNamingRule</className>
         <solutionClassName>refactor.refactorimpl.ContantNameRefactor</solutionClassName>
-        <rule-status>false</rule-status>
+        <rule-status>true</rule-status>
         <rule-message>常量命名应该全部大写</rule-message>
         <rule-level>12</rule-level>
         <example>
@@ -159,7 +159,7 @@
         <description>方法内变量名应符合小驼峰形式</description>
         <className>analysis.rule.LowerCamelCaseVariableNaming</className>
         <solutionClassName>refactor.refactorimpl.VariableNameRefactor</solutionClassName>
-        <rule-status>false</rule-status>
+        <rule-status>true</rule-status>
         <rule-message>方法内变量应符合小驼峰形式</rule-message>
         <rule-level>12</rule-level>
         <example>
@@ -178,7 +178,7 @@
         <description>方法名应符合小驼峰形式</description>
         <className>analysis.rule.MethodNamingShouldBeCamelRule</className>
         <solutionClassName>refactor.refactorimpl.MethodNameRefactor</solutionClassName>
-        <rule-status>false</rule-status>
+        <rule-status>true</rule-status>
         <rule-message>方法命名应该全部大写</rule-message>
         <rule-level>12</rule-level>
         <example>
@@ -196,7 +196,7 @@
         <description>包命名应该全部小写</description>
         <className>analysis.rule.PackageNamingRule</className>
         <solutionClassName>refactor.refactorimpl.PackageNameRefactor</solutionClassName>
-        <rule-status>false</rule-status>
+        <rule-status>true</rule-status>
         <rule-message>包命名应该全部小写</rule-message>
         <rule-level>12</rule-level>
         <example>
@@ -213,7 +213,7 @@
         <description>方法的参数命名应符合小驼峰形式</description>
         <className>analysis.rule.ParameterNamingRule</className>
         <solutionClassName>refactor.refactorimpl.ParameterNameRefactor</solutionClassName>
-        <rule-status>false</rule-status>
+        <rule-status>true</rule-status>
         <rule-message>方法的参数命名应符合小驼峰形式</rule-message>
         <rule-level>12</rule-level>
         <example>
