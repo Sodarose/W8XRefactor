@@ -1,5 +1,6 @@
 package io;
 
+import model.Store;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.File;
@@ -65,5 +66,14 @@ public class FileUlits {
      * */
     public static InputStream readFilesByClassLoader(String path) throws IOException {
         return new ClassPathResource(path).getInputStream();
+    }
+
+    public static boolean saveProject(){
+        boolean isSave = false;
+        if(Store.rootNode==null){
+            return isSave;
+        }
+        
+        return isSave;
     }
 }

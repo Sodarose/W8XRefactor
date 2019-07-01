@@ -1,79 +1,153 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <profiles version="13">
     <profile kind="CodeFormatterProfile" name="GoogleStyle" version="13">
+        <!--在根标签之前插入新行-->
         <setting id="org.eclipse.jdt.core.formatter.comment.insert_new_line_before_root_tags" value="insert"/>
+        <!--禁用标签-->
         <setting id="org.eclipse.jdt.core.formatter.disabling_tag" value="@formatter:off"/>
+        <!--在注释中以逗号后插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_comma_in_annotation" value="insert"/>
+        <!--在类型参数中以逗号前插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_comma_in_type_parameters" value="do not insert"/>
+        <!--在类型声明中打开大括号之前插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_type_declaration" value="insert"/>
+        <!--在类型参数中以逗号后插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_comma_in_type_arguments" value="insert"/>
+        <!--匿名类型声明的大括号位置-->
         <setting id="org.eclipse.jdt.core.formatter.brace_position_for_anonymous_type_declaration" value="end_of_line"/>
+        <!--在冒号之前插入空格以防万一-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_colon_in_case" value="do not insert"/>
+        <!--在数组初始值设定项中打开括号后插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_opening_brace_in_array_initializer" value="do not insert"/>
+        <!--块边界处的新线-->
         <setting id="org.eclipse.jdt.core.formatter.comment.new_lines_at_block_boundaries" value="true"/>
+        <!--与arguments.count相关的级联方法调用的对齐方式-->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_cascading_method_invocation_with_arguments.count_dependent" value="16|-1|16"/>
+        <!--在空注释声明中插入新行-->
         <setting id="org.eclipse.jdt.core.formatter.insert_new_line_in_empty_annotation_declaration" value="insert"/>
+        <!--在注释中打开括号后插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_annotation" value="do not insert"/>
+        <!--字段前的空白行-->
         <setting id="org.eclipse.jdt.core.formatter.blank_lines_before_field" value="0"/>
+        <!--打开括号后插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_while" value="do not insert"/>
+        <!--用于关闭标签-->
         <setting id="org.eclipse.jdt.core.formatter.use_on_off_tags" value="true"/>
+        <!--包裹更喜欢两个片段-->
         <setting id="org.eclipse.jdt.core.formatter.wrap_prefer_two_fragments" value="false"/>
+        <!--在注释类型成员声明中的空括号之间插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_annotation_type_member_declaration" value="do not insert"/>
+        <!--在if语句中的else之前插入新行-->
         <setting id="org.eclipse.jdt.core.formatter.insert_new_line_before_else_in_if_statement" value="do not insert"/>
+        <!--在前缀运算符后插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_prefix_operator" value="do not insert"/>
+        <!--将else语句保留在同一行-->
         <setting id="org.eclipse.jdt.core.formatter.keep_else_statement_on_same_line" value="false"/>
+        <!--省略号后插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_ellipsis" value="insert"/>
+        <!--comment.insert参数的新行-->
         <setting id="org.eclipse.jdt.core.formatter.comment.insert_new_line_for_parameter" value="do not insert"/>
+        <!--包含注释内联标签-->
         <setting id="org.eclipse.jdt.core.formatter.wrap_comment_inline_tags" value="false"/>
+        <!--在注释类型声明中打开大括号之前插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_annotation_type_declaration" value="insert"/>
+        <!--缩进中断与案例相比-->
         <setting id="org.eclipse.jdt.core.formatter.indent_breaks_compare_to_cases" value="true"/>
+        <!--在注释中插入空格后-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_at_in_annotation" value="do not insert"/>
+        <!--局部变量声明的对齐方式-->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_local_variable_declaration" value="16"/>
+        <!--多个字段的对齐方式-->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_multiple_fields" value="16"/>
+        <!--对齐参数的注释-->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_annotations_on_parameter" value="1040"/>
+        <!--数组初始化程序中表达式的对齐方式-->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_expressions_in_array_initializer" value="16"/>
+        <!--对type.count依赖的注释的对齐方式-->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_annotations_on_type.count_dependent" value="1585|-1|1585"/>
+        <!--条件表达式的对齐-->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_conditional_expression" value="80"/>
+        <!--在打开之前插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_for" value="insert"/>
+        <!--多个fields.count依赖的对齐方式-->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_multiple_fields.count_dependent" value="16|-1|16"/>
+        <!--二元运算符后插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_binary_operator" value="insert"/>
+        <!--在通配符中插入问题前的空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_question_in_wildcard" value="do not insert"/>
+        <!--数组初始化程序的大括号位置-->
         <setting id="org.eclipse.jdt.core.formatter.brace_position_for_array_initializer" value="end_of_line"/>
+        <!--在枚举常量中的空括号之间插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_enum_constant" value="do not insert"/>
+        <!--最后在try语句中插入新行-->
         <setting id="org.eclipse.jdt.core.formatter.insert_new_line_before_finally_in_try_statement" value="do not insert"/>
+        <!--在局部变量上注释后插入新行-->
         <setting id="org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_local_variable" value="insert"/>
+        <!--在try语句中的catch之前插入新行-->
         <setting id="org.eclipse.jdt.core.formatter.insert_new_line_before_catch_in_try_statement" value="do not insert"/>
+        <!--在打开括号之前插入空格-->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_while" value="insert"/>
+        <!--包装后的空白行-->
         <setting id="org.eclipse.jdt.core.formatter.blank_lines_after_package" value="1"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_arguments_in_qualified_allocation_expression.count_dependent" value="16|4|80"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_throws_clause_in_method_declaration.count_dependent" value="16|4|48"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_comma_in_type_parameters" value="insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.continuation_indentation" value="2"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_superinterfaces_in_enum_declaration.count_dependent" value="16|4|49"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_postfix_operator" value="do not insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_arguments_in_method_invocation" value="16"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_closing_angle_bracket_in_type_arguments" value="do not insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_comma_in_superinterfaces" value="do not insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.blank_lines_before_new_chunk" value="1"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_binary_operator" value="insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.blank_lines_before_package" value="0"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_cascading_method_invocation_with_arguments" value="16"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.compiler.source" value="1.7"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_throws_clause_in_constructor_declaration.count_dependent" value="16|4|48"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_comma_in_enum_constant_arguments" value="insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_constructor_declaration" value="do not insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.comment.format_line_comments" value="true"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_closing_angle_bracket_in_type_arguments" value="do not insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_comma_in_enum_declarations" value="insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.join_wrapped_lines" value="true"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_block" value="insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_arguments_in_explicit_constructor_call" value="16"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.wrap_non_simple_local_variable_annotation" value="true"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_comma_in_method_invocation_arguments" value="do not insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.align_type_members_on_columns" value="false"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.blank_lines_before_member_type" value="0"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_enum_constant" value="do not insert"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_enum_constants.count_dependent" value="16|5|48"/>
+        <!---->
         <setting id="org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_for" value="do not insert"/>
         <setting id="org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_method_declaration" value="insert"/>
         <setting id="org.eclipse.jdt.core.formatter.alignment_for_selector_in_method_invocation" value="16"/>
