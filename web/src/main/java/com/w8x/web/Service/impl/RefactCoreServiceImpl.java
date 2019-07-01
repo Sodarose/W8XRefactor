@@ -2,6 +2,7 @@ package com.w8x.web.Service.impl;
 
 import api.AnalysisApi;
 import com.w8x.web.Service.RefactCoreService;
+import com.w8x.web.api.GithubDataGrabber;
 import com.w8x.web.model.Code;
 import com.w8x.web.model.CodeShown;
 import com.w8x.web.model.IssueShow;
@@ -9,9 +10,11 @@ import com.w8x.web.model.Overview;
 import model.Issue;
 import model.JavaModel;
 import model.Store;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,8 @@ import java.util.List;
 public class RefactCoreServiceImpl implements RefactCoreService {
 
     private AnalysisApi analysisApi = AnalysisApi.getInstance();
+    @Autowired
+    GithubDataGrabber githubDataGrabber;
 
     /**
      * 进行 分析
@@ -104,5 +109,13 @@ public class RefactCoreServiceImpl implements RefactCoreService {
         return Code.createCode(404, null, "扫描失败");
     }
 
+    @Override
+    public Code<String> analysisByGithub(String gitPath, String branch) throws IOException {
+        String projectPath = githubDataGrabber.gitCloneRepository(gitPath,branch);
+        if(projectPath==null){
+            return Code.createCode(404,"仓库克隆失败","仓库克隆失败");
+        }
+        return runAnalysis(projectPath);
+    }
 
 }

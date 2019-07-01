@@ -58,4 +58,10 @@ public class WebRedux {
     Code<String> analysisAgin() throws FileNotFoundException {
         return refactCoreService.analysisAgin();
     }
+
+    @PostMapping("/analysisByGitHub")
+    @ResponseBody
+    Code<String> analysisByGitHub(String gitPath,String branch){
+        return null;
+    }
 }
