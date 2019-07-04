@@ -10,9 +10,11 @@ import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
 import ulits.SplitName;
+import ulits.SplitWord;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ClassVariNamingRule extends AbstractRuleVisitor {
@@ -33,7 +35,9 @@ public class ClassVariNamingRule extends AbstractRuleVisitor {
         List<FieldDeclaration> fieldDeclarationList = javaModel.getUnit().findAll(FieldDeclaration.class);
         for (FieldDeclaration fieldDeclaration : fieldDeclarationList) {
             String name = fieldDeclaration.getVariable(0).getNameAsString();
-            List<String> nameList = SplitName.split(name);
+            SplitWord splitWord=new SplitWord();
+            List<String> nameList =splitWord.split(name);
+            Collections.reverse(nameList);
             if (nameList != null) {
                 boolean nameFlag = check(nameList);
                 if (!nameFlag) {

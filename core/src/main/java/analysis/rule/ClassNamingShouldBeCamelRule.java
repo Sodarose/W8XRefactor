@@ -10,8 +10,11 @@ import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
 import ulits.SplitName;
+import ulits.SplitWord;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ClassNamingShouldBeCamelRule extends AbstractRuleVisitor {
@@ -22,7 +25,9 @@ public class ClassNamingShouldBeCamelRule extends AbstractRuleVisitor {
         List<ClassOrInterfaceDeclaration> classList=javaModel.getUnit().findAll(ClassOrInterfaceDeclaration.class);
         for(ClassOrInterfaceDeclaration classOrInterfaceDeclaration:classList) {
             String name = classOrInterfaceDeclaration.getNameAsString();
-            List<String> nameList = SplitName.split(name);
+            SplitWord splitWord=new SplitWord();
+            List<String> nameList = splitWord.split(name);
+            Collections.reverse(nameList);
             if (!(nameList.isEmpty())) {
                 boolean nameFlag = check(nameList);
                 if (!nameFlag) {
