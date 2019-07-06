@@ -6,7 +6,6 @@ import com.w8x.web.api.GithubDataGrabber;
 import com.w8x.web.model.Code;
 import com.w8x.web.model.CodeShown;
 import com.w8x.web.model.IssueShow;
-import com.w8x.web.model.Overview;
 import model.Issue;
 import model.JavaModel;
 import model.Store;
@@ -73,24 +72,6 @@ public class RefactCoreServiceImpl implements RefactCoreService {
             codeShown.setIssueShows(issueShows);
         }
         return codeShown;
-    }
-
-    @Override
-    public Code<Overview> getOverview() {
-        Overview overview = new Overview();
-        if (!Store.run) {
-            return Code.createCode(404, null, "获取信息失败");
-        }
-        overview.setProjectName(Store.projectRoot.getRoot().toFile().getName());
-        overview.setIssueCount(Store.issueContext.getIssues().size());
-        overview.setJavaCount(Store.javaModelMap.size());
-        overview.setRule(Store.rules.size());
-        overview.setRealPath(Store.projectRoot.getRoot().toFile().getPath());
-        int badCount = 0;
-        badCount = (int) Store.javaModelMap.values().stream().filter(javaModelVo ->
-                javaModelVo.getIssues() != null && javaModelVo.getIssues().size() != 0).count();
-        overview.setBadFileCount(badCount);
-        return Code.createCode(200, overview, "获取信息成功");
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.w8x.web.controller;
 import com.w8x.web.Service.RefactCoreService;
 import com.w8x.web.model.Code;
 import com.w8x.web.model.CodeShown;
-import com.w8x.web.model.Overview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -39,12 +38,6 @@ public class WebRedux {
     @ResponseBody
     public CodeShown javaFileDetail(String filePath) throws UnsupportedEncodingException {
         return refactCoreService.getJavaFileDetail(filePath);
-    }
-
-    @GetMapping("/overview")
-    @ResponseBody
-    public Code<Overview> getOverview() {
-        return refactCoreService.getOverview();
     }
 
     @GetMapping("/refactorAll")

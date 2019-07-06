@@ -33,13 +33,20 @@ public class GithubDataGrabber {
      */
     private void init() {
         ApplicationHome home = new ApplicationHome(getClass());
-        File homeDir = home.getSource();
+        //目前用于测试 返回的是程序主目录
+        File homeDir = home.getDir();
         // jar包存放的位置
-        String path = homeDir.getPath() + "/" + gitConfig.getPath();
+        String path = homeDir.getPath() + File.separator + "repository";
+        if(gitConfig.getPath()!=null&&!"".equals(gitConfig.getPath())){
+            path = gitConfig.getPath();
+        }
+        gitConfig.setPath(path);
         File repository = new File(path);
+        LOGGER.info("仓库地址："+repository.getPath());
         if (!repository.exists()) {
             repository.mkdirs();
         }
+        //设置仓库地址
         gitConfig.setRepository(repository);
     }
 
@@ -47,10 +54,14 @@ public class GithubDataGrabber {
      * 克隆仓库
      */
     public String gitCloneRepository(String remoteUrl, String branch) throws IOException {
+        //初始化
         init();
         Git git = null;
+        //项目名称
         String name = remoteUrl.substring(remoteUrl.lastIndexOf("/") + 1, remoteUrl.lastIndexOf(".git"));
-        File file = new File(gitConfig.getRepository().getPath() + File.pathSeparatorChar + name);
+        //得到
+        File file = new File(gitConfig.getRepository().getPath() + File.separatorChar+ name);
+        LOGGER.info("项目地址："+file.getPath());
         if (file.exists()) {
             Files.deleteIfExists(file.toPath());
         } else {
@@ -58,7 +69,7 @@ public class GithubDataGrabber {
         }
         String projectPath = null;
         try {
-            LOGGER.info("开始拉取仓库");
+            LOGGER.info("开始拉取仓库 仓库名："+name+"\t分支："+branch);
             git = Git.cloneRepository().setDirectory(file).setURI(remoteUrl).setBranch(branch).call();
             LOGGER.info("克隆本地成功");
             projectPath = file.getPath();
@@ -74,10 +85,5 @@ public class GithubDataGrabber {
             }
         }
         return projectPath;
-    }
-
-    public static void main(String args[]) throws IOException {
-        GithubDataGrabber githubDataGrabber = new GithubDataGrabber();
-        githubDataGrabber.gitCloneRepository("https://github.com/Sodarose/W8XRefactor.git", "dev");
     }
 }
