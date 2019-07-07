@@ -16,8 +16,11 @@ public class WebApplicationTests {
     @Autowired
     GitConfig gitConfig;
 
+
     @Autowired
     GithubDataGrabber githubDataGrabber;
+
+
     @Test
     public void contextLoads() throws IOException {
         githubDataGrabber.gitCloneRepository("https://github.com/Sodarose/W8XRefactor.git","master");

@@ -52,7 +52,6 @@ public class UnusedImportsRule extends AbstractRuleVisitor {
                 .stream().map(declaration -> {
                     return declaration.getName().getIdentifier();
                 }).collect(Collectors.toList());
-        System.out.println(commitName.size());
         simpleNames.addAll(commitName);
         for (ImportDeclaration declaration : importDeclarations) {
             String fullName = declaration.getName().asString();

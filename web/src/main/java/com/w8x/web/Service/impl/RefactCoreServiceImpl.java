@@ -1,5 +1,6 @@
 package com.w8x.web.Service.impl;
 
+import analysis.AbstractRuleVisitor;
 import api.AnalysisApi;
 import com.w8x.web.Service.RefactCoreService;
 import com.w8x.web.api.GithubDataGrabber;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 调用Core服务
@@ -92,11 +94,29 @@ public class RefactCoreServiceImpl implements RefactCoreService {
 
     @Override
     public Code<String> analysisByGithub(String gitPath, String branch) throws IOException {
-        String projectPath = githubDataGrabber.gitCloneRepository(gitPath,branch);
-        if(projectPath==null){
-            return Code.createCode(404,"仓库克隆失败","仓库克隆失败");
+        String projectPath = githubDataGrabber.gitCloneRepository(gitPath, branch);
+        if (projectPath == null) {
+            return Code.createCode(404, "仓库克隆失败", "仓库克隆失败");
         }
         return runAnalysis(projectPath);
     }
+
+    @Override
+    public Code<Map<String, AbstractRuleVisitor>> getRuleByMap() {
+        Map<String, AbstractRuleVisitor> ruleVisitorMap = Store.ruleMap;
+        if (ruleVisitorMap == null) {
+            return Code.createCode(404, ruleVisitorMap, "数据获取失败");
+        }
+        return Code.createCode(200, ruleVisitorMap, "获取数据成功");
+    }
+
+    @Override
+    public Code<String> setRuleByMap(Map<String, Integer> rules) throws IOException {
+        if (!analysisApi.setRules(rules)) {
+            return Code.createCode(403, "", "规则设置失败");
+        }
+        return Code.createCode(200, "", "设置成功");
+    }
+
 
 }
