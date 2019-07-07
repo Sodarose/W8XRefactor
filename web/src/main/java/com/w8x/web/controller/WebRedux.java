@@ -1,9 +1,10 @@
 package com.w8x.web.controller;
 
+import analysis.AbstractRuleVisitor;
 import com.w8x.web.Service.RefactCoreService;
 import com.w8x.web.model.Code;
 import com.w8x.web.model.CodeShown;
-import com.w8x.web.model.Overview;
+import com.w8x.web.model.RuleModelVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/core")
@@ -42,12 +45,6 @@ public class WebRedux {
         return refactCoreService.getJavaFileDetail(filePath);
     }
 
-    @GetMapping("/overview")
-    @ResponseBody
-    public Code<Overview> getOverview() {
-        return refactCoreService.getOverview();
-    }
-
     @GetMapping("/refactorAll")
     @ResponseBody
     Code<String> refactorAll() {
@@ -59,6 +56,27 @@ public class WebRedux {
     Code<String> analysisAgin() throws FileNotFoundException {
         return refactCoreService.analysisAgin();
     }
+
+    @PostMapping("/analysisByGitHub")
+    @ResponseBody
+    Code<String> analysisByGitHub(String gitPath, String branch) throws IOException {
+        return refactCoreService.analysisByGithub(gitPath,branch);
+    }
+
+
+    @GetMapping("/analysisRules")
+    @ResponseBody
+    Code<List<RuleModelVo>> getRules() {
+        return refactCoreService.getRuleByMap();
+    }
+
+    @PostMapping("/setAnalysisRules")
+    @ResponseBody
+    Code<String> setRules(Map<String, Integer> rules) throws IOException {
+        return refactCoreService.setRuleByMap(rules);
+    }
+
+
     @GetMapping("/project/saveModify")
     @ResponseBody
     public boolean saveModify() throws IOException {

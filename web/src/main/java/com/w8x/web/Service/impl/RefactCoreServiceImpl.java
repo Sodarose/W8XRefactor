@@ -1,15 +1,18 @@
 package com.w8x.web.Service.impl;
 
+import analysis.AbstractRuleVisitor;
 import api.AnalysisApi;
 import com.google.gson.JsonObject;
 import com.w8x.web.Service.RefactCoreService;
+import com.w8x.web.api.GithubDataGrabber;
 import com.w8x.web.model.Code;
 import com.w8x.web.model.CodeShown;
 import com.w8x.web.model.IssueShow;
-import com.w8x.web.model.Overview;
+import com.w8x.web.model.RuleModelVo;
 import model.Issue;
 import model.JavaModel;
 import model.Store;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ulits.DirCopy;
 import ulits.JsonUtil;
@@ -21,7 +24,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 调用Core服务
@@ -32,6 +37,8 @@ import java.util.List;
 public class RefactCoreServiceImpl implements RefactCoreService {
 
     private AnalysisApi analysisApi = AnalysisApi.getInstance();
+    @Autowired
+    GithubDataGrabber githubDataGrabber;
 
     /**
      * 进行 分析
@@ -79,24 +86,6 @@ public class RefactCoreServiceImpl implements RefactCoreService {
     }
 
     @Override
-    public Code<Overview> getOverview() {
-        Overview overview = new Overview();
-        if (!Store.run) {
-            return Code.createCode(404, null, "获取信息失败");
-        }
-        overview.setProjectName(Store.projectRoot.getRoot().toFile().getName());
-        overview.setIssueCount(Store.issueContext.getIssues().size());
-        overview.setJavaCount(Store.javaModelMap.size());
-        overview.setRule(Store.rules.size());
-        overview.setRealPath(Store.projectRoot.getRoot().toFile().getPath());
-        int badCount = 0;
-        badCount = (int) Store.javaModelMap.values().stream().filter(javaModelVo ->
-                javaModelVo.getIssues() != null && javaModelVo.getIssues().size() != 0).count();
-        overview.setBadFileCount(badCount);
-        return Code.createCode(200, overview, "获取信息成功");
-    }
-
-    @Override
     public Code<String> refactorAll() {
         if (!Store.run) {
             return Code.createCode(404, null, "操作失败");
@@ -111,6 +100,40 @@ public class RefactCoreServiceImpl implements RefactCoreService {
         }
         return Code.createCode(404, null, "扫描失败");
     }
+
+    @Override
+    public Code<String> analysisByGithub(String gitPath, String branch) throws IOException {
+        String projectPath = githubDataGrabber.gitCloneRepository(gitPath, branch);
+        if (projectPath == null) {
+            return Code.createCode(404, "仓库克隆失败", "仓库克隆失败");
+        }
+        return runAnalysis(projectPath);
+    }
+
+    @Override
+    public Code<List<RuleModelVo>> getRuleByMap() {
+        Map<String, AbstractRuleVisitor> ruleVisitorMap = Store.ruleMap;
+        if (ruleVisitorMap == null) {
+            return Code.createCode(404, null, "数据获取失败");
+        }
+        List<RuleModelVo> ruleModelVos = new ArrayList<>();
+        for(Map.Entry<String,AbstractRuleVisitor> entry:ruleVisitorMap.entrySet()){
+            AbstractRuleVisitor ruleVisitor = entry.getValue();
+            ruleModelVos.add(new RuleModelVo(ruleVisitor.getRuleName(),ruleVisitor.getDescription()
+                    ,ruleVisitor.isRuleStatus(),ruleVisitor.getMessage(),ruleVisitor.getExample()));
+        }
+        return Code.createCode(200, ruleModelVos, "获取数据成功");
+    }
+
+    @Override
+    public Code<String> setRuleByMap(Map<String, Integer> rules) throws IOException {
+        if (!analysisApi.setRules(rules)) {
+            return Code.createCode(403, "", "规则设置失败");
+        }
+        return Code.createCode(200, "", "设置成功");
+    }
+
+
     @Override
    public  boolean saveModify() throws IOException{
         boolean ModifyFlag = JsonUtil.savemodify(Store.modifyPath);

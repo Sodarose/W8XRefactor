@@ -1,9 +1,9 @@
 package api;
 
+import analysis.AbstractRuleVisitor;
+import analysis.RuleLink;
 import analysis.process.Analysis;
 import com.alibaba.fastjson.JSON;
-import com.github.javaparser.utils.ProjectRoot;
-import com.github.javaparser.utils.SourceRoot;
 import model.*;
 import ulits.SaveJson;
 import ulits.ThreadPoolUtils;
@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.ThreadPoolExecutor;
+
 
 public class AnalysisApi {
 
@@ -24,6 +24,14 @@ public class AnalysisApi {
             instance = new AnalysisApi();
         }
         return instance;
+    }
+
+    /**
+     * 初始化一些配置
+     */
+    public void init() {
+        Store.rules = RuleLink.newInstance().readRuleLinkByXML();
+        Store.run = false;
     }
 
     /**
@@ -85,4 +93,23 @@ public class AnalysisApi {
             e.printStackTrace();
         }
     }
+
+    public boolean setRules(Map<String, Integer> rules) throws IOException {
+        RuleLink ruleLink = new RuleLink();
+        for (Map.Entry<String, Integer> entry : rules.entrySet()) {
+            AbstractRuleVisitor rule = Store.ruleMap.get(entry.getKey());
+            if (rule == null) {
+                continue;
+            }
+            if (entry.getValue() == 1) {
+                rule.setRuleStatus(true);
+            } else {
+                rule.setRuleStatus(false);
+            }
+            ruleLink.changeRuleXML(entry.getKey(), entry.getValue());
+        }
+        ruleLink.writeRuleXML();
+        return false;
+    }
+
 }

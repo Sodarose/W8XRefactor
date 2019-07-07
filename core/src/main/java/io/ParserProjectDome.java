@@ -1,6 +1,5 @@
 package io;
 
-import analysis.process.Analysis;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.symbolsolver.javaparsermodel.JavaParserFacade;
@@ -84,12 +83,12 @@ public class ParserProjectDome {
             Store.javaFiles.add(unit);
             Store.javaModelMap.put(file.getPath(), javaModel);
             //构建子分支
-            TreeNode node = new TreeNode(file.getPath(), file.getName(), null, true, false);
+            TreeNode node = new TreeNode(file.getPath(),file.getPath(), file.getName(), null, true);
             Store.treeNodeMap.put(node.getRealPath(), node);
             treeNode.getChildren().add(node);
         }
         if (file.isDirectory()) {
-            TreeNode node = new TreeNode(file.getPath(), file.getName(), new ArrayList<>(), false, false);
+            TreeNode node = new TreeNode(file.getPath(),file.getPath(), file.getName(), new ArrayList<>(), false);
             treeNode.getChildren().add(node);
             Store.treeNodeMap.put(node.getRealPath(), node);
             for (File f : file.listFiles()) {
@@ -116,7 +115,7 @@ public class ParserProjectDome {
             CompilationUnit unit = StaticJavaParser.parse(file);
             JavaModel javaModel = new JavaModel(file.getPath(),unit,FileUlits.readFile(file),false,null);
             Store.javaFiles.add(unit);
-            TreeNode root = new TreeNode(file.getPath(), file.getName(), null, true, false);
+            TreeNode root = new TreeNode(file.getPath(),file.getPath(), file.getName(), null, true);
             Store.treeNodeMap.put(root.getRealPath(), root);
             Store.rootNode = root;
             Store.javaModelMap.put(file.getPath(),javaModel);
@@ -124,7 +123,7 @@ public class ParserProjectDome {
         }
 
         // 生成文件树以及索引map
-        TreeNode root = new TreeNode(file.getPath(), file.getName(), new ArrayList<>(), false, false);
+        TreeNode root = new TreeNode(file.getPath(),file.getPath(), file.getName(), new ArrayList<>(), false);
         Store.treeNodeMap.put(root.getRealPath(), root);
         Store.rootNode = root;
         createFileTree(file, root);
