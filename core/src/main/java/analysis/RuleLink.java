@@ -89,7 +89,7 @@ public class RuleLink {
             rule.setRuleName(ruleName);
             rule.setRuleStatus(Boolean.parseBoolean(status));
             rule.setMessage(message);
-            rule.setMessage(example);
+            rule.setExample(example);
             rule.setSolutionClassName(solutionClassName);
             rule.setLevel(level);
         } catch (ClassNotFoundException e) {

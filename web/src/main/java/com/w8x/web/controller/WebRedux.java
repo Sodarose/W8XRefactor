@@ -4,6 +4,7 @@ import analysis.AbstractRuleVisitor;
 import com.w8x.web.Service.RefactCoreService;
 import com.w8x.web.model.Code;
 import com.w8x.web.model.CodeShown;
+import com.w8x.web.model.RuleModelVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -64,7 +66,7 @@ public class WebRedux {
 
     @GetMapping("/analysisRules")
     @ResponseBody
-    Code<Map<String, AbstractRuleVisitor>> getRules() {
+    Code<List<RuleModelVo>> getRules() {
         return refactCoreService.getRuleByMap();
     }
 

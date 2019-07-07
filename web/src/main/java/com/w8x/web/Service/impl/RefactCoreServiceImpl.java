@@ -7,6 +7,7 @@ import com.w8x.web.api.GithubDataGrabber;
 import com.w8x.web.model.Code;
 import com.w8x.web.model.CodeShown;
 import com.w8x.web.model.IssueShow;
+import com.w8x.web.model.RuleModelVo;
 import model.Issue;
 import model.JavaModel;
 import model.Store;
@@ -17,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -102,12 +104,18 @@ public class RefactCoreServiceImpl implements RefactCoreService {
     }
 
     @Override
-    public Code<Map<String, AbstractRuleVisitor>> getRuleByMap() {
+    public Code<List<RuleModelVo>> getRuleByMap() {
         Map<String, AbstractRuleVisitor> ruleVisitorMap = Store.ruleMap;
         if (ruleVisitorMap == null) {
-            return Code.createCode(404, ruleVisitorMap, "数据获取失败");
+            return Code.createCode(404, null, "数据获取失败");
         }
-        return Code.createCode(200, ruleVisitorMap, "获取数据成功");
+        List<RuleModelVo> ruleModelVos = new ArrayList<>();
+        for(Map.Entry<String,AbstractRuleVisitor> entry:ruleVisitorMap.entrySet()){
+            AbstractRuleVisitor ruleVisitor = entry.getValue();
+            ruleModelVos.add(new RuleModelVo(ruleVisitor.getRuleName(),ruleVisitor.getDescription()
+                    ,ruleVisitor.isRuleStatus(),ruleVisitor.getMessage(),ruleVisitor.getExample()));
+        }
+        return Code.createCode(200, ruleModelVos, "获取数据成功");
     }
 
     @Override
