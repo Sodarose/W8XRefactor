@@ -66,4 +66,7 @@ public class FileUlits {
     public static InputStream readFilesByClassLoader(String path) throws IOException {
         return new ClassPathResource(path).getInputStream();
     }
+    public static File readSourceFile(String path) throws IOException{
+        return new ClassPathResource(path).getFile();
+    }
 }

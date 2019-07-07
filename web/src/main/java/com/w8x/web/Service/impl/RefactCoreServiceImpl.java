@@ -1,6 +1,7 @@
 package com.w8x.web.Service.impl;
 
 import api.AnalysisApi;
+import com.google.gson.JsonObject;
 import com.w8x.web.Service.RefactCoreService;
 import com.w8x.web.model.Code;
 import com.w8x.web.model.CodeShown;
@@ -10,8 +11,14 @@ import model.Issue;
 import model.JavaModel;
 import model.Store;
 import org.springframework.stereotype.Service;
+import ulits.DirCopy;
+import ulits.JsonUtil;
+import ulits.SaveJson;
+import ulits.SaveModify;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +38,8 @@ public class RefactCoreServiceImpl implements RefactCoreService {
      */
     @Override
     public Code runAnalysis(String filePath) throws FileNotFoundException {
-        if (analysisApi.analysis(filePath)) {
+        String copyPath=DirCopy.dirCopy(filePath);
+        if (analysisApi.analysis(copyPath)) {
             return Code.createCode(200, null, "扫描成功");
         }
         return Code.createCode(404, null, "扫描失败");
@@ -103,6 +111,9 @@ public class RefactCoreServiceImpl implements RefactCoreService {
         }
         return Code.createCode(404, null, "扫描失败");
     }
-
-
+    @Override
+   public  boolean saveModify() throws IOException{
+        boolean ModifyFlag = JsonUtil.savemodify(Store.modifyPath);
+        return ModifyFlag;
+   }
 }

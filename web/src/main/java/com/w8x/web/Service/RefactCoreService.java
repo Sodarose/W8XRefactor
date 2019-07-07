@@ -5,6 +5,7 @@ import com.w8x.web.model.CodeShown;
 import com.w8x.web.model.Overview;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -18,4 +19,5 @@ public interface RefactCoreService {
     Code<String> refactorAll();
 
     Code<String> analysisAgin() throws FileNotFoundException;
+    boolean saveModify() throws IOException;
 }

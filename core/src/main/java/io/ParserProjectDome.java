@@ -41,6 +41,7 @@ public class ParserProjectDome {
         Store.javaFiles = new ArrayList<>();
         Store.javaModelMap = new HashMap<>();
         Store.treeNodeMap = new HashMap<>();
+        Store.jsonObjectList = new ArrayList<>();
         loadProject(rootPath);
         initTypeSolver();
     }

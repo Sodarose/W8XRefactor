@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -57,5 +58,10 @@ public class WebRedux {
     @ResponseBody
     Code<String> analysisAgin() throws FileNotFoundException {
         return refactCoreService.analysisAgin();
+    }
+    @GetMapping("/project/saveModify")
+    @ResponseBody
+    public boolean saveModify() throws IOException {
+        return refactCoreService.saveModify();
     }
 }
