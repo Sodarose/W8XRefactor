@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>项目配置</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+    <script src="/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <link rel="stylesheet" href="/styles/default.css" th:href="@{/styles/default.css}">
+    <script src="../src/layui.js" th:src="@{/layui/layui.js}"></script>
+    <style type="text/css">
+        .layui-row{
+            display: table;
+            margin: 0 auto;
+            width: 900px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layui-row">
+    <table class="layui-table">
+        <colgroup>
+            <col width="300px">
+            <col width="500px">
+            <col width="100px">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>选择项目功能</th>
+            <th>功能描述</th>
+            <th>开关</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>OverwriteMethodRule</td>
+            <td>对于覆写的方法必须加@Override注释</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="OverwriteMethodRule" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                </form>
+            </td>
+        </tr>
+
+        <!--<tr>
+            <td>VariableDeclarationSpecification</td>
+            <td>对于部分变量声明或赋值执行更正</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>UnusedImportsRefactor</td>
+            <td>清除未使用的导入</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>CodeStyleRule</td>
+            <td>大括号与if,else,for,do,while语句一起使用，即使只有一条语句(或是空)，也应该把大括号写上</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>ClassNamingShouldBeCamelRule</td>
+            <td>类名使用UpperCamelCase风格，必须遵从驼峰形式</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>ClassVariNamingRule</td>
+            <td>成员变量名字应遵从小驼峰模式</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>ClassConstantNamingRule</td>
+            <td>常量命名应该全部大写</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>LowerCamelCaseVariableNaming</td>
+            <td>方法内变量名应符合小驼峰形式</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>MethodNamingShouldBeCamelRule</td>
+            <td>方法名应符合小驼峰形式</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>PackageNamingRule</td>
+            <td>包命名应该全部小写</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>ParameterNamingRule</td>
+            <td>方法的参数命名应符合小驼峰形式</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>VoidPoolRule</td>
+            <td>空表达式for转换为while</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>WhileChangeForRule</td>
+            <td>while转化为for</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>IFTransformSwitchRule</td>
+            <td>if转换成switch</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>ShallowSwitchRule</td>
+            <td>Switch转换为if</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>DeeplyIfStmtsRule</td>
+            <td>if深层嵌套</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>ForEachRule</td>
+            <td>不要在 foreach 循环里进行元素的 remove/add 操作</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>HashCodeRefactor</td>
+            <td>只要重写 equals，就必须重写 hashCode。</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value="1">
+                </form>
+            </td>
+        </tr>-->
+        <tr>
+            <td>StringComparisonRule</td>
+            <td>字符串比较改用equals</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="StringComparisonRule" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>SwicthDefaultRule</td>
+            <td>对于缺少default的switch进行补充 即使为空</td>
+            <td>
+                <form class="layui-form" action="">
+                    <input type="checkbox" checked="" name="SwicthDefaultRule" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" >
+                </form>
+            </td>
+        </tr>
+        <!-- <tr>
+             <td>
+             <div class="layui-collapse" lay-filter="test">
+                 <div class="layui-collapse" lay-accordion>
+                     <div class="layui-colla-item">
+                         <h2 class="layui-colla-title">杜甫</h2>
+                         <div class="layui-colla-content layui-show">
+                             内容区域
+                             内容区域
+                             内容区域
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             </td>
+             <td>对于缺少default的switch进行补充 即使为空</td>
+             <td>
+                 <form class="layui-form" action="">
+                     <input type="checkbox" checked="" name="SwicthDefaultRule" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" >
+                 </form>
+             </td>
+         </tr>-->
+
+        <tr>
+            <td colspan="3">
+                <input type="button" class="layui-btn layui-btn-normal layui-col-md3 layui-col-md-offset9" value="提交扫描配置"></input>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    layui.use(['form','element', 'layer'], function () {
+        var form = layui.form
+            , layer = layui.layer;
+        var element = layui.element();
+        var layer = layui.layer;
+        element.on('collapse(test)', function(data){
+            layer.msg('展开状态：'+ data.show);
+        });
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '0px'
+            });
+        });
+    });
+
+    $(function() {
+
+        $("input:button").click(function () {
+            var name = $('input').attr('checked')
+            if(name="checked"){
+                $('input[type="checkbox"]').val(1);
+            }else{
+                $('input[type="checkbox"]').val(0);
+            }
+            //var value={};
+            var key = $('input[type="checkbox"]:checked').map(function () {
+                var value = $('input[type="checkbox"]').attr("name")
+                alert(this.value + ":"+ value)
+                return this.value;
+            }).get();
+//            $post(url, {'ids': ids}, function (result) {
+//                if (result) {
+//                    alert('保存成功')
+//                }
+//            })
+        })
+    })
+</script>
+
+</body>
+</html>
