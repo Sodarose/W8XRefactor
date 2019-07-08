@@ -2,7 +2,6 @@ package com.w8x.web.Service.impl;
 
 import analysis.AbstractRuleVisitor;
 import api.AnalysisApi;
-import com.google.gson.JsonObject;
 import com.w8x.web.Service.RefactCoreService;
 import com.w8x.web.api.GithubDataGrabber;
 import com.w8x.web.model.Code;
@@ -16,15 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ulits.DirCopy;
 import ulits.JsonUtil;
-import ulits.SaveJson;
-import ulits.SaveModify;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -133,13 +128,10 @@ public class RefactCoreServiceImpl implements RefactCoreService {
         return Code.createCode(200, "", "设置成功");
     }
 
-<<<<<<< HEAD
-=======
 
     @Override
    public  boolean saveModify() throws IOException{
         boolean ModifyFlag = JsonUtil.savemodify(Store.modifyPath);
         return ModifyFlag;
    }
->>>>>>> f03ed4542ff13950ed3b2e360f9443af079d08f6
 }
