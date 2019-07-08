@@ -73,7 +73,8 @@ public class WebRedux {
     @PostMapping("/setAnalysisRules")
     @ResponseBody
     Code<String> setRules(Map<String, Integer> rules) throws IOException {
-        return refactCoreService.setRuleByMap(rules);
+        System.out.println(rules);
+        return null;
     }
 
 
