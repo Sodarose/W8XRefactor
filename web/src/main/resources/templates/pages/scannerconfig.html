@@ -52,7 +52,7 @@
                         var message = data[i].message;
                         var ruleName = data[i].ruleName;
                         var ruleStatus = data[i].ruleStatus;
-                        if(ruleStatus="true"){
+                        if(ruleStatus===true){
                             var
                                 $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input id="rules'+(i+1)+'" type="checkbox" checked="" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value=""></form></td></tr>');
                             $(".layui-table").append($tr)
@@ -63,7 +63,7 @@
                         }
 
                     }
-                    var $button = $('<tr><td colspan="3"><botton type="button" onclick="commit()" class="layui-btn layui-btn-normal layui-col-md3 layui-col-md-offset9">提交扫描配置</botton></td></tr>');
+                    var $button = $('<tr><td colspan="3"><botton type="button" onclick="collectData()" class="layui-btn layui-btn-normal layui-col-md3 layui-col-md-offset9">提交扫描配置</botton></td></tr>');
                     $(".layui-table").append($button)
                 }else{
                     layer.msg('读取配置失败', {icon: 5});
@@ -92,25 +92,31 @@
     }
     function collectData() {
         var map;
-        var str=new Array()
         var len = $('#tabledata tr td').find("input").length
-        console.log(len)
-
         var filter_numbs = new Array();
+        var datas = []
         for(var i=1; i<=len; i++)
         {
             var name = $("#tabledata tr").eq(i).find("input:first").attr("name");
-            var checked = $("#tabledata tr").eq(i).find("input:first").attr("checked");
-            console.log(name+":" +checked)
-           /* if (checked == 'checked') {
-                var value = $('input').attr('value',1)
+            var checked = $("#tabledata tr").eq(i).find("input[type='checkbox']").is(':checked');
+           if (checked == true) {
+                 $('input').attr('value',1)
             } else {
-                $('input').removeAttribute('checked');
-                $('input').attr('value',0)
-            }*/
+                  $('input').attr('value',0)
+            }
+            var value = $("#tabledata tr").eq(i).find("input:first").attr("value");
+            var data={}
+            data["rulename"] = name;
+            data["status"] = value
+            //var numberStr = "{\"rulename\":\""+name+"\",\"status\":"+value+"}"
+            //var json=JSON.parse(numberStr)
+            //console.log(json)
+            console.log(data)
+            datas.push(data)
             //filter_numbs.push(numberStr);
         }
-
+        var jsonString = JSON.stringify(datas);
+        console.log(jsonString)
         /*$('#tabledata tr td').find("input").each(function(){
                     var key = $('input').attr('name')
                     var checked = $('input').attr('checked')
@@ -125,9 +131,7 @@
                    str1='"name":"'+key+'","value":'+value;
                    str.push(str1)
         })*/
-        console.log(str)
-        //json=JSON.parse(str)
-        //console.log(json)
+       // console.log(filter_numbs)
       return map
     }
 

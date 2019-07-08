@@ -15,12 +15,12 @@ import java.util.Map;
  * 核心服务
  * */
 public interface RefactCoreService {
-    Code runAnalysis(String filePath) throws FileNotFoundException;
+    Code runAnalysis(String filePath) throws FileNotFoundException,IOException;
     String getJavaFileTree();
     CodeShown getJavaFileDetail(String filePath) throws UnsupportedEncodingException;
     Code<String> refactorAll();
 
-    Code<String> analysisAgin() throws FileNotFoundException;
+    Code<String> analysisAgin() throws FileNotFoundException,IOException;
 
     Code<String> analysisByGithub(String gitPath,String branch) throws IOException;
 

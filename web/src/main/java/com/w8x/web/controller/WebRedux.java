@@ -27,7 +27,7 @@ public class WebRedux {
      */
     @RequestMapping(value = "/analysis", method = RequestMethod.POST)
     @ResponseBody
-    public Code analysis(@RequestParam(value = "fileName") String fileName) throws FileNotFoundException {
+    public Code analysis(@RequestParam(value = "fileName") String fileName) throws FileNotFoundException,IOException {
         //System.out.println(fileName);
         Code code = refactCoreService.runAnalysis(fileName);
         return code;
@@ -53,7 +53,7 @@ public class WebRedux {
 
     @GetMapping("/analysisagin")
     @ResponseBody
-    Code<String> analysisAgin() throws FileNotFoundException {
+    Code<String> analysisAgin() throws FileNotFoundException,IOException {
         return refactCoreService.analysisAgin();
     }
 
