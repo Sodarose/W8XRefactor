@@ -128,8 +128,17 @@ public class RuleLink {
 
     public void writeRuleXML() throws IOException {
         Resource resource = new ClassPathResource(RULE_XML_PATH);
-        XMLWriter xmlWriter = new XMLWriter(new PrintWriter(resource.getFile()));
-        xmlWriter.write(document);
-        xmlWriter.close();
+        XMLWriter xmlWriter = null;
+        try {
+            LOGGER.warn("资源是否能获取:"+resource.getFile()+"");
+            xmlWriter = new XMLWriter(new PrintWriter(resource.getFile()));
+            xmlWriter.write(document);
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if(xmlWriter!=null){
+                xmlWriter.close();
+            }
+        }
     }
 }

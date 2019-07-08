@@ -15,7 +15,7 @@ import java.io.File;
 @Component
 @PropertySource("classpath:application-dev.properties")
 @ConfigurationProperties(prefix = "git")
-public class GitConfig {
+public class GitConfigDev {
     private String path;
     private File repository;
 }

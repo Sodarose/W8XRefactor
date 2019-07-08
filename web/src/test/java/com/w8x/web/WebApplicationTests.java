@@ -1,7 +1,9 @@
 package com.w8x.web;
 
 import com.w8x.web.api.GithubDataGrabber;
-import com.w8x.web.config.GitConfig;
+import com.w8x.web.config.GitConfigDev;
+import com.w8x.web.dao.CodeStyleRepository;
+import com.w8x.web.pojo.CodeStyleConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +16,25 @@ import java.io.IOException;
 @SpringBootTest
 public class WebApplicationTests {
     @Autowired
-    GitConfig gitConfig;
+    GitConfigDev gitConfigDev;
 
 
     @Autowired
     GithubDataGrabber githubDataGrabber;
 
+    @Autowired
+    CodeStyleRepository codeStyleRepository;
 
     @Test
     public void contextLoads() throws IOException {
-        githubDataGrabber.gitCloneRepository("https://github.com/Sodarose/W8XRefactor.git","master");
+        CodeStyleConfig codeStyleConfig = new CodeStyleConfig();
+        codeStyleConfig.setId(1L);
+        codeStyleConfig.setCodeName("各个风格校验");
+        codeStyleConfig.setPath("");
+        codeStyleConfig.setUse(true);
+        codeStyleRepository.save(codeStyleConfig);
+        CodeStyleConfig t = codeStyleRepository.findCodeStyleConfigByCodeNameAndUse("各个风格校验",true);
+        System.out.println("啊哈哈哈哈哈"+t);
     }
 
 }

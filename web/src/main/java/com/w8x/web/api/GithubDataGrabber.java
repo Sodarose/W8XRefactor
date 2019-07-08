@@ -1,7 +1,7 @@
 package com.w8x.web.api;
 
 
-import com.w8x.web.config.GitConfig;
+import com.w8x.web.config.GitConfigDev;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
@@ -24,7 +24,7 @@ import java.nio.file.Files;
 public class GithubDataGrabber {
 
     @Autowired
-    GitConfig gitConfig;
+    GitConfigDev gitConfigDev;
 
     private static Logger LOGGER = LoggerFactory.getLogger(GithubDataGrabber.class);
 
@@ -37,17 +37,17 @@ public class GithubDataGrabber {
         File homeDir = home.getDir();
         // jar包存放的位置
         String path = homeDir.getPath() + File.separator + "repository";
-        if(gitConfig.getPath()!=null&&!"".equals(gitConfig.getPath())){
-            path = gitConfig.getPath();
+        if(gitConfigDev.getPath()!=null&&!"".equals(gitConfigDev.getPath())){
+            path = gitConfigDev.getPath();
         }
-        gitConfig.setPath(path);
+        gitConfigDev.setPath(path);
         File repository = new File(path);
         LOGGER.info("仓库地址："+repository.getPath());
         if (!repository.exists()) {
             repository.mkdirs();
         }
         //设置仓库地址
-        gitConfig.setRepository(repository);
+        gitConfigDev.setRepository(repository);
     }
 
     /**
@@ -60,7 +60,7 @@ public class GithubDataGrabber {
         //项目名称
         String name = remoteUrl.substring(remoteUrl.lastIndexOf("/") + 1, remoteUrl.lastIndexOf(".git"));
         //得到
-        File file = new File(gitConfig.getRepository().getPath() + File.separatorChar+ name);
+        File file = new File(gitConfigDev.getRepository().getPath() + File.separatorChar+ name);
         LOGGER.info("项目地址："+file.getPath());
         if (file.exists()) {
             Files.deleteIfExists(file.toPath());
