@@ -126,5 +126,4 @@ public class RefactCoreServiceImpl implements RefactCoreService {
         return Code.createCode(200, "", "设置成功");
     }
 
-
 }
