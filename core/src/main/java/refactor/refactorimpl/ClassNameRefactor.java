@@ -12,12 +12,14 @@ import refactor.AbstractRefactor;
 import ulits.ClassReferUtil;
 import ulits.FilesNameRename;
 import ulits.SplitName;
+import ulits.SplitWord;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +37,9 @@ public class ClassNameRefactor extends AbstractRefactor {
     private void classNameRefactor(ClassOrInterfaceDeclaration classOrInterfaceDeclaration, Issue issue) throws IOException {
         String newName = "";
         String oldName = classOrInterfaceDeclaration.getNameAsString();
-        List<String> nameList = SplitName.split(classOrInterfaceDeclaration.getNameAsString());
+        SplitWord splitWord = new SplitWord();
+        List<String> nameList = splitWord.split(classOrInterfaceDeclaration.getNameAsString());
+        Collections.reverse(nameList);
         if (nameList == null) {
             return;
         }

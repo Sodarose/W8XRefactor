@@ -77,4 +77,9 @@ public class WebRedux {
     }
 
 
+    @GetMapping("/project/saveModify")
+    @ResponseBody
+    public boolean saveModify() throws IOException {
+        return refactCoreService.saveModify();
+    }
 }
