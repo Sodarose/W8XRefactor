@@ -27,4 +27,5 @@ public interface RefactCoreService {
     Code<List<RuleModelVo>> getRuleByMap();
 
     Code<String> setRuleByMap(Map<String,Integer> rules) throws IOException;
+    boolean saveModify() throws IOException;
 }

@@ -3,7 +3,6 @@ package model;
 import analysis.AbstractRuleVisitor;
 import analysis.Rule;
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.symbolsolver.javaparsermodel.JavaParserFacade;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.utils.ProjectRoot;
@@ -21,6 +20,9 @@ import java.util.Map;
 public class Store {
     //项目路径
     public static String path;
+
+    //保存项目路径
+    public static String savePath;
     //状态
     public static boolean run;
 
@@ -48,5 +50,11 @@ public class Store {
      * 规则索引
      */
     public static Map<String, AbstractRuleVisitor> ruleMap;
+
+    public static Map<String,String> pathMap; //路径映射
+
+    public static List<JsonObject> jsonObjectList; //写入json文件的信息
+
+    public static String modifyPath;
 
 }

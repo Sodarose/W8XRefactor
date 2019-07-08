@@ -9,9 +9,11 @@ import model.Issue;
 import refactor.AbstractRefactor;
 import ulits.MethodReferUtil;
 import ulits.SplitName;
+import ulits.SplitWord;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MethodNameRefactor extends AbstractRefactor {
@@ -27,7 +29,9 @@ public class MethodNameRefactor extends AbstractRefactor {
     public void methodNameRefactor(MethodDeclaration methodDeclaration) throws IOException {
         String oldName=methodDeclaration.getNameAsString();
         String newName="";
-        List<String> nameList= SplitName.split(methodDeclaration.getNameAsString());
+        SplitWord splitWord=new SplitWord();
+        List<String> nameList= splitWord.split(methodDeclaration.getNameAsString());
+        Collections.reverse(nameList);
         if(nameList==null){
             return;
         }
@@ -40,8 +44,10 @@ public class MethodNameRefactor extends AbstractRefactor {
             newName=newName+data;
 
         }
-        methodDeclaration.setName(newName);
-        MethodReferUtil.referUtil(oldName,newName);
+        if(!newName.equals("")) {
+            methodDeclaration.setName(newName);
+            MethodReferUtil.referUtil(oldName, newName);
+        }
     }
 
 }

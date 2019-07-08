@@ -10,9 +10,11 @@ import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
 import ulits.SplitName;
+import ulits.SplitWord;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ParameterNamingRule extends AbstractRuleVisitor {
@@ -31,7 +33,9 @@ public class ParameterNamingRule extends AbstractRuleVisitor {
         List<Parameter> parameterList=javaModel.getUnit().findAll(Parameter.class);
         for(Parameter parameter:parameterList){
             String name=parameter.getNameAsString();
-            List<String> nameList= SplitName.split(name);
+            SplitWord splitWord=new SplitWord();
+            List<String> nameList= splitWord.split(name);
+            Collections.reverse(nameList);
             if(nameList!=null) {
                 boolean nameFlag = check(nameList);
                 if (!nameFlag) {
