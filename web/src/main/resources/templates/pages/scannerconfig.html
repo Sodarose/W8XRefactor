@@ -52,9 +52,16 @@
                         var message = data[i].message;
                         var ruleName = data[i].ruleName;
                         var ruleStatus = data[i].ruleStatus;
-                        var
-                            $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input id="rules'+(i+1)+'" type="checkbox" checked="'+ruleStatus+'" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value=""></form></td></tr>');
-                        $(".layui-table").append($tr)
+                        if(ruleStatus="true"){
+                            var
+                                $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input id="rules'+(i+1)+'" type="checkbox" checked="" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value=""></form></td></tr>');
+                            $(".layui-table").append($tr)
+                        }else{
+                            var
+                                $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input id="rules'+(i+1)+'" type="checkbox" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value=""></form></td></tr>');
+                            $(".layui-table").append($tr)
+                        }
+
                     }
                     var $button = $('<tr><td colspan="3"><botton type="button" onclick="commit()" class="layui-btn layui-btn-normal layui-col-md3 layui-col-md-offset9">提交扫描配置</botton></td></tr>');
                     $(".layui-table").append($button)
@@ -86,22 +93,41 @@
     function collectData() {
         var map;
         var str=new Array()
-        $('#tabledata tr td').find("input").each(function(){
+        var len = $('#tabledata tr td').find("input").length
+        console.log(len)
+
+        var filter_numbs = new Array();
+        for(var i=1; i<=len; i++)
+        {
+            var name = $("#tabledata tr").eq(i).find("input:first").attr("name");
+            var checked = $("#tabledata tr").eq(i).find("input:first").attr("checked");
+            console.log(name+":" +checked)
+           /* if (checked == 'checked') {
+                var value = $('input').attr('value',1)
+            } else {
+                $('input').removeAttribute('checked');
+                $('input').attr('value',0)
+            }*/
+            //filter_numbs.push(numberStr);
+        }
+
+        /*$('#tabledata tr td').find("input").each(function(){
                     var key = $('input').attr('name')
-                    var value = $('input').attr('checked')
-                    if (value = 'ture') {
+                    var checked = $('input').attr('checked')
+                    if (checked = 'ture') {
                         $('input').attr('value',1)
                     } else {
                         $('input').removeAttribute('checked');
                         $('input').attr('value',0)
                     }
+                    var value = $('input').attr('value')
                     console.log(key+ ":" + value)
-                   str1='{"name":"'+key+'","value":'+value+'}';
+                   str1='"name":"'+key+'","value":'+value;
                    str.push(str1)
-        })
+        })*/
         console.log(str)
-        json=JSON.parse(str)
-        console.log(json)
+        //json=JSON.parse(str)
+        //console.log(json)
       return map
     }
 
