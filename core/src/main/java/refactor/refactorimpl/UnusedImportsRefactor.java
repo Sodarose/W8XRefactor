@@ -19,9 +19,9 @@ public class UnusedImportsRefactor extends AbstractRefactor {
         ImportDeclaration importDeclaration = (ImportDeclaration) issue.getIssueNode();
         removeImport(importDeclaration);
     }
-    private void removeImport(ImportDeclaration declaration){
-        if(declaration.getParentNode().isPresent()){
-            System.out.println(declaration);
+
+    private void removeImport(ImportDeclaration declaration) {
+        if (declaration.getParentNode().isPresent()) {
             declaration.getParentNode().get().remove(declaration);
         }
     }
