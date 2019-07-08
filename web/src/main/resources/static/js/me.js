@@ -13,8 +13,8 @@ function scanner(path) {
         },
         success: function (res) {
             if(res.code===200){
-                layer.msg('扫描成功 即将跳转', {icon: 1});
-                window.setTimeout(function(){location.href='/route/index.html'},2000);
+                layer.msg('扫描成功', {icon: 1});
+                /*window.setTimeout(function(){location.href='/route/index.html'},2000);*/
             }else{
                 layer.msg('扫描失败', {icon: 5});
             }
