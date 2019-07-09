@@ -23,6 +23,11 @@ function scanner(path) {
         }
     })
 }
+
+
+
+
+
 function refactor() {
     $.ajax({
         url: '/core/analysis',
