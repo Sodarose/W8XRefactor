@@ -24,9 +24,9 @@ public class RuleLink {
 
     private static final String RULE_XML_PATH = "static/rule.xml";
 
-    private static RuleLink ruleLink = null;
+    private static RuleLink ruleLink ;
 
-    private Document document = null;
+    private static Document document ;
     private Map<String, Element> elementMap = new HashMap<>();
 
 
@@ -68,6 +68,7 @@ public class RuleLink {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        LOGGER.warn("文档是否为"+(document == null)+"");
         LOGGER.info("读取成功");
         return rules;
     }
@@ -128,8 +129,19 @@ public class RuleLink {
 
     public void writeRuleXML() throws IOException {
         Resource resource = new ClassPathResource(RULE_XML_PATH);
-        XMLWriter xmlWriter = new XMLWriter(new PrintWriter(resource.getFile()));
-        xmlWriter.write(document);
-        xmlWriter.close();
+        XMLWriter xmlWriter = null;
+        try {
+            LOGGER.warn("资源是否能获取:"+resource.getFile()+"");
+            xmlWriter = new XMLWriter(new PrintWriter(resource.getFile()));
+            LOGGER.warn("文档是否为"+(document == null)+"");
+            xmlWriter.write(document);
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if(xmlWriter!=null){
+                LOGGER.warn("关闭写入流");
+                xmlWriter.close();
+            }
+        }
     }
 }

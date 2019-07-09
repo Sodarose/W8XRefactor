@@ -19,12 +19,12 @@ public class TransmissionThread implements Runnable {
 
     @Override
     public void run() {
-        String modifyPath = Store.pathMap.get(javaModel.getReadPath());
+        String modifyPath = javaModel.getReadPath();
         String fileName = Store.treeNodeMap.get(javaModel.getReadPath()).getFileName();
         String fileStatus = "file";
         JsonObject jsonObject =new JsonObject();
         jsonObject.setModifyPath(modifyPath);
-        jsonObject.setCopyPath(javaModel.getReadPath());
+        //jsonObject.setCopyPath(javaModel.getReadPath());
         jsonObject.setFileName(fileName);
         jsonObject.setFileStatus(fileStatus);
         Store.jsonObjectList.add(jsonObject);
