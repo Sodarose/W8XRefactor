@@ -8,10 +8,12 @@ import io.FileUlits;
 import model.Issue;
 import refactor.AbstractRefactor;
 import ulits.SplitName;
+import ulits.SplitWord;
 import ulits.VariableReferUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ClassVariNameRefactor  extends AbstractRefactor {
@@ -27,7 +29,9 @@ public class ClassVariNameRefactor  extends AbstractRefactor {
     public void variableNameRefactor(FieldDeclaration fieldDeclaration) throws IOException {
         String newName="";
         String oldName=fieldDeclaration.getVariable(0).getNameAsString();
-        List<String> nameList = SplitName.split(fieldDeclaration.getVariable(0).getNameAsString());
+        SplitWord splitWord = new SplitWord();
+        List<String> nameList = splitWord.split(fieldDeclaration.getVariable(0).getNameAsString());
+        Collections.reverse(nameList);
         if(nameList==null){
             return;
         }
@@ -39,8 +43,11 @@ public class ClassVariNameRefactor  extends AbstractRefactor {
             data=data.substring(0,1).toUpperCase()+data.substring(1);
             newName=newName+data;
         }
+        if(!newName.equals("")){
         fieldDeclaration.getVariable(0).setName(newName);
         VariableReferUtil.FieldNameUtil(oldName,newName);
+        }
+
     }
 
 }

@@ -13,6 +13,7 @@
     <bytecodeTargetLevel>
       <module name="core" target="1.8" />
       <module name="w8x" target="1.8" />
+      <module name="W8XRefactor" target="1.8" />
       <module name="web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
