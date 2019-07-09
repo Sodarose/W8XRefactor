@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-@ControllerAdvice
+
 public class WebExceptionHandler {
     private static Logger LOGGER = LoggerFactory.getLogger(WebExceptionHandler.class);
     private static String ERROR_VIEW= "/error.html";
