@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>扫描配置</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+    <script src="/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <link rel="stylesheet" href="/styles/default.css" th:href="@{/styles/default.css}">
+    <script src="../src/layui.js" th:src="@{/layui/layui.js}"></script>
+    <style type="text/css">
+        .layui-row{
+            display: table;
+            margin: 0 auto;
+            width: 900px;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-row">
+        <table class="layui-table" id="tabledata">
+            <colgroup>
+                <col width="300px">
+                <col width="500px">
+                <col width="100px">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>选择系统功能</th>
+                <th>功能描述</th>
+                <th>开关</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/core/analysisRules',
+            type: 'get',
+            async: true,
+            dataType: 'json',
+            success: function (res) {
+                console.log(res)
+                if(res.code===200){
+                    var data = res.data;
+                    for(var i = 0;i<data.length;i++){
+                        var description = data[i].description;
+                        var example = data[i].example;
+                        var message = data[i].message;
+                        var ruleName = data[i].ruleName;
+                        var ruleStatus = data[i].ruleStatus;
+                        if(ruleStatus===true){
+                            var
+                                $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input id="rules'+(i+1)+'" type="checkbox" checked="" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value=""></form></td></tr>');
+                            $(".layui-table").append($tr)
+                        }else{
+                            var
+                                $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input id="rules'+(i+1)+'" type="checkbox" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value=""></form></td></tr>');
+                            $(".layui-table").append($tr)
+                        }
+
+                    }
+                    var $button = $('<tr><td colspan="3"><botton type="button" onclick="commit()" class="layui-btn layui-btn-normal layui-col-md3 layui-col-md-offset9">提交扫描配置</botton></td></tr>');
+                    $(".layui-table").append($button)
+                }else{
+                    layer.msg('读取配置失败', {icon: 5});
+                }
+            }, error: function (e) {
+            }
+        })
+    })
+
+    function commit(){
+      var datas = collectData()
+        $.ajax({
+            url:'/core/setAnalysisRules',
+            type:'post',
+            async: true,
+            contentType:"application/json",
+            dataType:'json',
+            data: {
+               "data":JSON.stringify(datas),
+            },
+            success:function(res){
+//                layer.msg
+            },error:function(){
+
+            }
+        })
+    }
+    function collectData() {
+        var map;
+        var len = $('#tabledata tr td').find("input").length
+        var datas = []
+        for(var i=1; i<=len; i++)
+        {
+            var name = $("#tabledata tr").eq(i).find("input:first").attr("name");
+            var checked = $("#tabledata tr").eq(i).find("input[type='checkbox']").is(':checked');
+           if (checked == true) {
+                 $('input').attr('value',1)
+            } else {
+                    $('input').attr('value',0)
+            }
+            var value = $("#tabledata tr").eq(i).find("input:first").attr("value");
+            //var data={}
+           var data  = {"ruleName" : name,"status":value}
+            datas.push(data)
+        }
+        //var jsonString = JSON.stringify(datas);
+        /*$('#tabledata tr td').find("input").each(function(){
+                    var key = $('input').attr('name')
+                    var checked = $('input').attr('checked')
+                    if (checked = 'ture') {
+                        $('input').attr('value',1)
+                    } else {
+                        $('input').removeAttribute('checked');
+                        $('input').attr('value',0)
+                    }
+                    var value = $('input').attr('value')
+                    console.log(key+ ":" + value)
+                   str1='"name":"'+key+'","value":'+value;
+                   str.push(str1)
+        })*/
+
+        console.log(JSON.stringify(datas))
+      return datas
+    }
+
+    layui.use(['form','element', 'layer'], function () {
+        var form = layui.form,layer = layui.layer;
+        var element = layui.element;
+        var layer = layui.layer;
+        element.on('collapse(test)', function(data){
+            layer.msg('展开状态：'+ data.show);
+        });
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '0px'
+            });
+        });
+    });
+
+</script>
+
+</body>
+</html>

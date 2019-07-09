@@ -1,412 +1,602 @@
 {
-  "ref": "refs/heads/dev",
-  "before": "4ddd242a785eb25ac7d5f4a37193acd8fa417f6f",
-  "after": "587e4af1e12a6dfb430b4e465b67b085866a6900",
-  "created": false,
-  "deleted": false,
-  "forced": false,
-  "base_ref": null,
-  "compare": "https://github.com/Sodarose/W8X/compare/4ddd242a785e...587e4af1e12a",
-  "commits": [
+  "children": [
     {
-      "id": "587e4af1e12a6dfb430b4e465b67b085866a6900",
-      "tree_id": "a7ac3da34eab9f0d8c16183f1df901096d8625b4",
-      "distinct": true,
-      "message": "test",
-      "timestamp": "2019-04-20T02:33:07+08:00",
-      "url": "https://github.com/Sodarose/W8X/commit/587e4af1e12a6dfb430b4e465b67b085866a6900",
-      "author": {
-        "name": "bassnsmq",
-        "email": "2418267675@qq.com",
-        "username": "bassnsmq"
-      },
-      "committer": {
-        "name": "bassnsmq",
-        "email": "2418267675@qq.com",
-        "username": "bassnsmq"
-      },
-      "added": [
-        ".idea/libraries/Maven__com_beust_jcommander_1_48.xml",
-        ".idea/libraries/Maven__com_google_code_gson_gson_2_5.xml",
-        ".idea/libraries/Maven__commons_io_commons_io_2_4.xml",
-        ".idea/libraries/Maven__jaxen_jaxen_1_1_6.xml",
-        ".idea/libraries/Maven__mysql_mysql_connector_java_5_1_45.xml",
-        ".idea/libraries/Maven__net_java_dev_javacc_javacc_5_0.xml",
-        ".idea/libraries/Maven__net_sourceforge_pmd_pmd_core_5_5_2.xml",
-        ".idea/libraries/Maven__net_sourceforge_pmd_pmd_java_5_5_2.xml",
-        ".idea/libraries/Maven__net_sourceforge_pmd_pmd_test_5_5_2.xml",
-        ".idea/libraries/Maven__net_sourceforge_pmd_pmd_vm_5_5_2.xml",
-        ".idea/libraries/Maven__net_sourceforge_saxon_saxon_9_1_0_8.xml",
-        ".idea/libraries/Maven__net_sourceforge_saxon_saxon_dom_9_1_0_8.xml",
-        ".idea/libraries/Maven__org_apache_ant_ant_1_9_6.xml",
-        ".idea/libraries/Maven__org_apache_ant_ant_launcher_1_9_6.xml",
-        ".idea/libraries/Maven__org_apache_ant_ant_testutil_1_9_6.xml",
-        ".idea/libraries/Maven__org_apache_commons_commons_lang3_3_4.xml",
-        "core/src/main/java/com/alibaba/p3c/pmd/I18nResources.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/Main.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/fix/FixClassTypeResolver.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/AbstractXpathRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/AbstractAliRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/AbstractPojoRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/AbstractAliCommentRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/AbstractMethodOrInterfaceMethodMustUseJavadocRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/AvoidCommentBehindStatementRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/ClassMustHaveAuthorRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/CommentsMustBeJavadocFormatRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/EnumConstantsMustHaveCommentRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/RemoveCommentedCodeRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/AvoidCallStaticSimpleDateFormatRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/AvoidConcurrentCompetitionRandomRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/AvoidManuallyCreateThreadRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/AvoidUseTimerRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/CountDownShouldInFinallyRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/ThreadLocalShouldRemoveRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/ThreadPoolCreationRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/ThreadShouldSetNameRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/constant/UndefineMagicConstantRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/constant/UpperEllRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/exception/AvoidReturnInFinallyRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/exception/MethodReturnWrapperTypeRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/exception/TransactionMustHaveRollbackRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/flowcontrol/AvoidComplexConditionRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/flowcontrol/AvoidNegationOperatorRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/flowcontrol/NeedBraceRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/flowcontrol/SwitchStatementRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/AbstractClassShouldStartWithAbstractNamingRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/ArrayNamingShouldHaveBracketRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/AvoidStartWithDollarAndUnderLineNamingRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/BooleanPropertyShouldNotStartWithIsRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/ClassNamingShouldBeCamelRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/ConstantFieldShouldBeUpperCaseRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/ExceptionClassShouldEndWithExceptionRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/LowerCamelCaseVariableNamingRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/PackageNamingRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/ServiceOrDaoClassShouldEndWithImplRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/TestClassShouldEndWithTestNamingRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/EqualsAvoidNullRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/PojoMustOverrideToStringRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/PojoMustUsePrimitiveFieldRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/PojoNoDefaultValueRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/StringConcatRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/WrapperTypeEqualityRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/orm/IbatisMethodQueryForListRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/AvoidApacheBeanUtilsCopyRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/AvoidMissUseOfMathRandomRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/AvoidNewDateGetTimeRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/AvoidPatternCompileInMethodRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/MethodTooLongRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/UseRightCaseForDateFormatRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/ClassCastExceptionWithSubListToArrayListRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/ClassCastExceptionWithToArrayRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/CollectionInitShouldAssignCapacityRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/ConcurrentExceptionWithModifyOriginSubListRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/DontModifyInForeachCircleRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/UnsupportedExceptionWithModifyAsListRule.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/util/NodeSortUtils.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/util/NodeUtils.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/GeneratedCodeUtils.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/NumberConstants.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/PojoUtils.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/SpiLoader.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/StringAndCharConstants.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/ViolationUtils.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/namelist/NameListConfig.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/namelist/NameListService.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/namelist/NameListServiceImpl.java",
-        "core/src/main/java/com/alibaba/p3c/pmd/lang/vm/rule/other/UseQuietReferenceNotationRule.java",
-        "core/src/main/resources/messages.xml",
-        "core/src/main/resources/messages_en.xml",
-        "core/src/main/resources/namelist.properties",
-        "core/src/main/resources/rulesets/java/ali-comment.xml",
-        "core/src/main/resources/rulesets/java/ali-concurrent.xml",
-        "core/src/main/resources/rulesets/java/ali-constant.xml",
-        "core/src/main/resources/rulesets/java/ali-exception.xml",
-        "core/src/main/resources/rulesets/java/ali-flowcontrol.xml",
-        "core/src/main/resources/rulesets/java/ali-naming.xml",
-        "core/src/main/resources/rulesets/java/ali-oop.xml",
-        "core/src/main/resources/rulesets/java/ali-orm.xml",
-        "core/src/main/resources/rulesets/java/ali-other.xml",
-        "core/src/main/resources/rulesets/java/ali-set.xml",
-        "core/src/main/resources/rulesets/vm/ali-other.xml"
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "file": false,
+              "hasIssue": false,
+              "name": "hooks",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\hooks"
+            },
+            {
+              "children": [],
+              "file": false,
+              "hasIssue": false,
+              "name": "info",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\info"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "heads",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\logs\\refs\\heads"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "file": false,
+                          "hasIssue": false,
+                          "name": "origin",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\logs\\refs\\remotes\\origin"
+                        }
+                      ],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "remotes",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\logs\\refs\\remotes"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "refs",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\logs\\refs"
+                }
+              ],
+              "file": false,
+              "hasIssue": false,
+              "name": "logs",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\logs"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "info",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\objects\\info"
+                },
+                {
+                  "children": [],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "pack",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\objects\\pack"
+                }
+              ],
+              "file": false,
+              "hasIssue": false,
+              "name": "objects",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\objects"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "heads",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\refs\\heads"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "origin",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\refs\\remotes\\origin"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "remotes",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\refs\\remotes"
+                },
+                {
+                  "children": [],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "tags",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\refs\\tags"
+                }
+              ],
+              "file": false,
+              "hasIssue": false,
+              "name": "refs",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git\\refs"
+            }
+          ],
+          "file": false,
+          "hasIssue": false,
+          "name": ".git",
+          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.git"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "file": false,
+              "hasIssue": false,
+              "name": "inspectionProfiles",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.idea\\inspectionProfiles"
+            }
+          ],
+          "file": false,
+          "hasIssue": false,
+          "name": ".idea",
+          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\.idea"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "file": false,
+                          "hasIssue": false,
+                          "name": "fortransfromwhile",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production\\测试用例\\demanadthree\\fortransfromwhile"
+                        },
+                        {
+                          "children": [],
+                          "file": false,
+                          "hasIssue": false,
+                          "name": "IfRefactor",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production\\测试用例\\demanadthree\\IfRefactor"
+                        },
+                        {
+                          "children": [],
+                          "file": false,
+                          "hasIssue": false,
+                          "name": "iftandformsswitch",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production\\测试用例\\demanadthree\\iftandformsswitch"
+                        },
+                        {
+                          "children": [],
+                          "file": false,
+                          "hasIssue": false,
+                          "name": "switchtrandfromif",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production\\测试用例\\demanadthree\\switchtrandfromif"
+                        },
+                        {
+                          "children": [],
+                          "file": false,
+                          "hasIssue": false,
+                          "name": "whiletrandsfromfor",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production\\测试用例\\demanadthree\\whiletrandsfromfor"
+                        }
+                      ],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "demanadthree",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production\\测试用例\\demanadthree"
+                    },
+                    {
+                      "children": [],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "demanadtwo",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production\\测试用例\\demanadtwo"
+                    },
+                    {
+                      "children": [],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "demandfour",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production\\测试用例\\demandfour"
+                    },
+                    {
+                      "children": [],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "demandone",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production\\测试用例\\demandone"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "测试用例",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production\\测试用例"
+                }
+              ],
+              "file": false,
+              "hasIssue": false,
+              "name": "production",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out\\production"
+            }
+          ],
+          "file": false,
+          "hasIssue": false,
+          "name": "out",
+          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\out"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "VoidForRefactor.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\fortransfromwhile\\VoidForRefactor.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "VoidForTransFromWhile.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\fortransfromwhile\\VoidForTransFromWhile.java"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "fortransfromwhile",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\fortransfromwhile"
+                },
+                {
+                  "children": [
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "ComplexGuardStmtRefactor.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\IfRefactor\\ComplexGuardStmtRefactor.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "ForGuardStmtRefactor.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\IfRefactor\\ForGuardStmtRefactor.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "GuardStmtRefactorTestOne.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\IfRefactor\\GuardStmtRefactorTestOne.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "GuardStmtRefactorTwo.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\IfRefactor\\GuardStmtRefactorTwo.java"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "IfRefactor",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\IfRefactor"
+                },
+                {
+                  "children": [
+                    {
+                      "file": true,
+                      "hasIssue": false,
+                      "name": "EnumClass.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\iftandformsswitch\\EnumClass.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "EnumCondition",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\iftandformsswitch\\EnumCondition.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "EnumT.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\iftandformsswitch\\EnumT.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "MoreCoditionTest",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\iftandformsswitch\\MoreCoditionTest.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "NoHaveElse.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\iftandformsswitch\\NoHaveElse.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "SampleIfTrandFromsSwitch.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\iftandformsswitch\\SampleIfTrandFromsSwitch.java"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "iftandformsswitch",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\iftandformsswitch"
+                },
+                {
+                  "children": [
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "EnumSwitchTrandsFromIf.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\switchtrandfromif\\EnumSwitchTrandsFromIf.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "SwitchChangeFromIf.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\switchtrandfromif\\SwitchChangeFromIf.java"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "switchtrandfromif",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\switchtrandfromif"
+                },
+                {
+                  "children": [
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "WhileTrandsFromFor.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\whiletrandsfromfor\\WhileTrandsFromFor.java"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "whiletrandsfromfor",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree\\whiletrandsfromfor"
+                }
+              ],
+              "file": false,
+              "hasIssue": false,
+              "name": "demanadthree",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadthree"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "file": true,
+                          "hasIssue": true,
+                          "name": "testModel.java",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\classtest\\model\\testModel.java"
+                        }
+                      ],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "model",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\classtest\\model"
+                    },
+                    {
+                      "children": [
+                        {
+                          "file": true,
+                          "hasIssue": true,
+                          "name": "ReferTest",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\classtest\\refer\\ReferTest.java"
+                        }
+                      ],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "refer",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\classtest\\refer"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "classtest",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\classtest"
+                },
+                {
+                  "children": [
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "StringMatch.java",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\constantnametest\\StringMatch.java"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "constantnametest",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\constantnametest"
+                },
+                {
+                  "children": [
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "MethodRefer",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\methodtest\\MethodRefer.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "MethodTest",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\methodtest\\MethodTest.java"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "methodtest",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\methodtest"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "file": true,
+                          "hasIssue": true,
+                          "name": "ArticleDao",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\Dao\\ArticleDao.java"
+                        },
+                        {
+                          "file": true,
+                          "hasIssue": true,
+                          "name": "UserDao",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\Dao\\UserDao.java"
+                        }
+                      ],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "Dao",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\Dao"
+                    },
+                    {
+                      "children": [
+                        {
+                          "file": true,
+                          "hasIssue": true,
+                          "name": "Article",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\entity\\Article.java"
+                        },
+                        {
+                          "file": true,
+                          "hasIssue": true,
+                          "name": "Category",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\entity\\Category.java"
+                        },
+                        {
+                          "file": true,
+                          "hasIssue": true,
+                          "name": "Comments.java",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\entity\\Comments.java"
+                        },
+                        {
+                          "file": true,
+                          "hasIssue": true,
+                          "name": "User",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\entity\\User.java"
+                        }
+                      ],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "entity",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\entity"
+                    },
+                    {
+                      "children": [
+                        {
+                          "file": true,
+                          "hasIssue": true,
+                          "name": "ArticleService",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\service\\ArticleService.java"
+                        },
+                        {
+                          "file": true,
+                          "hasIssue": true,
+                          "name": "UserService",
+                          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\service\\UserService.java"
+                        }
+                      ],
+                      "file": false,
+                      "hasIssue": false,
+                      "name": "service",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest\\service"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "packagetest",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\packagetest"
+                },
+                {
+                  "children": [
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "NameTest",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\variablenametest\\NameTest.java"
+                    },
+                    {
+                      "file": true,
+                      "hasIssue": true,
+                      "name": "ReferTest",
+                      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\variablenametest\\ReferTest.java"
+                    }
+                  ],
+                  "file": false,
+                  "hasIssue": false,
+                  "name": "variablenametest",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo\\variablenametest"
+                }
+              ],
+              "file": false,
+              "hasIssue": false,
+              "name": "demanadtwo",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demanadtwo"
+            },
+            {
+              "children": [
+                {
+                  "file": true,
+                  "hasIssue": true,
+                  "name": "ForEachRule",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demandfour\\ForEachRule.java"
+                },
+                {
+                  "file": true,
+                  "hasIssue": true,
+                  "name": "HashCodeRule",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demandfour\\HashCodeRule.java"
+                },
+                {
+                  "file": true,
+                  "hasIssue": true,
+                  "name": "StringComparisonRule.java",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demandfour\\StringComparisonRule.java"
+                }
+              ],
+              "file": false,
+              "hasIssue": false,
+              "name": "demandfour",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demandfour"
+            },
+            {
+              "children": [
+                {
+                  "file": true,
+                  "hasIssue": true,
+                  "name": "CodeStyleRule",
+                  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demandone\\CodeStyleRule.java"
+                }
+              ],
+              "file": false,
+              "hasIssue": false,
+              "name": "demandone",
+              "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src\\demandone"
+            }
+          ],
+          "file": false,
+          "hasIssue": false,
+          "name": "src",
+          "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest\\src"
+        }
       ],
-      "removed": [
-        ".idea/libraries/Maven__net_bytebuddy_byte_buddy_1_9_3.xml",
-        ".idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_9_3.xml",
-        ".idea/libraries/Maven__org_javassist_javassist_3_24_0_GA.xml",
-        ".idea/libraries/Maven__org_objenesis_objenesis_3_0_1.xml",
-        ".idea/libraries/Maven__org_powermock_powermock_core_2_0_0.xml",
-        ".idea/libraries/Maven__org_powermock_powermock_module_junit4_2_0_0.xml",
-        ".idea/libraries/Maven__org_powermock_powermock_module_junit4_common_2_0_0.xml",
-        ".idea/libraries/Maven__org_powermock_powermock_reflect_2_0_0.xml",
-        "core/src/main/java/analyssis/Main.java"
-      ],
-      "modified": [
-        ".idea/compiler.xml",
-        ".idea/workspace.xml",
-        "core/core.iml",
-        "core/pom.xml"
-      ]
+      "file": false,
+      "hasIssue": false,
+      "name": "RefactorTest",
+      "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest"
     }
   ],
-  "head_commit": {
-    "id": "587e4af1e12a6dfb430b4e465b67b085866a6900",
-    "tree_id": "a7ac3da34eab9f0d8c16183f1df901096d8625b4",
-    "distinct": true,
-    "message": "test",
-    "timestamp": "2019-04-20T02:33:07+08:00",
-    "url": "https://github.com/Sodarose/W8X/commit/587e4af1e12a6dfb430b4e465b67b085866a6900",
-    "author": {
-      "name": "bassnsmq",
-      "email": "2418267675@qq.com",
-      "username": "bassnsmq"
-    },
-    "committer": {
-      "name": "bassnsmq",
-      "email": "2418267675@qq.com",
-      "username": "bassnsmq"
-    },
-    "added": [
-      ".idea/libraries/Maven__com_beust_jcommander_1_48.xml",
-      ".idea/libraries/Maven__com_google_code_gson_gson_2_5.xml",
-      ".idea/libraries/Maven__commons_io_commons_io_2_4.xml",
-      ".idea/libraries/Maven__jaxen_jaxen_1_1_6.xml",
-      ".idea/libraries/Maven__mysql_mysql_connector_java_5_1_45.xml",
-      ".idea/libraries/Maven__net_java_dev_javacc_javacc_5_0.xml",
-      ".idea/libraries/Maven__net_sourceforge_pmd_pmd_core_5_5_2.xml",
-      ".idea/libraries/Maven__net_sourceforge_pmd_pmd_java_5_5_2.xml",
-      ".idea/libraries/Maven__net_sourceforge_pmd_pmd_test_5_5_2.xml",
-      ".idea/libraries/Maven__net_sourceforge_pmd_pmd_vm_5_5_2.xml",
-      ".idea/libraries/Maven__net_sourceforge_saxon_saxon_9_1_0_8.xml",
-      ".idea/libraries/Maven__net_sourceforge_saxon_saxon_dom_9_1_0_8.xml",
-      ".idea/libraries/Maven__org_apache_ant_ant_1_9_6.xml",
-      ".idea/libraries/Maven__org_apache_ant_ant_launcher_1_9_6.xml",
-      ".idea/libraries/Maven__org_apache_ant_ant_testutil_1_9_6.xml",
-      ".idea/libraries/Maven__org_apache_commons_commons_lang3_3_4.xml",
-      "core/src/main/java/com/alibaba/p3c/pmd/I18nResources.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/Main.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/fix/FixClassTypeResolver.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/AbstractXpathRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/AbstractAliRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/AbstractPojoRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/AbstractAliCommentRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/AbstractMethodOrInterfaceMethodMustUseJavadocRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/AvoidCommentBehindStatementRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/ClassMustHaveAuthorRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/CommentsMustBeJavadocFormatRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/EnumConstantsMustHaveCommentRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/comment/RemoveCommentedCodeRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/AvoidCallStaticSimpleDateFormatRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/AvoidConcurrentCompetitionRandomRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/AvoidManuallyCreateThreadRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/AvoidUseTimerRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/CountDownShouldInFinallyRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/ThreadLocalShouldRemoveRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/ThreadPoolCreationRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/concurrent/ThreadShouldSetNameRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/constant/UndefineMagicConstantRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/constant/UpperEllRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/exception/AvoidReturnInFinallyRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/exception/MethodReturnWrapperTypeRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/exception/TransactionMustHaveRollbackRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/flowcontrol/AvoidComplexConditionRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/flowcontrol/AvoidNegationOperatorRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/flowcontrol/NeedBraceRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/flowcontrol/SwitchStatementRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/AbstractClassShouldStartWithAbstractNamingRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/ArrayNamingShouldHaveBracketRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/AvoidStartWithDollarAndUnderLineNamingRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/BooleanPropertyShouldNotStartWithIsRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/ClassNamingShouldBeCamelRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/ConstantFieldShouldBeUpperCaseRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/ExceptionClassShouldEndWithExceptionRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/LowerCamelCaseVariableNamingRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/PackageNamingRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/ServiceOrDaoClassShouldEndWithImplRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/naming/TestClassShouldEndWithTestNamingRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/EqualsAvoidNullRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/PojoMustOverrideToStringRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/PojoMustUsePrimitiveFieldRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/PojoNoDefaultValueRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/StringConcatRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/oop/WrapperTypeEqualityRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/orm/IbatisMethodQueryForListRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/AvoidApacheBeanUtilsCopyRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/AvoidMissUseOfMathRandomRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/AvoidNewDateGetTimeRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/AvoidPatternCompileInMethodRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/MethodTooLongRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/other/UseRightCaseForDateFormatRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/ClassCastExceptionWithSubListToArrayListRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/ClassCastExceptionWithToArrayRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/CollectionInitShouldAssignCapacityRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/ConcurrentExceptionWithModifyOriginSubListRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/DontModifyInForeachCircleRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/set/UnsupportedExceptionWithModifyAsListRule.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/util/NodeSortUtils.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/rule/util/NodeUtils.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/GeneratedCodeUtils.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/NumberConstants.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/PojoUtils.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/SpiLoader.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/StringAndCharConstants.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/ViolationUtils.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/namelist/NameListConfig.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/namelist/NameListService.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/java/util/namelist/NameListServiceImpl.java",
-      "core/src/main/java/com/alibaba/p3c/pmd/lang/vm/rule/other/UseQuietReferenceNotationRule.java",
-      "core/src/main/resources/messages.xml",
-      "core/src/main/resources/messages_en.xml",
-      "core/src/main/resources/namelist.properties",
-      "core/src/main/resources/rulesets/java/ali-comment.xml",
-      "core/src/main/resources/rulesets/java/ali-concurrent.xml",
-      "core/src/main/resources/rulesets/java/ali-constant.xml",
-      "core/src/main/resources/rulesets/java/ali-exception.xml",
-      "core/src/main/resources/rulesets/java/ali-flowcontrol.xml",
-      "core/src/main/resources/rulesets/java/ali-naming.xml",
-      "core/src/main/resources/rulesets/java/ali-oop.xml",
-      "core/src/main/resources/rulesets/java/ali-orm.xml",
-      "core/src/main/resources/rulesets/java/ali-other.xml",
-      "core/src/main/resources/rulesets/java/ali-set.xml",
-      "core/src/main/resources/rulesets/vm/ali-other.xml"
-    ],
-    "removed": [
-      ".idea/libraries/Maven__net_bytebuddy_byte_buddy_1_9_3.xml",
-      ".idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_9_3.xml",
-      ".idea/libraries/Maven__org_javassist_javassist_3_24_0_GA.xml",
-      ".idea/libraries/Maven__org_objenesis_objenesis_3_0_1.xml",
-      ".idea/libraries/Maven__org_powermock_powermock_core_2_0_0.xml",
-      ".idea/libraries/Maven__org_powermock_powermock_module_junit4_2_0_0.xml",
-      ".idea/libraries/Maven__org_powermock_powermock_module_junit4_common_2_0_0.xml",
-      ".idea/libraries/Maven__org_powermock_powermock_reflect_2_0_0.xml",
-      "core/src/main/java/analyssis/Main.java"
-    ],
-    "modified": [
-      ".idea/compiler.xml",
-      ".idea/workspace.xml",
-      "core/core.iml",
-      "core/pom.xml"
-    ]
-  },
-  "repository": {
-    "id": 181272937,
-    "node_id": "MDEwOlJlcG9zaXRvcnkxODEyNzI5Mzc=",
-    "name": "W8X",
-    "full_name": "Sodarose/W8X",
-    "private": true,
-    "owner": {
-      "name": "Sodarose",
-      "email": "38067631+Sodarose@users.noreply.github.com",
-      "login": "Sodarose",
-      "id": 38067631,
-      "node_id": "MDQ6VXNlcjM4MDY3NjMx",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/38067631?v=4",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/Sodarose",
-      "html_url": "https://github.com/Sodarose",
-      "followers_url": "https://api.github.com/users/Sodarose/followers",
-      "following_url": "https://api.github.com/users/Sodarose/following{/other_user}",
-      "gists_url": "https://api.github.com/users/Sodarose/gists{/gist_id}",
-      "starred_url": "https://api.github.com/users/Sodarose/starred{/owner}{/repo}",
-      "subscriptions_url": "https://api.github.com/users/Sodarose/subscriptions",
-      "organizations_url": "https://api.github.com/users/Sodarose/orgs",
-      "repos_url": "https://api.github.com/users/Sodarose/repos",
-      "events_url": "https://api.github.com/users/Sodarose/events{/privacy}",
-      "received_events_url": "https://api.github.com/users/Sodarose/received_events",
-      "type": "User",
-      "site_admin": false
-    },
-    "html_url": "https://github.com/Sodarose/W8X",
-    "description": null,
-    "fork": false,
-    "url": "https://github.com/Sodarose/W8X",
-    "forks_url": "https://api.github.com/repos/Sodarose/W8X/forks",
-    "keys_url": "https://api.github.com/repos/Sodarose/W8X/keys{/key_id}",
-    "collaborators_url": "https://api.github.com/repos/Sodarose/W8X/collaborators{/collaborator}",
-    "teams_url": "https://api.github.com/repos/Sodarose/W8X/teams",
-    "hooks_url": "https://api.github.com/repos/Sodarose/W8X/hooks",
-    "issue_events_url": "https://api.github.com/repos/Sodarose/W8X/issues/events{/number}",
-    "events_url": "https://api.github.com/repos/Sodarose/W8X/events",
-    "assignees_url": "https://api.github.com/repos/Sodarose/W8X/assignees{/user}",
-    "branches_url": "https://api.github.com/repos/Sodarose/W8X/branches{/branch}",
-    "tags_url": "https://api.github.com/repos/Sodarose/W8X/tags",
-    "blobs_url": "https://api.github.com/repos/Sodarose/W8X/git/blobs{/sha}",
-    "git_tags_url": "https://api.github.com/repos/Sodarose/W8X/git/tags{/sha}",
-    "git_refs_url": "https://api.github.com/repos/Sodarose/W8X/git/refs{/sha}",
-    "trees_url": "https://api.github.com/repos/Sodarose/W8X/git/trees{/sha}",
-    "statuses_url": "https://api.github.com/repos/Sodarose/W8X/statuses/{sha}",
-    "languages_url": "https://api.github.com/repos/Sodarose/W8X/languages",
-    "stargazers_url": "https://api.github.com/repos/Sodarose/W8X/stargazers",
-    "contributors_url": "https://api.github.com/repos/Sodarose/W8X/contributors",
-    "subscribers_url": "https://api.github.com/repos/Sodarose/W8X/subscribers",
-    "subscription_url": "https://api.github.com/repos/Sodarose/W8X/subscription",
-    "commits_url": "https://api.github.com/repos/Sodarose/W8X/commits{/sha}",
-    "git_commits_url": "https://api.github.com/repos/Sodarose/W8X/git/commits{/sha}",
-    "comments_url": "https://api.github.com/repos/Sodarose/W8X/comments{/number}",
-    "issue_comment_url": "https://api.github.com/repos/Sodarose/W8X/issues/comments{/number}",
-    "contents_url": "https://api.github.com/repos/Sodarose/W8X/contents/{+path}",
-    "compare_url": "https://api.github.com/repos/Sodarose/W8X/compare/{base}...{head}",
-    "merges_url": "https://api.github.com/repos/Sodarose/W8X/merges",
-    "archive_url": "https://api.github.com/repos/Sodarose/W8X/{archive_format}{/ref}",
-    "downloads_url": "https://api.github.com/repos/Sodarose/W8X/downloads",
-    "issues_url": "https://api.github.com/repos/Sodarose/W8X/issues{/number}",
-    "pulls_url": "https://api.github.com/repos/Sodarose/W8X/pulls{/number}",
-    "milestones_url": "https://api.github.com/repos/Sodarose/W8X/milestones{/number}",
-    "notifications_url": "https://api.github.com/repos/Sodarose/W8X/notifications{?since,all,participating}",
-    "labels_url": "https://api.github.com/repos/Sodarose/W8X/labels{/name}",
-    "releases_url": "https://api.github.com/repos/Sodarose/W8X/releases{/id}",
-    "deployments_url": "https://api.github.com/repos/Sodarose/W8X/deployments",
-    "created_at": 1555225948,
-    "updated_at": "2019-04-14T07:12:31Z",
-    "pushed_at": 1555727610,
-    "git_url": "git://github.com/Sodarose/W8X.git",
-    "ssh_url": "git@github.com:Sodarose/W8X.git",
-    "clone_url": "https://github.com/Sodarose/W8X.git",
-    "svn_url": "https://github.com/Sodarose/W8X",
-    "homepage": null,
-    "size": 650,
-    "stargazers_count": 0,
-    "watchers_count": 0,
-    "language": null,
-    "has_issues": true,
-    "has_projects": true,
-    "has_downloads": true,
-    "has_wiki": true,
-    "has_pages": false,
-    "forks_count": 0,
-    "mirror_url": null,
-    "archived": false,
-    "disabled": false,
-    "open_issues_count": 0,
-    "license": null,
-    "forks": 0,
-    "open_issues": 0,
-    "watchers": 0,
-    "default_branch": "master",
-    "stargazers": 0,
-    "master_branch": "master"
-  },
-  "pusher": {
-    "name": "bassnsmq",
-    "email": "38123303+bassnsmq@users.noreply.github.com"
-  },
-  "sender": {
-    "login": "bassnsmq",
-    "id": 38123303,
-    "node_id": "MDQ6VXNlcjM4MTIzMzAz",
-    "avatar_url": "https://avatars3.githubusercontent.com/u/38123303?v=4",
-    "gravatar_id": "",
-    "url": "https://api.github.com/users/bassnsmq",
-    "html_url": "https://github.com/bassnsmq",
-    "followers_url": "https://api.github.com/users/bassnsmq/followers",
-    "following_url": "https://api.github.com/users/bassnsmq/following{/other_user}",
-    "gists_url": "https://api.github.com/users/bassnsmq/gists{/gist_id}",
-    "starred_url": "https://api.github.com/users/bassnsmq/starred{/owner}{/repo}",
-    "subscriptions_url": "https://api.github.com/users/bassnsmq/subscriptions",
-    "organizations_url": "https://api.github.com/users/bassnsmq/orgs",
-    "repos_url": "https://api.github.com/users/bassnsmq/repos",
-    "events_url": "https://api.github.com/users/bassnsmq/events{/privacy}",
-    "received_events_url": "https://api.github.com/users/bassnsmq/received_events",
-    "type": "User",
-    "site_admin": false
-  }
+  "file": false,
+  "hasIssue": false,
+  "name": "RefactorTest",
+  "realPath": "C:\\Users\\Black\\Desktop\\RefactorTest"
 }

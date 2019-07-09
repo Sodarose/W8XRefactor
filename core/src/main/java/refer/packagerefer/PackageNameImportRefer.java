@@ -13,12 +13,14 @@ public class PackageNameImportRefer {
         for (CompilationUnit unit:units) {
             List<ImportDeclaration> importDeclarations=unit.getImports();
             if(!(importDeclarations.isEmpty())){
-                for (ImportDeclaration importDeclaration:importDeclarations){
-                    int index=importDeclaration.getNameAsString().lastIndexOf(".");
-                    String packageName=importDeclaration.getNameAsString().substring(0,index);
-                    if(packageName.equals(oldPackageName)){
-                        String className=importDeclaration.getNameAsString().substring(index);
-                        importDeclaration.setName(newPackageName+className);
+                for (ImportDeclaration importDeclaration:importDeclarations) {
+                    int index = importDeclaration.getNameAsString().lastIndexOf(".");
+                    if (index != -1) {
+                        String packageName = importDeclaration.getNameAsString().substring(0, index);
+                        if (packageName.equals(oldPackageName)) {
+                            String className = importDeclaration.getNameAsString().substring(index);
+                            importDeclaration.setName(newPackageName + className);
+                        }
                     }
                 }
             }

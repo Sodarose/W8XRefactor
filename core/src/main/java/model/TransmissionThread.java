@@ -19,10 +19,31 @@ public class TransmissionThread implements Runnable {
 
     @Override
     public void run() {
-        File file = new File(javaModel.getReadPath());
-        if (!file.exists()) {
-            return;
+        String modifyPath = Store.pathMap.get(javaModel.getReadPath());
+        String fileName = Store.treeNodeMap.get(javaModel.getReadPath()).getFileName();
+        String fileStatus = "file";
+        JsonObject jsonObject =new JsonObject();
+        jsonObject.setModifyPath(modifyPath);
+        jsonObject.setCopyPath(javaModel.getReadPath());
+        jsonObject.setFileName(fileName);
+        jsonObject.setFileStatus(fileStatus);
+        Store.jsonObjectList.add(jsonObject);
+        String filePath = Store.modifyPath+"\\"+fileName;
+        File file = new File(filePath);
+        if(!file.getParentFile().exists()){
+            //如果父目录不存在;创建父目录
+            file.getParentFile().mkdirs();
         }
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        /*if (!file.exists()) {
+            return;
+        }*/
         PrintWriter printWriter = null;
         try {
             printWriter = new PrintWriter(file);
