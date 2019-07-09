@@ -3,6 +3,8 @@ package com.w8x.web.controller;
 import analysis.AbstractRuleVisitor;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.w8x.web.BO.RuleObj;
+import com.w8x.web.BO.RulesConfig;
 import com.w8x.web.Service.RefactCoreService;
 import com.w8x.web.model.Code;
 import com.w8x.web.model.CodeShown;
@@ -19,7 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/core")
 public class WebRedux {
 
@@ -75,14 +77,13 @@ public class WebRedux {
     }
 
     @PostMapping("/setAnalysisRules")
-    @ResponseBody
-    Code<String> setRules(@RequestBody Map<String, RuleStatus[]> ruleStatusMap) throws IOException {
-        System.out.println(ruleStatusMap);
-        RuleStatus[] ruleStatuses = ruleStatusMap.get("data");
-        for (RuleStatus ruleStatus : ruleStatuses) {
-            System.out.println(ruleStatus.getRuleName());
-            System.out.println(ruleStatus.getStatus());
-        }
+    Code<String> setRules( @RequestBody RulesConfig[] rules) throws IOException {
+        System.out.println(rules);
+//        RuleStatus[] ruleStatuses = datas.get("data");
+//        for (RuleStatus ruleStatus : ruleStatuses) {
+//            System.out.println(ruleStatus.getRuleName());
+//            System.out.println(ruleStatus.getStatus());
+//        }
         return null;
     }
 
