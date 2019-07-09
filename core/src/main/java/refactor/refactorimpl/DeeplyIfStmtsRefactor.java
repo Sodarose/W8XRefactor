@@ -258,6 +258,9 @@ public class DeeplyIfStmtsRefactor extends AbstractRefactor {
      */
     private int checkIFChange(BlockStmt blockStmt, Statement stmt) {
         int index = blockStmt.getStatements().indexOf(stmt);
+        if(index==-1){
+            return 4;
+        }
         return blockStmt.getStatements().subList(index, blockStmt.getStatements().size()).size();
     }
 

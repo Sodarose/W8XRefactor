@@ -14,12 +14,11 @@
             margin: 0 auto;
             width: 900px;
         }
-
     </style>
 </head>
 <body>
 <div class="layui-row">
-        <table class="layui-table">
+        <table class="layui-table" id="tabledata">
             <colgroup>
                 <col width="300px">
                 <col width="500px">
@@ -44,6 +43,7 @@
             async: true,
             dataType: 'json',
             success: function (res) {
+                console.log(res)
                 if(res.code===200){
                     var data = res.data;
                     for(var i = 0;i<data.length;i++){
@@ -52,40 +52,77 @@
                         var message = data[i].message;
                         var ruleName = data[i].ruleName;
                         var ruleStatus = data[i].ruleStatus;
+                        if(ruleStatus===true){
+                            var
+                                $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input id="rules'+(i+1)+'" type="checkbox" checked="" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value=""></form></td></tr>');
+                            $(".layui-table").append($tr)
+                        }else{
+                            var
+                                $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input id="rules'+(i+1)+'" type="checkbox" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value=""></form></td></tr>');
+                            $(".layui-table").append($tr)
+                        }
 
-
-                        var
-                            $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input type="checkbox" checked="'+ruleStatus+'" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF"></form></td></tr>');
-                        $(".layui-table").append($tr)
                     }
-                    var $button = $('<tr><td colspan="3"><input type="button" onclick="commit()" class="layui-btn layui-btn-normal layui-col-md3 layui-col-md-offset9" value="提交扫描配置"></td></tr>');
+                    var $button = $('<tr><td colspan="3"><botton type="button" onclick="commit()" class="layui-btn layui-btn-normal layui-col-md3 layui-col-md-offset9">提交扫描配置</botton></td></tr>');
                     $(".layui-table").append($button)
-
                 }else{
                     layer.msg('读取配置失败', {icon: 5});
                 }
-
             }, error: function (e) {
-
             }
         })
     })
+
     function commit(){
+      var datas = collectData();
+
+      console.log(datas);
+
+//        $.post("/core/setAnalysisRules",{"rules":datas,
+//                "abc": "abc", "test":[1,2,3]},function(data){
+//        },'json');
         $.ajax({
-            url:'/core/setAnalysisRules',
+            url:"/core/setAnalysisRules",
             type:'post',
-            async: true,
+            contentType:"application/json",
+//            contentType:"",
             dataType:'json',
-            data:{
-                a:'aa'
-            },
+            data: JSON.stringify(datas),
+
             success:function(res){
-                layer.msg(a+'success')
+//                layer.msg
             },error:function(){
-                layer.msg(a+'error')
+
             }
-        })
+        });
+
     }
+    function collectData() {
+        var map;
+        var len = $('#tabledata tr td').find("input").length
+        var datas = [];
+        for(var i=1; i<=len; i++)
+        {
+            var name = $("#tabledata tr").eq(i).find("input:first").attr("name");
+            var checked = $("#tabledata tr").eq(i).find("input[type='checkbox']").is(':checked');
+           if (checked == true) {
+                 $('input').attr('value',1)
+            } else {
+                    $('input').attr('value',0)
+            }
+            var value = $("#tabledata tr").eq(i).find("input:first").attr("value");
+            //var data={}
+            var data={};
+            data.ruleName = name;
+            data.status  = value;
+//           var data  = {"ruleName" : name,"status":value}
+            datas.push(data)
+        }
+
+        console.log(datas);
+      return datas
+    }
+
     layui.use(['form','element', 'layer'], function () {
         var form = layui.form,layer = layui.layer;
         var element = layui.element;

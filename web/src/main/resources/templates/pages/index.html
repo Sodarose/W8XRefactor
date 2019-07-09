@@ -194,7 +194,7 @@
         var arry = originalCode.split('<br>')
         if (issueShows.length > 0) {
             for (var i = 0; i < issueShows.length; i++) {
-                for (var j = issueShows[i].beginLine; j <= issueShows[i].endLine; j++) {
+                for (var j = issueShows[i].beginLine-1; j <= issueShows[i].endLine-1; j++) {
                     arry[j] = '<span class="source-line-code-issue">' + arry[j] + '</span>'
 
                 }

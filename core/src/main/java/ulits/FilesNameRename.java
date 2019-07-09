@@ -14,7 +14,7 @@ public class FilesNameRename {
         String path=javaModel.getReadPath();
         Map<String, TreeNode> treeNode = Store.treeNodeMap;
         TreeNode node=treeNode.get(path);
-        node.setFileName(newFileName);
+        node.setFileName(newFileName+".java");
         treeNode.put(path,node);
         Store.treeNodeMap = treeNode;
         /*File file=new File(path);

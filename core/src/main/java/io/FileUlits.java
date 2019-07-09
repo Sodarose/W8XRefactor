@@ -116,4 +116,7 @@ public class FileUlits {
         isSave = true;
         return isSave;
     }
+    public static File readSourceFile(String path) throws IOException{
+        return new ClassPathResource(path).getFile();
+    }
 }
