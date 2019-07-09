@@ -57,4 +57,13 @@ public class Store {
 
     public static String modifyPath;
 
+    /**
+     *  格式化配置
+     * */
+    public static Map<String, Object> options;
+
+    /**
+     *
+     * */
+
 }
