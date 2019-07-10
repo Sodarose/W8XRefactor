@@ -29,21 +29,25 @@ public class JsonUtil {
         file.createNewFile();
         //JSONObject root = new JSONObject();
         JSONArray array = new JSONArray();
-        for (JsonObject object:jsonObjects){
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("modifyPath",object.getModifyPath());
-            jsonObject.put("copyPath",object.getCopyPath());
-            jsonObject.put("FileName",object.getFileName());
-            jsonObject.put("FileStatus",object.getFileStatus());
-            //jsonObject.put("javamodel", Store.javaModelMap.get(object.getCopyPath()));
-            array.add(jsonObject);
-        }
-        //root.put("content",array);
+        if(!jsonObjects.isEmpty()) {
+            for (JsonObject object : jsonObjects) {
+                if(object != null) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("modifyPath", object.getModifyPath());
+                    //jsonObject.put("copyPath",object.getCopyPath());
+                    jsonObject.put("FileName", object.getFileName());
+                    jsonObject.put("FileStatus", object.getFileStatus());
+                    //jsonObject.put("javamodel", Store.javaModelMap.get(object.getCopyPath()));
+                    array.add(jsonObject);
+                }
+            }
+            //root.put("content",array);
             String jsonString = formatJson(array.toString());
-        Writer write = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
-        write.write(jsonString);
-        write.flush();
-        write.close();
+            Writer write = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+            write.write(jsonString);
+            write.flush();
+            write.close();
+        }
     }
     /**
      * 返回格式化JSON字符串。
@@ -153,33 +157,33 @@ public class JsonUtil {
         for (JsonObject jsonObject:jsonObjects) {
             if (jsonObject.getFileStatus().equals("file")) {
                 String modifyPath = jsonObject.getModifyPath();
-                String copyPath = jsonObject.getCopyPath();
+                //String copyPath = jsonObject.getCopyPath();
                 File modifyFile = new File(modifyPath);
-                File copyFile = new File(copyPath);
+                //File copyFile = new File(copyPath);
                 File file = new File(path +File.separator+ jsonObject.getFileName());
-                if (modifyFile.isFile() && copyFile.isFile()) {
+                if (modifyFile.isFile() ) {
                     if (modifyFile.exists()) {
                         modifyFile.delete();
                     }
-                    if (copyFile.exists()) {
-                        copyFile.delete();
-                    }
+                    //if (copyFile.exists()) {
+                      //  copyFile.delete();
+                    //}
                     modifyPath = modifyPath.substring(0, modifyPath.lastIndexOf("\\") + 1) + jsonObject.getFileName();
-                    copyPath = copyPath.substring(0, copyPath.lastIndexOf("\\") + 1) + jsonObject.getFileName();
+                    //copyPath = copyPath.substring(0, copyPath.lastIndexOf("\\") + 1) + jsonObject.getFileName();
                     Files.copy(file.toPath(), new File(modifyPath).toPath());
-                    Files.copy(file.toPath(), new File(copyPath).toPath());
+                    //Files.copy(file.toPath(), new File(copyPath).toPath());
                 }
             }
             if(jsonObject.getFileStatus().equals("dir")){
                 String modifyPath = jsonObject.getModifyPath();
-                String copyPath = jsonObject.getCopyPath();
+                //String copyPath = jsonObject.getCopyPath();
                 File modifyFile = new File(modifyPath);
-                File copyFile = new File(copyPath);
+                //File copyFile = new File(copyPath);
                 modifyFlag=modifyFile.renameTo(new File(modifyPath.substring(0,modifyPath.lastIndexOf("\\")+1)+jsonObject.getFileName()));
-               copyFlag=copyFile.renameTo(new File(copyPath.substring(0,copyPath.lastIndexOf("\\")+1)+jsonObject.getFileName()));
+               //copyFlag=copyFile.renameTo(new File(copyPath.substring(0,copyPath.lastIndexOf("\\")+1)+jsonObject.getFileName()));
             }
         }
-       return modifyFlag&&copyFlag;
+       return modifyFlag;
     }
     public static void main(String args[]) throws IOException {
         String  jsonPath = "C:\\w8x\\temp\\RefactorTest\\2019-07-06 20-22-32\\info.json";
@@ -188,30 +192,30 @@ public class JsonUtil {
         for (JsonObject jsonObject:jsonObjects) {
             if (jsonObject.getFileStatus().equals("file")) {
                 String modifyPath = jsonObject.getModifyPath();
-                String copyPath = jsonObject.getCopyPath();
+                //String copyPath = jsonObject.getCopyPath();
                 File modifyFile = new File(modifyPath);
-                File copyFile = new File(copyPath);
+                //File copyFile = new File(copyPath);
                 File file = new File(path + jsonObject.getFileName());
-                if (modifyFile.isFile() && copyFile.isFile()) {
+                if (modifyFile.isFile() ) {
                     if (modifyFile.exists()) {
                         modifyFile.delete();
                     }
-                    if (copyFile.exists()) {
-                        copyFile.delete();
-                    }
+                   // if (copyFile.exists()) {
+                     //   copyFile.delete();
+                    //}
                     modifyPath = modifyPath.substring(0, modifyPath.lastIndexOf("\\") + 1) + jsonObject.getFileName();
-                    copyPath = copyPath.substring(0, copyPath.lastIndexOf("\\") + 1) + jsonObject.getFileName();
+                    //copyPath = copyPath.substring(0, copyPath.lastIndexOf("\\") + 1) + jsonObject.getFileName();
                     Files.copy(file.toPath(), new File(modifyPath).toPath());
-                    Files.copy(file.toPath(), new File(copyPath).toPath());
+                    //Files.copy(file.toPath(), new File(copyPath).toPath());
                 }
             }
             if(jsonObject.getFileStatus().equals("dir")){
                 String modifyPath = jsonObject.getModifyPath();
-                String copyPath = jsonObject.getCopyPath();
+               // String copyPath = jsonObject.getCopyPath();
                 File modifyFile = new File(modifyPath);
-                File copyFile = new File(copyPath);
+                //File copyFile = new File(copyPath);
                 modifyFile.renameTo(new File(modifyPath.substring(0,modifyPath.lastIndexOf("\\")+1)+jsonObject.getFileName()));
-                copyFile.renameTo(new File(copyPath.substring(0,copyPath.lastIndexOf("\\")+1)+jsonObject.getFileName()));
+               // copyFile.renameTo(new File(copyPath.substring(0,copyPath.lastIndexOf("\\")+1)+jsonObject.getFileName()));
 
             }
         }

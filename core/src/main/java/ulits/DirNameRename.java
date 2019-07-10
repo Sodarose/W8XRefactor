@@ -42,9 +42,9 @@ public class DirNameRename {
             TreeNode dirNode = treeNode.get(parentPath);
             dirNode.setFileName(newName[newName.length-1]);
             JsonObject jsonObject = new JsonObject();
-            String modifyPath = Store.pathMap.get(parentPath);
-            jsonObject.setModifyPath(modifyPath);
-            jsonObject.setCopyPath(parentPath);
+            //String modifyPath = Store.pathMap.get(parentPath);
+            jsonObject.setModifyPath(parentPath);
+            //jsonObject.setCopyPath(parentPath);
             jsonObject.setFileStatus("dir");
             jsonObject.setFileName(newName[newName.length-1]);
             Store.jsonObjectList.add(jsonObject);
@@ -60,9 +60,9 @@ public class DirNameRename {
                 model.setReadPath(newFilePath);
                 modelMap.remove(filePath);
                 modelMap.put(newFilePath,model);
-                String modifypath=Store.pathMap.get(filePath);
-                Store.pathMap.remove(filePath);
-                Store.pathMap.put(newFilePath,modifypath);
+                //String modifypath=Store.pathMap.get(filePath);
+                //Store.pathMap.remove(filePath);
+                //Store.pathMap.put(newFilePath,modifypath);
                 //System.out.println(filePath);
                 //System.out.println(newFilePath);
                 TreeNode fileNode=treeNode.get(filePath);
