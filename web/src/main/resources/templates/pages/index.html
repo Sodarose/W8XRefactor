@@ -26,20 +26,12 @@
         background-size: 4px;
         background-position: bottom;
     }
-
-    .ztree li span.button.pIcon01_ico_open {
-        margin-right: 2px;
-        background: url(/images/warn.png);
-        vertical-align: top;
-        *vertical-align: middle
-    }
-
     .ztree li span.button.icon01_ico_docu {
         margin-right: 2px;
-        background: url(/images/warn.png);
-        vertical-align: top;
-        vertical-align: middle;
+        background: url(/images/op.svg) no-repeat scroll 0 0 transparent;
+        vertical-align:top;
     }
+
 </style>
 <!--<body class="layui-layout-body">-->
 <body>
@@ -55,6 +47,9 @@
                         <div class="layui-card-body" style="overflow-y:auto; overflow-x:auto;">
                             <ul id="treeDemo" class="ztree" name="StringComparisonRule" value="0"></ul>
                         </div>
+                    </div>
+                    <div class="layui-card" style="text-align:center">
+                        <button data-method="confirmTrans" class="layui-btn"onclick="confirmTrans()">重构代码</button>
                     </div>
                 </div>
                 <div class="layui-col-md10 layui-row">
@@ -194,7 +189,7 @@
         var arry = originalCode.split('<br>')
         if (issueShows.length > 0) {
             for (var i = 0; i < issueShows.length; i++) {
-                for (var j = issueShows[i].beginLine; j <= issueShows[i].endLine; j++) {
+                for (var j = issueShows[i].beginLine-1; j <= issueShows[i].endLine-1; j++) {
                     arry[j] = '<span class="source-line-code-issue">' + arry[j] + '</span>'
 
                 }
@@ -208,6 +203,18 @@
         }
         return originalCode
     }
+
+            function confirmTrans(){
+                //配置一个透明的询问框
+                layer.msg('重构代码会修改你原来的代码<br>你是否确定重构代码', {
+                    btn: ['确定','取消']
+                },function (index) {
+                    layer.close()
+                    console.log("确定")
+                },function () {
+                    console.log("取消")
+                });
+            }
 </script>
 </body>
 </html>

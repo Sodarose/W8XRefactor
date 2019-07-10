@@ -1,10 +1,7 @@
 package ulits;
 
 
-import model.Issue;
-import model.JavaModel;
-import model.Store;
-import model.TreeNode;
+import model.*;
 
 
 import javax.xml.soap.Node;
@@ -44,6 +41,13 @@ public class DirNameRename {
             Map<String, TreeNode> treeNode = Store.treeNodeMap;
             TreeNode dirNode = treeNode.get(parentPath);
             dirNode.setFileName(newName[newName.length-1]);
+            JsonObject jsonObject = new JsonObject();
+            //String modifyPath = Store.pathMap.get(parentPath);
+            jsonObject.setModifyPath(parentPath);
+            //jsonObject.setCopyPath(parentPath);
+            jsonObject.setFileStatus("dir");
+            jsonObject.setFileName(newName[newName.length-1]);
+            Store.jsonObjectList.add(jsonObject);
             treeNode.remove(parentPath.substring(0, pathindex)+oldPackageName);
             treeNode.put(newParentPath,dirNode);
             //renameDirectory(parentPath, newParentPath);
@@ -56,6 +60,9 @@ public class DirNameRename {
                 model.setReadPath(newFilePath);
                 modelMap.remove(filePath);
                 modelMap.put(newFilePath,model);
+                //String modifypath=Store.pathMap.get(filePath);
+                //Store.pathMap.remove(filePath);
+                //Store.pathMap.put(newFilePath,modifypath);
                 //System.out.println(filePath);
                 //System.out.println(newFilePath);
                 TreeNode fileNode=treeNode.get(filePath);

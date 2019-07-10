@@ -7,11 +7,10 @@ import com.github.javaparser.ast.body.Parameter;
 import io.FileUlits;
 import model.Issue;
 import refactor.AbstractRefactor;
-import ulits.SplitName;
+import ulits.SplitWord;
 import ulits.VariableReferUtil;
-
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ParameterNameRefactor extends AbstractRefactor {
@@ -27,7 +26,9 @@ public class ParameterNameRefactor extends AbstractRefactor {
     public void parameterNameRefactor(Parameter parameter) throws IOException {
         String oldName=parameter.getNameAsString();
         String newName="";
-        List<String> nameList= SplitName.split(parameter.getNameAsString());
+        SplitWord splitWord=new SplitWord();
+        List<String> nameList= splitWord.split(parameter.getNameAsString());
+        Collections.reverse(nameList);
         if(nameList==null){
             return;
         }
@@ -40,8 +41,9 @@ public class ParameterNameRefactor extends AbstractRefactor {
             newName=newName+data;
 
         }
-        parameter.setName(newName);
-        VariableReferUtil.VariableNameUtil(oldName,newName);
-    }
+        if(!newName.equals("")) {
+            parameter.setName(newName);
+            VariableReferUtil.VariableNameUtil(oldName, newName);
+        }}
 
 }

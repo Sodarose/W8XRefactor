@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -56,7 +56,6 @@
                         var message = data[i].message;
                         var ruleName = data[i].ruleName;
                         var ruleStatus = data[i].ruleStatus;
-                        //console.log(ruleStatus)
                         if(ruleStatus===true){
                             var
                                 $tr=$('<tr><td id="example'+(i+1)+'" data-example="'+example+'">'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input type="checkbox" checked="" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" value=""></form></td></tr>');
@@ -206,31 +205,53 @@
     })
 
     function commit(){
+      var datas = collectData();
 
+      console.log(datas);
+
+//        $.post("/core/setAnalysisRules",{"rules":datas,
+//                "abc": "abc", "test":[1,2,3]},function(data){
+//        },'json');
         $.ajax({
-            url:'/core/setAnalysisRules',
+            url:"/core/setAnalysisRules",
             type:'post',
-            async: true,
+            contentType:"application/json",
+//            contentType:"",
             dataType:'json',
-            data:{
-                "rules":collectData()
-            },
+            data: JSON.stringify(datas),
+
             success:function(res){
 //                layer.msg
             },error:function(){
 
             }
-        })
-    }
+        });
 
+    }
     function collectData() {
+        var map;
         var len = $('#tabledata tr td').find("input").length
+        var datas = [];
         for(var i=1; i<=len; i++)
         {
             var name = $("#tabledata tr").eq(i).find("input:first").attr("name");
+            var checked = $("#tabledata tr").eq(i).find("input[type='checkbox']").is(':checked');
+           if (checked == true) {
+                 $('input').attr('value',1)
+            } else {
+                    $('input').attr('value',0)
+            }
             var value = $("#tabledata tr").eq(i).find("input:first").attr("value");
-            console.log(name+value)
+            //var data={}
+            var data={};
+            data.ruleName = name;
+            data.status  = value;
+//           var data  = {"ruleName" : name,"status":value}
+            datas.push(data)
         }
+
+        //console.log(datas);
+      return datas
     }
 
 
