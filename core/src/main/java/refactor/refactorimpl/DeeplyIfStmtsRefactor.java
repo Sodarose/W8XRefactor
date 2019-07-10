@@ -34,8 +34,8 @@ public class DeeplyIfStmtsRefactor extends AbstractRefactor {
 
 
     /**
-     *  重构主体
-     * */
+     * 重构主体
+     */
     @Override
     public void refactor(Issue issue) {
         IfStmt ifStmt = (IfStmt) issue.getIssueNode();
@@ -107,7 +107,7 @@ public class DeeplyIfStmtsRefactor extends AbstractRefactor {
             return false;
         }
 
-        if(!isHasReturn(blockStmt)){
+        if (!isHasReturn(blockStmt)) {
             //如果是这个表示本身就有返回语句
             if (interrupt.equals("object")) {
             }
@@ -245,7 +245,7 @@ public class DeeplyIfStmtsRefactor extends AbstractRefactor {
      */
     private boolean isHasReturn(BlockStmt blockStmt) {
         for (Statement statement : blockStmt.getStatements()) {
-            if(statement.isReturnStmt()||statement.isContinueStmt()){
+            if (statement.isReturnStmt() || statement.isContinueStmt()) {
                 return true;
             }
         }
@@ -258,7 +258,7 @@ public class DeeplyIfStmtsRefactor extends AbstractRefactor {
      */
     private int checkIFChange(BlockStmt blockStmt, Statement stmt) {
         int index = blockStmt.getStatements().indexOf(stmt);
-        if(index==-1){
+        if (index == -1) {
             return 4;
         }
         return blockStmt.getStatements().subList(index, blockStmt.getStatements().size()).size();
@@ -306,6 +306,7 @@ public class DeeplyIfStmtsRefactor extends AbstractRefactor {
 
         Statement rStmt = stmts.get(stmts.size() - 1);
         Statement aStmt = stmts.get(stmts.size() - 2);
+
         if (!rStmt.isReturnStmt()) {
             return;
         }
@@ -314,11 +315,15 @@ public class DeeplyIfStmtsRefactor extends AbstractRefactor {
             return;
         }
 
+
         ReturnStmt returnStmt = rStmt.asReturnStmt();
-        if(!aStmt.isExpressionStmt()){
+
+        //
+        if (!aStmt.isExpressionStmt()) {
             return;
         }
 
+        //
         if (!aStmt.asExpressionStmt().getExpression().isAssignExpr() &&
                 !aStmt.asExpressionStmt().getExpression().isVariableDeclarationExpr()) {
             return;
@@ -347,10 +352,15 @@ public class DeeplyIfStmtsRefactor extends AbstractRefactor {
                 return;
             }
 
-            if (variableDeclarator.getName().getIdentifier().equals(returnStmt.
+
+            if (returnStmt.getExpression().get().isNameExpr() && variableDeclarator.getName().getIdentifier().equals(returnStmt.
                     getExpression().get().asNameExpr().getName().getIdentifier())) {
                 value = variableDeclarator.getInitializer().get();
             }
+        }
+
+        if (value == null) {
+            return;
         }
 
         ReturnStmt rt = new ReturnStmt();

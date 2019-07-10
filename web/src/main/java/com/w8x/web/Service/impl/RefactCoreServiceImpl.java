@@ -40,8 +40,7 @@ public class RefactCoreServiceImpl implements RefactCoreService {
      */
     @Override
     public Code runAnalysis(String filePath) throws FileNotFoundException {
-        String copyPath=DirCopy.dirCopy(filePath);
-        if (analysisApi.analysis(copyPath)) {
+        if (analysisApi.analysis(filePath)) {
             return Code.createCode(200, null, "扫描成功");
         }
         return Code.createCode(404, null, "扫描失败");
@@ -112,10 +111,10 @@ public class RefactCoreServiceImpl implements RefactCoreService {
             return Code.createCode(404, null, "数据获取失败");
         }
         List<RuleModelVo> ruleModelVos = new ArrayList<>();
-        for(Map.Entry<String,AbstractRuleVisitor> entry:ruleVisitorMap.entrySet()){
+        for (Map.Entry<String, AbstractRuleVisitor> entry : ruleVisitorMap.entrySet()) {
             AbstractRuleVisitor ruleVisitor = entry.getValue();
-            ruleModelVos.add(new RuleModelVo(ruleVisitor.getRuleName(),ruleVisitor.getDescription()
-                    ,ruleVisitor.isRuleStatus(),ruleVisitor.getMessage(),ruleVisitor.getExample()));
+            ruleModelVos.add(new RuleModelVo(ruleVisitor.getRuleName(), ruleVisitor.getDescription()
+                    , ruleVisitor.isRuleStatus(), ruleVisitor.getMessage(), ruleVisitor.getExample()));
         }
         return Code.createCode(200, ruleModelVos, "获取数据成功");
     }
@@ -130,8 +129,8 @@ public class RefactCoreServiceImpl implements RefactCoreService {
 
 
     @Override
-   public  boolean saveModify() throws IOException{
+    public boolean saveModify() throws IOException {
         boolean ModifyFlag = JsonUtil.savemodify(Store.modifyPath);
         return ModifyFlag;
-   }
+    }
 }

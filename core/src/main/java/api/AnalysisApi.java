@@ -47,7 +47,7 @@ public class AnalysisApi {
         //数据处理
         organizeData();
         Store.run = true;
-        saveProject();
+        //saveProject();
         return Store.javaModelMap != null;
     }
 
