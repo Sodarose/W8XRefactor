@@ -24,6 +24,7 @@ function scanner(path) {
         }
     })
 }
+
 //扫描远程代码
 function scannerremote(path,branch) {
     $.ajax({
