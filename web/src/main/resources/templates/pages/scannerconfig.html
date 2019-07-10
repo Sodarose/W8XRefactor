@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -40,7 +40,7 @@
         $.ajax({
             url: '/core/analysisRules',
             type: 'get',
-            async: true,
+            async: false,
             dataType: 'json',
             success: function (res) {
                 console.log(res)
@@ -74,27 +74,33 @@
     })
 
     function commit(){
-      var datas = collectData()
+      var datas = collectData();
+
+      console.log(datas);
+
+//        $.post("/core/setAnalysisRules",{"rules":datas,
+//                "abc": "abc", "test":[1,2,3]},function(data){
+//        },'json');
         $.ajax({
-            url:'/core/setAnalysisRules',
+            url:"/core/setAnalysisRules",
             type:'post',
-            async: true,
             contentType:"application/json",
+//            contentType:"",
             dataType:'json',
-            data: {
-               "data":JSON.stringify(datas),
-            },
+            data: JSON.stringify(datas),
+
             success:function(res){
 //                layer.msg
             },error:function(){
 
             }
-        })
+        });
+
     }
     function collectData() {
         var map;
         var len = $('#tabledata tr td').find("input").length
-        var datas = []
+        var datas = [];
         for(var i=1; i<=len; i++)
         {
             var name = $("#tabledata tr").eq(i).find("input:first").attr("name");
@@ -106,26 +112,14 @@
             }
             var value = $("#tabledata tr").eq(i).find("input:first").attr("value");
             //var data={}
-           var data  = {"ruleName" : name,"status":value}
+            var data={};
+            data.ruleName = name;
+            data.status  = value;
+//           var data  = {"ruleName" : name,"status":value}
             datas.push(data)
         }
-        //var jsonString = JSON.stringify(datas);
-        /*$('#tabledata tr td').find("input").each(function(){
-                    var key = $('input').attr('name')
-                    var checked = $('input').attr('checked')
-                    if (checked = 'ture') {
-                        $('input').attr('value',1)
-                    } else {
-                        $('input').removeAttribute('checked');
-                        $('input').attr('value',0)
-                    }
-                    var value = $('input').attr('value')
-                    console.log(key+ ":" + value)
-                   str1='"name":"'+key+'","value":'+value;
-                   str.push(str1)
-        })*/
 
-        console.log(JSON.stringify(datas))
+        //console.log(datas);
       return datas
     }
 

@@ -96,6 +96,7 @@ public class AnalysisApi {
 
     public boolean setRules(Map<String, Integer> rules) throws IOException {
         RuleLink ruleLink = new RuleLink();
+        //修改内存配置
         for (Map.Entry<String, Integer> entry : rules.entrySet()) {
             AbstractRuleVisitor rule = Store.ruleMap.get(entry.getKey());
             if (rule == null) {
@@ -106,9 +107,9 @@ public class AnalysisApi {
             } else {
                 rule.setRuleStatus(false);
             }
-            ruleLink.changeRuleXML(entry.getKey(), entry.getValue());
         }
-        ruleLink.writeRuleXML();
+        //修改xml内容
+        ruleLink.changeRuleXMLByMap(rules);
         return false;
     }
 

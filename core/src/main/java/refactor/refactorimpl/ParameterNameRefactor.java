@@ -7,13 +7,9 @@ import com.github.javaparser.ast.body.Parameter;
 import io.FileUlits;
 import model.Issue;
 import refactor.AbstractRefactor;
-import ulits.SplitName;
 import ulits.SplitWord;
 import ulits.VariableReferUtil;
-
-import java.awt.peer.ScrollbarPeer;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

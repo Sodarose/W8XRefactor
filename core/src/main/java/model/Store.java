@@ -51,7 +51,7 @@ public class Store {
      */
     public static Map<String, AbstractRuleVisitor> ruleMap;
 
-    public static Map<String,String> pathMap; //路径映射
+    //public static Map<String,String> pathMap; //路径映射
 
     public static List<JsonObject> jsonObjectList; //写入json文件的信息
 

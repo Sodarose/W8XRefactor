@@ -24,10 +24,7 @@ public class RuleLink {
 
     private static final String RULE_XML_PATH = "static/rule.xml";
 
-    private static RuleLink ruleLink = null;
-
-    private Document document = null;
-    private Map<String, Element> elementMap = new HashMap<>();
+    private static RuleLink ruleLink;
 
 
     public static RuleLink newInstance() {
@@ -44,7 +41,7 @@ public class RuleLink {
         try {
             Resource resource = new ClassPathResource(RULE_XML_PATH);
             SAXReader reader = new SAXReader();
-            document = reader.read(resource.getInputStream());
+            Document document = reader.read(resource.getInputStream());
             Element root = document.getRootElement();
             Iterator<Element> it = root.elementIterator();
             Store.rules = new ArrayList<>();
@@ -68,7 +65,11 @@ public class RuleLink {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        LOGGER.info("读取成功");
+        if(rules.size()==0){
+            LOGGER.info("读取失败");
+        }else{
+            LOGGER.info("读取成功");
+        }
         return rules;
     }
 
@@ -99,44 +100,71 @@ public class RuleLink {
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
-        elementMap.put(ruleName, element);
         return rule;
     }
 
-    public void changeRuleXMLByMap(Map<String, Integer> rules) {
+    public void changeRuleXMLByMap(Map<String, Integer> rules) throws IOException {
+        //文档
+        Document document = null;
+        //索引表
+        Map<String,Element> elementMap = null;
+        try {
+            Resource resource = new ClassPathResource(RULE_XML_PATH);
+            SAXReader reader = new SAXReader();
+            document = reader.read(resource.getInputStream());
+            Element root = document.getRootElement();
+            Iterator<Element> it = root.elementIterator();
+            elementMap = new HashMap<>();
+            while (it.hasNext()) {
+                Element element = it.next();
+                String ruleName = element.elementText("rule-name");
+                elementMap.put(ruleName,element);
+            }
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(document==null){
+            LOGGER.error("配置写入失败");
+            return;
+        }
+
+        //更改值
         for (Map.Entry<String, Integer> entry : rules.entrySet()) {
-            changeRuleXML(entry.getKey(), entry.getValue());
+
+            Element element = elementMap.get(entry.getKey());
+            if (element == null) {
+                return;
+            }
+            Element ruleStatus = element.element("rule-status");
+            if (ruleStatus == null) {
+                return;
+            }
+            if (entry.getValue() == 1) {
+                ruleStatus.setText("true");
+            } else {
+                ruleStatus.setText("false");
+            }
         }
+        writeRuleXML(document);
     }
 
 
-    public void changeRuleXML(String key, Integer value) {
-        Element element = elementMap.get(key);
-        if (element == null) {
-            return;
-        }
-        Element ruleStatus = element.element("rule-status");
-        if (ruleStatus == null) {
-            return;
-        }
-        if (value == 1) {
-            ruleStatus.setText("true");
-        } else {
-            ruleStatus.setText("false");
-        }
-    }
-
-    public void writeRuleXML() throws IOException {
+    public void writeRuleXML(Document document) throws IOException {
         Resource resource = new ClassPathResource(RULE_XML_PATH);
         XMLWriter xmlWriter = null;
         try {
-            LOGGER.warn("资源是否能获取:"+resource.getFile()+"");
+            LOGGER.warn("资源是否能获取:" + resource.getFile() + "");
             xmlWriter = new XMLWriter(new PrintWriter(resource.getFile()));
+            LOGGER.warn("文档是否为" + document + "");
             xmlWriter.write(document);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if(xmlWriter!=null){
+        } finally {
+            if (xmlWriter != null) {
+                LOGGER.warn("关闭写入流");
                 xmlWriter.close();
             }
         }
