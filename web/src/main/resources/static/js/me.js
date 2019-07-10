@@ -29,7 +29,7 @@ function scannerremote(path,branch) {
     $.ajax({
         url: '/core/analysisByGitHub',
         type: 'post',
-        async: false,
+        async: true,
         data: {
             'gitPath': path,
             'branch': branch
