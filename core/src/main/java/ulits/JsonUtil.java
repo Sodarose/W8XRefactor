@@ -29,21 +29,25 @@ public class JsonUtil {
         file.createNewFile();
         //JSONObject root = new JSONObject();
         JSONArray array = new JSONArray();
-        for (JsonObject object:jsonObjects){
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("modifyPath",object.getModifyPath());
-            //jsonObject.put("copyPath",object.getCopyPath());
-            jsonObject.put("FileName",object.getFileName());
-            jsonObject.put("FileStatus",object.getFileStatus());
-            //jsonObject.put("javamodel", Store.javaModelMap.get(object.getCopyPath()));
-            array.add(jsonObject);
-        }
-        //root.put("content",array);
+        if(!jsonObjects.isEmpty()) {
+            for (JsonObject object : jsonObjects) {
+                if(object != null) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("modifyPath", object.getModifyPath());
+                    //jsonObject.put("copyPath",object.getCopyPath());
+                    jsonObject.put("FileName", object.getFileName());
+                    jsonObject.put("FileStatus", object.getFileStatus());
+                    //jsonObject.put("javamodel", Store.javaModelMap.get(object.getCopyPath()));
+                    array.add(jsonObject);
+                }
+            }
+            //root.put("content",array);
             String jsonString = formatJson(array.toString());
-        Writer write = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
-        write.write(jsonString);
-        write.flush();
-        write.close();
+            Writer write = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+            write.write(jsonString);
+            write.flush();
+            write.close();
+        }
     }
     /**
      * 返回格式化JSON字符串。
