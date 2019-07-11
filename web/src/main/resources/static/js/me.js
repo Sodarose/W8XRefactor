@@ -1,3 +1,4 @@
+//扫描本地代码
 function scanner(path) {
     $.ajax({
         url: '/core/analysis',
@@ -23,6 +24,37 @@ function scanner(path) {
         }
     })
 }
+
+//扫描远程代码
+function scannerremote(path,branch) {
+    $.ajax({
+        url: '/core/analysisByGitHub',
+        type: 'post',
+        async: true,
+        data: {
+            'gitPath': path,
+            'branch': branch
+        },
+        dataType: 'json',
+        beforeSend: function () {
+            layer.msg('扫描中', {
+                icon: 16
+                ,shade: 0.01
+            });
+        },
+        success: function (res) {
+            if(res.code===200){
+                layer.msg('扫描成功', {icon: 1});
+                /*window.setTimeout(function(){location.href='/route/index.html'},2000);*/
+            }else{
+                layer.msg('扫描失败', {icon: 5});
+            }
+        }, error: function (e) {
+
+        }
+    })
+}
+
 function refactor() {
     $.ajax({
         url: '/core/analysis',

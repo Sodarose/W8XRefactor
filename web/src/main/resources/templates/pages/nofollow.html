@@ -32,14 +32,10 @@
          style="display: flex;flex-direction: column;align-items: center;height: 100%;width: 100%;">
         <div class="scanPanl">
             <div id="root" class="layui-form">
-                <button class="layui-btn layui-btn-normal" @click="toggleLoginType" style="margin-bottom: 5px" id="test"><!--输入项目路径-->本地路径</button><br>
-                <template v-if="loginType === 'local'">
-                    <input placeholder="请输入本地项目路径" lay-verify="title" autocomplete="off" class="layui-input" style="width: 70%;float: left;" key="local" name="message">
-                </template>
-                <template v-else>
-                    <input placeholder="请输入远程项目路径" lay-verify="title" autocomplete="off" class="layui-input" style="width: 70%;float: left;" key="remote" name="message">
-                    <input placeholder="请输入远程项目分支名称" lay-verify="title" autocomplete="off" class="layui-input" style="width: 70%;float: left;" name="dev">
-                </template>
+                <div id="test2">
+                    <button class="layui-btn layui-btn-normal" @click="local" style="margin-bottom: 5px">本地路径</button>
+                    <button class="layui-btn layui-btn-normal" @click="remote" style="margin-bottom: 5px">远程路径</button>
+                </div>
                 <button class="layui-btn layui-btn-normal" style="margin-left: 10px;" @click="sendRequest">扫描项目代码</button>
             </div>
         </div>
@@ -50,44 +46,42 @@
 <script src="/js/vue.js" th:src="@{/js/vue.js}"></script>
 <script>
     $(document).ready(function () {
-        layui.use('layer', function () { //独立版的layer无需执行这一句
+        layui.use('layer', function () {
             var $ = layui.jquery, layer = layui.layer;
         });
+        var str = $('<div><input placeholder="请输入本地项目路径" lay-verify="title" autocomplete="off" class="layui-input" style="width: 70%;float: left;" name="message"></div>')
+        $("#test2").append(str);
     });
-    /* function sendRequest() {
-         let path = $("#filePath").val()
-         scanner(path);
-     }*/
     var vm = new Vue({
         el: '#root',
         data: {
             loginType: 'local',
-            /*isAdvanced:false*/
         },
         methods:{
-            toggleLoginType: function() {
+            local: function() {
+                vm.loginType='local'
+                $('.layui-input').remove();
+                var str = $('<div><input placeholder="请输入本地项目路径" lay-verify="title" autocomplete="off" class="layui-input" style="width: 70%;float: left;" name="message"></div>')
+                $("#test2").append(str);
 
-                vm.loginType = this.loginType === 'local' ? 'remote' : 'local'
-                //alert(vm.loginType) //remote
-                if (vm.loginType=="local") {
-                    //alert(vm.loginType)  //local
-                    //alert(this.loginType)  //local
-                    $("#test").text('本地路径');
-                } else {
-                    $("#test").text('远程路径');
-                }
-                return vm.loginType
+
+            },
+            remote:function() {
+                vm.loginType='remote'
+                $('.layui-input').remove();
+                var str1 = $('<div><input placeholder="请输入远程项目路径" lay-verify="title" autocomplete="off" class="layui-input" style="width: 54%;float: left;" name="message">' +
+                    '<input placeholder="分支名称" lay-verify="title" autocomplete="off" class="layui-input" style="width: 15%;float: left;margin-left: 5px;" name="branch"></div>')
+                $('#test2').append(str1)
             },
             sendRequest:function() {
-                if(vm.loginType =="local"){
+                if(this.loginType ==="local"){
                     let path =  $("input[name='message']").val()
-                    //alert("本地")
                     scanner(path);
-
                 }else{
+                    //console.log(this.loginType)
                     let path =  $("input[name='message']").val()
-                    //alert("远程")
-                    scanner(path);
+                    let branch = $("input[name='branch']").val()
+                    scannerremote(path,branch);
                 }
             }
         }

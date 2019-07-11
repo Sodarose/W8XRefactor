@@ -14,6 +14,10 @@
             margin: 0 auto;
             width: 900px;
         }
+        .layui-form-onswitch {
+            border-color: #00c0ef;
+            background-color: #00c0ef;
+        }
     </style>
 </head>
 <body>
@@ -54,16 +58,17 @@
                         var ruleStatus = data[i].ruleStatus;
                         if(ruleStatus===true){
                             var
-                                $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input id="rules'+(i+1)+'" type="checkbox" checked="" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value=""></form></td></tr>');
+                                $tr=$('<tr><td id="example'+(i+1)+'" data-example="'+example+'">'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input type="checkbox" checked="" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" value=""></form></td></tr>');
                             $(".layui-table").append($tr)
                         }else{
                             var
-                                $tr=$('<tr><td>'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input id="rules'+(i+1)+'" type="checkbox" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest1" lay-text="ON|OFF" value=""></form></td></tr>');
+                                $tr=$('<tr><td id="example'+(i+1)+'" data-example="'+example+'">'+ruleName+'</td><td>'+description+'</td><td><form class="layui-form" action=""><input type="checkbox" name="'+ruleName+'" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF" value=""></form></td></tr>');
                             $(".layui-table").append($tr)
                         }
 
                     }
-                    var $button = $('<tr><td colspan="3"><botton type="button" onclick="commit()" class="layui-btn layui-btn-normal layui-col-md3 layui-col-md-offset9">提交扫描配置</botton></td></tr>');
+                    var $button =
+                        $('<tr><td colspan="3"><botton type="button" onclick="commit()" class="layui-btn layui-btn-normal layui-col-md3 layui-col-md-offset9">提交扫描配置</botton></td></tr>');
                     $(".layui-table").append($button)
                 }else{
                     layer.msg('读取配置失败', {icon: 5});
@@ -71,6 +76,132 @@
             }, error: function (e) {
             }
         })
+      /*  for(var i=1;i<=20;i++) {
+            var a = $('#example'+i)
+            a.click(function () {
+                for(var j=1;j<=20;j++){
+                var message = $('#example'+j).attr("data-example");
+                    confirm(message);
+                }
+            })
+        }*/
+
+        $('#example1').click(function () {
+            var message = $('#example1').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example2').click(function () {
+            var message = $('#example2').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example3').click(function () {
+            var message = $('#example3').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example4').click(function () {
+            var message = $('#example4').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example5').click(function () {
+            var message = $('#example5').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example6').click(function () {
+            var message = $('#example6').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example7').click(function () {
+            var message = $('#example7').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example8').click(function () {
+            var message = $('#example8').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example9').click(function () {
+            var message = $('#example9').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example10').click(function () {
+            var message = $('#example10').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example11').click(function () {
+            var message = $('#example11').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example12').click(function () {
+            var message = $('#example12').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example13').click(function () {
+            var message = $('#example13').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example14').click(function () {
+            var message = $('#example14').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example15').click(function () {
+            var message = $('#example15').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example16').click(function () {
+            var message = $('#example16').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example17').click(function () {
+            var message = $('#example17').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example18').click(function () {
+            var message = $('#example18').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example19').click(function () {
+            var message = $('#example19').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+        $('#example20').click(function () {
+            var message = $('#example20').attr("data-example");
+            console.log(message)
+            confirm(message);
+        })
+
+        function reload() {
+            var len = $('#tabledata tr td').find("input").length
+            for(var i=1; i<=len; i++)
+            {
+                var name = $("#tabledata tr").eq(i).find("input:first").attr("name");
+                var checked = $("#tabledata tr").eq(i).find("input:first").attr("checked");
+
+                //console.log(name+":" +checked)
+                if (checked === 'checked') {
+                    $('input').attr('value',1)
+                } else {
+                    $('input').attr('value',0)
+                }
+            }
+        }
     })
 
     function commit(){
@@ -123,6 +254,7 @@
       return datas
     }
 
+
     layui.use(['form','element', 'layer'], function () {
         var form = layui.form,layer = layui.layer;
         var element = layui.element;
@@ -132,9 +264,9 @@
         });
         //监听指定开关
         form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '0px'
-            });
+            /*layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });*/
         });
     });
 
