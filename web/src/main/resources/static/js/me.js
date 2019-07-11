@@ -3,13 +3,14 @@ function scanner(path) {
     $.ajax({
         url: '/core/analysis',
         type: 'post',
-        async: false,
+        async: true,
         data: {'fileName': path},
         dataType: 'json',
         beforeSend: function () {
             layer.msg('扫描中', {
                 icon: 16
-                ,shade: 0.01
+                ,shade: 0.01,
+                time : 0
             });
         },
         success: function (res) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.springframework.org/schema/mvc">
+<html xmlns:th="http://www.springframework.org/schema/mvc" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="/css/zTreeStyle/zTreeStyle.css" th:href="@{/css/zTreeStyle/zTreeStyle.css}"
           type="text/css">
     <link rel="stylesheet" href="/styles/default.css" th:href="@{/styles/default.css}">
-
-
+    <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
     <script src="/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
     <script type="text/javascript" src="/js/jquery-1.4.4.min.js" th:href="@{/js/jquery-1.4.4.min.js}"></script>
     <script type="text/javascript" src="/js/jquery.ztree.core.js"
@@ -49,7 +48,7 @@
                         </div>
                     </div>
                     <div class="layui-card" style="text-align:center">
-                        <button data-method="confirmTrans" class="layui-btn"onclick="confirmTrans()">重构代码</button>
+                        <button data-method="confirmTrans" class="layui-btn layui-btn-normal"onclick="confirmTrans()" style="color: #00C0EF"><p style="color:#FFFFFF;">重构代码</p></button>
                     </div>
                 </div>
                 <div class="layui-col-md10 layui-row">
@@ -57,7 +56,7 @@
                     <div id="oldCode" class="layui-card layui-col-md10">
                         <div class="layui-card-header">源码预览</div>
                         <div class="layui-card-body">
-                            <div id="code" style="background-color:darkgray; overflow-x:auto;">....</div>
+                            <div id="code" style="overflow-x:auto;" class="layui-bg-black">....</div>
                         </div>
                     </div>
 
@@ -65,6 +64,8 @@
                         <div class="layui-card-header">重构后代码</div>
                         <div class="layui-card-body ">
                             <div id="refactorcode" style="background-color:darkgray; overflow-x:auto">...</div>
+                        <div class="layui-card-body">
+                            <div id="refactorcode" style="overflow-x:auto;" class="layui-bg-black">...</div>
                         </div>
                     </div>
                 </div>
@@ -80,8 +81,10 @@
 <script src="/layui/layui.js" th:src="@{/layui/layui.js}"></script>
 <script src="/layui/me.js" th:src="@{/layui/me.js}"></script>
 <script src="/js/highlight.pack.js" th:src="@{/js/highlight.pack.js}"></script>
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
 <script>
 
+    hljs.initHighlightingOnLoad();
     $(document).ready(function () {
         layui.use('element', function () {
             var element = layui.element;
@@ -148,24 +151,27 @@
                 filePath: data,
             },
             success: function (res) {
-                res.originalCode = res.originalCode.replace('<', '&lt;')
-                res.originalCode = res.originalCode.replace('>', '&gt;')
-                res.originalCode = res.originalCode.replace(/\n/g, '<br>')
-                res.originalCode = res.originalCode.replace(/\s/g, '&nbsp;')
-                if (res.refactCode != null) {
-                    res.refactCode = res.refactCode.replace('<', '&lt;')
-                    res.refactCode = res.refactCode.replace('>', '&gt;')
-                    res.refactCode = res.refactCode.replace(/\n/g, '<br>')
-                    res.refactCode = res.refactCode.replace(/\s/g, '&nbsp;')
-                }
+                 res.originalCode = res.originalCode.replace('<', '&lt;')
+                 res.originalCode = res.originalCode.replace('>', '&gt;')
+                 res.originalCode = res.originalCode.replace(/\n/g, '<br>')
+                 res.originalCode = res.originalCode.replace(/\s/g, '&nbsp;')
+                 // if (res.refactCode != null) {
+                 //     res.refactCode = res.refactCode.replace('<', '&lt;')
+                 //     res.refactCode = res.refactCode.replace('>', '&gt;')
+                 //     res.refactCode = res.refactCode.replace(/\n/g, '<br>')
+                 //     res.refactCode = res.refactCode.replace(/\s/g, '&nbsp;')
+                 // }
                 if (res.issueShows != null) {
                     res.originalCode = contrast(res.originalCode, res.issueShows)
+                   // res.originalCode = '<pre><code>'+res.originalCode+'</code></pre>'
                 }
+                res.originalCode = '<pre><code class="java">'+res.originalCode+'</code></pre>'
                 $("#code").html(res.originalCode)
                 if (res.refactCode != null) {
                     $("#oldCode").addClass("layui-col-md6");
                     $("#oldCode").removeClass("layui-col-md10");
                     $("#newCode").css("display", "block");
+                    res.refactCode = '<pre><code class="java">'+res.refactCode+'</code></pre>'
                     $("#refactorcode").html(res.refactCode);
                 } else {
                     $("#newCode").css("display", "none");

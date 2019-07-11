@@ -220,9 +220,15 @@
             dataType:'json',
             data: JSON.stringify(datas),
 
-            success:function(res){
-//                layer.msg
-            },error:function(){
+            success:function(res) {
+                if (res.code === 200) {
+                    layer.msg('修改配置成功', {icon: 1});
+                }
+                if(res.code === 403){
+                    layer.msg('修改配置成功', {icon: 1});
+                }
+            }
+            ,error:function(){
 
             }
         });
