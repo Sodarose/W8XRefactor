@@ -320,7 +320,7 @@
         <description>if深层嵌套</description>
         <className>analysis.rule.DeeplyIfStmtsRule</className>
         <solutionClassName>refactor.refactorimpl.DeeplyIfStmtsRefactor</solutionClassName>
-        <rule-status>true</rule-status>
+        <rule-status>false</rule-status>
         <rule-message>if深层嵌套超过三层</rule-message>
         <rule-level>10</rule-level>
         <example>

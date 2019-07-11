@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统介绍</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" th:href="@{/layui/css/layui.css}">
+    <link rel="stylesheet" href="/styles/default.css" th:href="@{/styles/default.css}">
+    <link rel="stylesheet" href="/css/zTreeStyle/zTreeStyle.css" th:href="@{/css/zTreeStyle/zTreeStyle.css}"
+          type="text/css">
+    <link rel="stylesheet" href="/styles/default.css" th:href="@{/styles/default.css}">
+
+
+    <script src="/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" src="/js/jquery-1.4.4.min.js" th:href="@{/js/jquery-1.4.4.min.js}"></script>
+    <script type="text/javascript" src="/js/jquery.ztree.core.js"
+            th:href="@{/js/jquery.ztree.core.js}"></script>
+</head>
+<body>
+
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header" style="margin: 20px"><b>平台信息介绍</b></div>
+                <div class="layui-card-body">
+                    &nbsp;&nbsp;&nbsp;&nbsp;平台功能介绍
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="layui-collapse" lay-filter="test">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">本系统是干什么的？</h2>
+                <div class="layui-colla-content">
+                    <p>代码重构，即通过调整程序代码改善软件的质量、性能，使其程序的设计模式和架构更趋合理，提高软件的扩展性和维护性。而遵循某种约定好的编码规范则是代码重构过程中的基本约束条件。然而，人无完人，在编写代码时，可能会产生一些不符合代码规范的代码，并且可能会由于程序员的疏忽，该份带有异味的代码上传至代码仓库，导致后续代码的维护困难。那么，在这种情况下，就需要自动的对源代码进行分析，并进行一定的重构。本项目的主旨在于，在一定的条件下对代码进行格式化规范以及重构，使其规范化</p>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">能解决怎样的需求？</h2>
+                <div class="layui-colla-content">
+                    <p>1.根据指定的代码规范进行代码风格的格式化。<br/>
+                        2.根据指定的代码规范将不符合命名规范的命名进行修正<br/>
+                        3.对坏味道的代码进行修复<br/>
+                        4.检查代码可能隐藏的缺陷或bug并进行提示</p>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">系统采用了什么技术？</h2>
+                <div class="layui-colla-content">
+                    <p>我们采用了javaparser这个静态分析插件，一开始，我们曾经想过用编译原理的符号流去做，但是符号流的操作十分的困难，所以采用了ast树。但是自己写生成ast树组件过于困难，所以我们采用javapaser这个开源模块用来生成ast树，其余均为自己写用来操作ast树
+                        项目所用技术:JavaParser，
+                        Springboot</p>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">本系统有哪些模块？</h2>
+                <div class="layui-colla-content">
+                    <p>系统分为两个大模块，分别是Core 核心模块和Web 模块<br/>
+                        Core 核心模块:负责本地项目的读取,分析,重构,数据存储以及web的API调用<br/>
+                        Web 模块:负责数据的展示，数据的传输，以及获取git项目
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+<script src="/layui/layui.js" th:src="@{/layui/layui.js}"></script>
+<script src="/layui/me.js" th:src="@{/layui/me.js}"></script>
+<script src="/js/highlight.pack.js" th:src="@{/js/highlight.pack.js}"></script>
+<script src="/layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['element', 'layer'], function(){
+        var element = layui.element;
+        var layer = layui.layer;
+
+        //监听折叠
+       /* element.on('collapse(test)', function(data){
+            layer.msg('展开状态：'+ data.show);
+        });*/
+    });
+</script>
+</body>
+</html>
