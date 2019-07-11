@@ -77,8 +77,8 @@ public class WebRedux {
         for(RulesConfig rulesConfig:rules){
             ruleMap.put(rulesConfig.getRuleName(),rulesConfig.getStatus());
         }
-        refactCoreService.setRuleByMap(ruleMap);
-        return null;
+        return refactCoreService.setRuleByMap(ruleMap);
+
     }
 
 

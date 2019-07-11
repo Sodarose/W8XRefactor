@@ -109,7 +109,7 @@ public class AnalysisApi {
             ruleLink.changeRuleXML(entry.getKey(), entry.getValue());
         }
         ruleLink.writeRuleXML();
-        return false;
+        return true;
     }
 
 }
