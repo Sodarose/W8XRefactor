@@ -221,18 +221,16 @@
 //            contentType:"",
             dataType:'json',
             data: JSON.stringify(datas),
-            success:function(res) {
-                if (res.code === 200) {
-                    layer.msg('修改配置成功', {icon: 1});
-                }
-                if(res.code === 403){
-                    layer.msg('修改配置成功', {icon: 1});
-                }
-            }
-            ,error:function(){
 
-            }
-        });
+                success:function(res) {
+                    if (res.code === 200) {
+                        layer.msg('修改配置成功', {icon: 1});
+                    }
+                    if(res.code === 403){
+                        layer.msg('修改配置失败', {icon: 5});
+                    }
+            },error:function(){
+            });
 
     }
     function collectData() {
