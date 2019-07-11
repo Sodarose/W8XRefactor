@@ -31,10 +31,11 @@
         }
         .layui-layout-admin .layui-side {
             text-align: center;
+            border-right: 1px solid #d0d0d0;
         }
         .layui-bg-black {
             background-color: #ffffff !important;
-            border-right: 1px solid #d0d0d0;
+
         }
         .layui-nav {
             background-color: #ffffff;
@@ -42,17 +43,26 @@
 
         .layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a, .layui-nav-tree .layui-this > a:hover {
             background-color: #fff;
+            border-right: 3px solid #00c0ef;
             color: black;
         }
 
+
+
         .layui-nav-tree .layui-nav-item {
-            border-bottom: 1px solid #d0d0d0;
+            border-bottom: 1px solid #eeeeee;
         }
         .layui-nav-tree .layui-nav-item a:hover{
             color:black;
             background-color: #fff;
-            border: 1px solid #00c0ef;
+            /*border: 1px solid #00c0ef;*/
         }
+
+       /*.layui-icon{
+            color: red;
+            font-size: 30px;
+            margin-left: 10px;
+        }*/
     </style>
 </head>
 <body class="kit-theme">
@@ -75,6 +85,10 @@
                        class=" site-demo-active " data-type="tabAdd"><i class="layui-icon layui-icon-set-fill"></i>扫描配置</a>
                 </li>
                 <li class="layui-nav-item">
+                    <a href="javascript:;"data-id="5" data-title="项目配置" data-url="projectconfig.html"
+                       class="site-demo-active" data-type="tabAdd">项目配置</a>
+                </li>
+                <li class="layui-nav-item">
                     <a href="javascript:;"data-id="2" data-title="扫描项目" data-url="/route/nofollow.html"
                        class="site-demo-active" data-type="tabAdd"><i class="layui-icon layui-icon-search"></i>扫描项目</a>
                 </li>
@@ -86,13 +100,10 @@
                     <a href="javascript:;"data-id="4" data-title="智能代码生成" data-url=""
                        class="site-demo-active" data-type="tabAdd"><i class="layui-icon layui-icon-code-circle"></i>智能代码生成</a>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"data-id="5" data-title="项目配置" data-url="projectconfig.html"
-                       class="site-demo-active" data-type="tabAdd">项目配置</a>
-                </li>
+
                 <li class="layui-nav-item">
                     <a href="javascript:;"data-id="6"  data-title="系统介绍" data-url="introduction.html"
-                       class="site-demo-active" data-type="tabAdd"><i class="layui-icon layui-icon-about" aria-hidden="true"></i>系统介绍</a>
+                       class="site-demo-active layui-icon layui-icon-code-circle" data-type="tabAdd">系统介绍</a>
                 </li>
             </ul>
         </div>
@@ -105,7 +116,7 @@
     </div>
     <!-- 底部固定区域 -->
     <div class="layui-footer" style="text-align:center;">
-        CopyRight © 2019<a href=""> 科技有限公司 </a>all rights rerserved
+        CopyRight © 2019<a href=""> 广东科技学院 </a>
 
     </div>
 </div>
