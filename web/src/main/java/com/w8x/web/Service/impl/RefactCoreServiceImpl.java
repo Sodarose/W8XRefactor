@@ -127,10 +127,10 @@ public class RefactCoreServiceImpl implements RefactCoreService {
 
     @Override
     public Code<String> setRuleByMap(Map<String, Integer> rules) throws IOException {
-        if (!analysisApi.setRules(rules)) {
-            return Code.createCode(403, "", "规则设置失败");
+        if (analysisApi.setRules(rules)) {
+            return Code.createCode(200, "", "设置成功");
         }
-        return Code.createCode(200, "", "设置成功");
+        return Code.createCode(403, "", "规则设置失败");
     }
 
 

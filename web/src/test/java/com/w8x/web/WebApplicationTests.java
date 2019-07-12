@@ -23,7 +23,7 @@ public class WebApplicationTests {
 
     @Test
     public void contextLoads() throws IOException {
-        githubDataGrabber.gitCloneRepository("https://github.com/Sodarose/W8XRefactor.git","master");
+       // githubDataGrabber.gitCloneRepository("https://github.com/Sodarose/W8XRefactor.git","master");
     }
 
 }
