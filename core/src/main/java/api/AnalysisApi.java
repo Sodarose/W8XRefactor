@@ -115,14 +115,10 @@ public class AnalysisApi {
                 rule.setRuleStatus(false);
             }
         }
-<<<<<<< HEAD
-        ruleLink.writeRuleXML();
-        return true;
-=======
+
         //修改xml内容
         ruleLink.changeRuleXMLByMap(rules);
-        return false;
->>>>>>> kangkang
+        return true;
     }
 
 }
