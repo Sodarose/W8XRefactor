@@ -206,32 +206,34 @@
         }
     })
 
-    function commit(){
-      var datas = collectData();
+    function commit() {
+        var datas = collectData();
 
-      console.log(datas);
+        console.log(datas);
 
 //        $.post("/core/setAnalysisRules",{"rules":datas,
 //                "abc": "abc", "test":[1,2,3]},function(data){
 //        },'json');
         $.ajax({
-            url:"/core/setAnalysisRules",
-            type:'post',
-            contentType:"application/json",
+            url: "/core/setAnalysisRules",
+            type: 'post',
+            contentType: "application/json",
 //            contentType:"",
-            dataType:'json',
+            dataType: 'json',
             data: JSON.stringify(datas),
 
-                success:function(res) {
-                    if (res.code === 200) {
-                        layer.msg('修改配置成功', {icon: 1});
-                    }
-                    if(res.code === 403){
-                        layer.msg('修改配置失败', {icon: 5});
-                    }
-            },error:function(){
-            });
+            success: function (res) {
+                if (res.code === 200) {
+                    layer.msg('修改配置成功', {icon: 1});
+                }
+                if (res.code === 403) {
+                    layer.msg('修改配置失败', {icon: 5});
+                }
+            }
+            , error: function (res) {
+            }
 
+        });
     }
     function collectData() {
         var map;
