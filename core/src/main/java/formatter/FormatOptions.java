@@ -13,6 +13,9 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.eclipse.jdt.core.formatter.DefaultCodeFormatterConstants;
 
+/**
+ *  代码格式化选项
+ * */
 public class FormatOptions {
 
     private static Map<String, Object> options;
@@ -25,7 +28,8 @@ public class FormatOptions {
         return options;
     }
 
-    public static Map<String, Object> options(String filePath) {
+
+    private static Map<String, Object> options(String filePath) {
         Map<String, Object> options = new HashMap<String, Object>();
         try {
             SAXReader reader = new SAXReader();

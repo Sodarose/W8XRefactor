@@ -1,15 +1,11 @@
 package refer.classrefer;
 
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import io.ParserProject;
 import model.Store;
-import ulits.ImportDeclarationUtil;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ParameterReferRefactor {
     public static void nameReferRefactor(String oldClassName,String newClassName) {

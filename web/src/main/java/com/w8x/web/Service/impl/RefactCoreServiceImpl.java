@@ -13,7 +13,6 @@ import model.JavaModel;
 import model.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ulits.DirCopy;
 import ulits.JsonUtil;
 
 import java.io.FileNotFoundException;
@@ -79,13 +78,6 @@ public class RefactCoreServiceImpl implements RefactCoreService {
         return codeShown;
     }
 
-    @Override
-    public Code<String> refactorAll() {
-        if (!Store.run) {
-            return Code.createCode(404, null, "操作失败");
-        }
-        return Code.createCode(200, null, "操作成功");
-    }
 
     @Override
     public Code<String> analysisAgin() throws FileNotFoundException {

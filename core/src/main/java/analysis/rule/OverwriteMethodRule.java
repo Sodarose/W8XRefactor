@@ -13,14 +13,10 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.github.javaparser.resolution.UnsolvedSymbolException;
 import com.github.javaparser.resolution.declarations.ResolvedReferenceTypeDeclaration;
-import com.github.javaparser.resolution.declarations.ResolvedTypeDeclaration;
 import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserClassDeclaration;
 import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserInterfaceDeclaration;
 import com.github.javaparser.symbolsolver.model.resolution.SymbolReference;
-import io.FileUlits;
-import io.ParserProject;
 import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
@@ -206,27 +202,5 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
         issue.setDescription(getDescription());
         issue.setRefactorName(getSolutionClassName());
         return issue;
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        ParserProject.parserProject("D:\\IdeaProjects\\W8XRefactor\\core");
-        String pathE = "D:\\IdeaProjects\\W8XRefactor\\core\\src\\main\\java\\analysis\\ruketest\\E.java";
-        String pathD = "D:\\IdeaProjects\\W8XRefactor\\core\\src\\main\\java\\analysis\\ruketest\\D.java";
-        String pathC = "D:\\IdeaProjects\\W8XRefactor\\core\\src\\main\\java\\analysis\\ruketest\\C.java";
-        CompilationUnit unitE = StaticJavaParser.parse(new File(pathE));
-        CompilationUnit unitD = StaticJavaParser.parse(new File(pathD));
-        CompilationUnit unitC = StaticJavaParser.parse(new File(pathC));
-        List<JavaModel> javaModels = new ArrayList<>();
-        javaModels.add(new JavaModel(unitE));
-        javaModels.add(new JavaModel(unitD));
-        javaModels.add(new JavaModel(unitC));
-        OverwriteMethodRule overwriteMethodRule = new OverwriteMethodRule();
-        overwriteMethodRule.apply(javaModels);
-        List<Issue> issues = overwriteMethodRule.getContext().getIssues();
-        OverwriteMethodRefactor refactor = new OverwriteMethodRefactor();
-        for(Issue issue:issues){
-            refactor.refactor(issue);
-        }
-        System.out.println(unitE);
     }
 }

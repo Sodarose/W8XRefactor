@@ -116,7 +116,23 @@ public class FileUlits {
         isSave = true;
         return isSave;
     }
-    public static File readSourceFile(String path) throws IOException{
+
+    public static File readSourceFile(String path) throws IOException {
         return new ClassPathResource(path).getFile();
+    }
+
+    /**
+     * 递归删除
+     */
+    public static void deleteFile(File f) {
+        File[] b = f.listFiles();
+        for (int i = 0; i < b.length; i++) {
+            if (b[i].isFile()) {
+                b[i].delete();
+            } else {
+                deleteFile(b[i]);
+            }
+        }
+        f.delete();//最后删除该目录中所有文件后就删除该目录
     }
 }

@@ -1,17 +1,11 @@
 package refer.classrefer;
 
-import com.github.javaparser.StaticJavaParser;
+
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
-import com.github.javaparser.ast.PackageDeclaration;
-import io.FileUlits;
-import io.ParserProject;
 import model.Store;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ClassImportReferRefactor {
     public static void importRefactor(String oldClassName,String newClassName) {
