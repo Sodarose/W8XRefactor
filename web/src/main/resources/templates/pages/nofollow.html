@@ -33,8 +33,8 @@
         <div class="scanPanl">
             <div id="root" class="layui-form">
                 <div id="test2">
-                    <button class="layui-btn layui-btn-normal" @click="local" style="margin-bottom: 5px">本地路径</button>
-                    <button class="layui-btn layui-btn-normal" @click="remote" style="margin-bottom: 5px">远程路径</button>
+                    <button class="layui-btn layui-btn-normal" id="local" @click="local" style="margin-bottom: 5px">本地路径</button>
+                    <button class="layui-btn layui-btn-normal" id="remote" @click="remote" style="margin-bottom: 5px">远程路径</button>
                 </div>
                 <button class="layui-btn layui-btn-normal" style="margin-left: 10px;" @click="sendRequest">扫描项目代码</button>
             </div>
@@ -51,6 +51,8 @@
         });
         var str = $('<div><input placeholder="请输入本地项目路径" lay-verify="title" autocomplete="off" class="layui-input" style="width: 70%;float: left;" name="message"></div>')
         $("#test2").append(str);
+        $("#local").css({"background-color":"#d0d0d0"});
+
     });
     var vm = new Vue({
         el: '#root',
@@ -63,8 +65,8 @@
                 $('.layui-input').remove();
                 var str = $('<div><input placeholder="请输入本地项目路径" lay-verify="title" autocomplete="off" class="layui-input" style="width: 70%;float: left;" name="message"></div>')
                 $("#test2").append(str);
-
-
+                $("#local").css({"background-color":"#d0d0d0"});
+                $("#remote").css({"background-color":"#00c0ef"});
             },
             remote:function() {
                 vm.loginType='remote'
@@ -72,6 +74,8 @@
                 var str1 = $('<div><input placeholder="请输入远程项目路径" lay-verify="title" autocomplete="off" class="layui-input" style="width: 54%;float: left;" name="message">' +
                     '<input placeholder="分支名称" lay-verify="title" autocomplete="off" class="layui-input" style="width: 15%;float: left;margin-left: 5px;" name="branch"></div>')
                 $('#test2').append(str1)
+                $("#remote").css({"background-color":"#d0d0d0"});
+                $("#local").css({"background-color":"#00c0ef"});
             },
             sendRequest:function() {
                 if(this.loginType ==="local"){

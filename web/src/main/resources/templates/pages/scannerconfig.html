@@ -88,103 +88,105 @@
 
         $('#example1').click(function () {
             var message = $('#example1').attr("data-example");
-            console.log(message)
-            confirm(message);
+            layer.msg(message, {
+                time: 20000,
+                btn: ['明白了']
+            });
         })
         $('#example2').click(function () {
             var message = $('#example2').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example3').click(function () {
             var message = $('#example3').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example4').click(function () {
             var message = $('#example4').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example5').click(function () {
             var message = $('#example5').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example6').click(function () {
             var message = $('#example6').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example7').click(function () {
             var message = $('#example7').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example8').click(function () {
             var message = $('#example8').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example9').click(function () {
             var message = $('#example9').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example10').click(function () {
             var message = $('#example10').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example11').click(function () {
             var message = $('#example11').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example12').click(function () {
             var message = $('#example12').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example13').click(function () {
             var message = $('#example13').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example14').click(function () {
             var message = $('#example14').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example15').click(function () {
             var message = $('#example15').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example16').click(function () {
             var message = $('#example16').attr("data-example");
-            console.log(message)
             confirm(message);
         })
         $('#example17').click(function () {
             var message = $('#example17').attr("data-example");
-            console.log(message)
-            confirm(message);
+            layer.msg(message, {
+                time: 20000,
+                btn: ['明白了']
+            });
         })
         $('#example18').click(function () {
             var message = $('#example18').attr("data-example");
-            console.log(message)
-            confirm(message);
+            layer.msg(message, {
+                time: 20000,
+                btn: ['明白了']
+            });
         })
         $('#example19').click(function () {
             var message = $('#example19').attr("data-example");
-            console.log(message)
-            confirm(message);
+            layer.msg(message, {
+                time: 20000,
+                btn: ['明白了']
+            });
         })
         $('#example20').click(function () {
             var message = $('#example20').attr("data-example");
-            console.log(message)
-            confirm(message);
+            layer.open({
+                type: 1
+                ,title: '规则例子'
+                ,area: ['200px', '260px']
+                ,shade: 0
+                ,content: message
+                ,btn: [ '关闭']
+                ,btn1: function(){
+                    layer.closeAll();
+                }
+            });
         })
 
         function reload() {
@@ -204,29 +206,34 @@
         }
     })
 
-    function commit(){
-      var datas = collectData();
+    function commit() {
+        var datas = collectData();
 
-      console.log(datas);
+        console.log(datas);
 
 //        $.post("/core/setAnalysisRules",{"rules":datas,
 //                "abc": "abc", "test":[1,2,3]},function(data){
 //        },'json');
         $.ajax({
-            url:"/core/setAnalysisRules",
-            type:'post',
-            contentType:"application/json",
+            url: "/core/setAnalysisRules",
+            type: 'post',
+            contentType: "application/json",
 //            contentType:"",
-            dataType:'json',
+            dataType: 'json',
             data: JSON.stringify(datas),
 
-            success:function(res){
-//                layer.msg
-            },error:function(){
-
+            success: function (res) {
+                if (res.code === 200) {
+                    layer.msg('修改配置成功', {icon: 1});
+                }
+                if (res.code === 403) {
+                    layer.msg('修改配置失败', {icon: 5});
+                }
             }
-        });
+            , error: function (res) {
+            }
 
+        });
     }
     function collectData() {
         var map;

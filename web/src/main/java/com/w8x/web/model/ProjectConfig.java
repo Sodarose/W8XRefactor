@@ -2,7 +2,6 @@ package com.w8x.web.model;
 
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.w8x.web.ulits.FileUlits;

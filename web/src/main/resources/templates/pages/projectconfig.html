@@ -8,34 +8,53 @@
     <link rel="stylesheet" href="/styles/default.css" th:href="@{/styles/default.css}">
     <script src="../src/layui.js" th:src="@{/layui/layui.js}"></script>
     <style>
-        .layui-elem-field{
-          margin-bottom: 70px;
+        .layui-elem-field {
+            margin-bottom: 70px;
         }
+
         .layui-form-select dl dd.layui-this {
             background-color: #00c0ef;
             color: #fff;
+        }
+        #filename{
+            width: 200px;
+            margin: -48px 0 0 470px;
         }
     </style>
 </head>
 <body>
 
-<fieldset class="layui-elem-field" style="margin-top: 20px;">
-    <legend style="font-size: 15px;">上传代码</legend>
+<fieldset class="layui-elem-field" style="margin-top: 20px;height: 200px">
+    <legend style="font-size: 15px;">上传代码风格</legend>
     <div class="layui-row">
         <div class="layui-col-xs12">
-            <form class="layui-form layui-form-pane" style="margin: 20px 0 0 10px;" action="">
+            <form class="layui-form layui-form-pane" style="margin: 20px 0 0 20px;" action="">
                 <div class="layui-form-item">
-                    <label class="layui-form-label" style="background-color: #00c0ef;width: 200px;color: white">代码风格</label>
+
                     <div class="layui-input-block">
-                        <input type="text" name="title" autocomplete="off" style="width: 900px" placeholder="" class="layui-input">
+                        <form class="layui-form" action="">
+                            <div class="layui-inline" style="margin: 20px 0 10px 190px;">
+                                <label class="layui-form-label" style="width: 114px;margin-right: 38px;">代码风格</label>
+                                <div class="layui-input-inline" style="width: 325px;">
+                                    <select name="modules" lay-verify="required" lay-search="">
+                                        <option value="">直接选择或搜索选择</option>
+                                        <option value="1">layer</option>
+                                        <option value="2">form</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </form>
-            <div>
-                <button type="button" class="layui-btn" id="test3" style="background-color: #00c0ef;margin: 0 0 10px 10px"><i class="layui-icon"></i>上传文件</button>
-            </div>
-        </div>
+                <div >
+                    <button type="button" class="layui-btn" id="test3" style="background-color: #00c0ef;margin: 0 0 10px 320px"><i class="layui-icon"></i>上传文件</button>
+                    <input type="text" id="filename" name="title"  class="layui-input" autocomplete="off" placeholder="上传 *.xml 文件">
+                    <button type="button" class="layui-btn" id="uploadPicBtn" style="background-color: #00c0ef;margin: -50px 0 10px 703px;">开始上传</button>
+                </div>
     </div>
+    </div>
+
 </fieldset>
 
 <fieldset class="layui-elem-field" style="margin-top: 20px;">
@@ -52,6 +71,7 @@
                         </select>
 
                         <button class="layui-btn" lay-submit="" lay-filter="demo1" style="background-color: #00c0ef;margin-top: 15px;">立即提交</button>
+
                         <button type="reset" class="layui-btn layui-btn-primary" style="margin-top: 15px;">重置</button>
 
                     </div>
@@ -63,13 +83,22 @@
 
 <script>
     layui.use('upload', function () {
-        var $ = layui.jquery
-            , upload = layui.upload;
-        upload.render({
+        var upload = layui.upload, $ = layui.jquery;
+        var uploadInst = upload.render({
             elem: '#test3'
             //,url: '/upload/'
+            , auto: false
             , accept: 'file' //普通文件
-            //, exts: 'xml'
+            , exts: 'xml'
+            ,choose: function(obj){  //上传前选择回调方法
+                obj.preview(function(index,file,result){
+                    var filename = file.name;
+                    $('#filename').val(filename);
+                    //layer.msg(file.name)
+                });
+            }
+            , bindAction: '#uploadPicBtn'
+
             , done: function (res) {
                 console.log(res)
             }
