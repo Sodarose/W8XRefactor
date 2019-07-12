@@ -3,12 +3,12 @@ package com.w8x.web.controller;
 import com.w8x.web.BO.RuleObj;
 import com.w8x.web.BO.RulesConfig;
 import com.w8x.web.Service.RefactCoreService;
-import com.w8x.web.model.Code;
-import com.w8x.web.model.CodeShown;
-import com.w8x.web.model.RuleModelVo;
+import com.w8x.web.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -22,6 +22,9 @@ public class WebRedux {
 
     @Autowired
     RefactCoreService refactCoreService;
+
+    @Autowired
+    ProjectConfig projectConfig;
 
     /**
      * 获得项目路径 并进行扫描
@@ -46,11 +49,6 @@ public class WebRedux {
         return refactCoreService.getJavaFileDetail(filePath);
     }
 
-    @GetMapping("/refactorAll")
-    @ResponseBody
-    Code<String> refactorAll() {
-        return refactCoreService.refactorAll();
-    }
 
     @GetMapping("/analysisagin")
     @ResponseBody
@@ -72,10 +70,10 @@ public class WebRedux {
     }
 
     @PostMapping("/setAnalysisRules")
-    Code<String> setRules( @RequestBody RulesConfig[] rules) throws IOException {
-        Map<String,Integer> ruleMap= new HashMap<>();
-        for(RulesConfig rulesConfig:rules){
-            ruleMap.put(rulesConfig.getRuleName(),rulesConfig.getStatus());
+    Code<String> setRules(@RequestBody RulesConfig[] rules) throws IOException {
+        Map<String, Integer> ruleMap = new HashMap<>();
+        for (RulesConfig rulesConfig : rules) {
+            ruleMap.put(rulesConfig.getRuleName(), rulesConfig.getStatus());
         }
         return refactCoreService.setRuleByMap(ruleMap);
 
@@ -87,4 +85,25 @@ public class WebRedux {
     public boolean saveModify() throws IOException {
         return refactCoreService.saveModify();
     }
+
+    @GetMapping("/getCodeStyles")
+    @ResponseBody
+    public Code<List<CodeStyle>> getCodeStyleList() {
+        if (projectConfig.getCodeStyles() == null || projectConfig.getCodeStyles().size() == 0) {
+            return Code.createCode(403, null, "没有配置文件");
+        }
+        return Code.createCode(200, projectConfig.getCodeStyles(), "得到配置信息");
+    }
+
+    @PostMapping("/uploadCodeStyle")
+    public Code<String> uploadCodeStyle(MultipartFile file,@RequestParam("codename") String codeName, HttpServletRequest request) {
+        return Code.createCode(200, "", "");
+    }
+
+    @PostMapping("/updateCodeStyleStatus")
+    @ResponseBody
+    public Code<String> updateCodeStyleStatus(CodeStyle codeStyle) {
+        return Code.createCode(200, "", "");
+    }
+
 }

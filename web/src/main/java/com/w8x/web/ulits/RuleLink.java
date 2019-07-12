@@ -1,10 +1,12 @@
-package analysis;
+package com.w8x.web.ulits;
 
+import analysis.AbstractRuleVisitor;
+import analysis.Rule;
 import model.Store;
-import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import org.slf4j.Logger;
@@ -12,22 +14,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
- * 读取xml中的信息 然后根据反射生成对象 生成规则链
+ * 读取xml中的信息
  */
 public class RuleLink {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RuleLink.class);
 
-    private static final String RULE_XML_PATH = "static/rule.xml";
+    private static final String RULE_XML_PATH = "rule.xml";
 
-    private static RuleLink ruleLink ;
-
-    private static Document document ;
-    private Map<String, Element> elementMap = new HashMap<>();
+    private static RuleLink ruleLink;
 
 
     public static RuleLink newInstance() {
@@ -38,23 +39,24 @@ public class RuleLink {
     }
 
 
+    /**
+     * 读取xml规则
+     */
     public List<Rule> readRuleLinkByXML() {
         List<Rule> rules = new ArrayList<>();
         LOGGER.info("读取规则配置文件");
         try {
-            Resource resource = new ClassPathResource(RULE_XML_PATH);
             SAXReader reader = new SAXReader();
-            document = reader.read(resource.getInputStream());
+            Document document = reader.read(FileUlits.readFileByJarContents(RULE_XML_PATH));
             Element root = document.getRootElement();
             Iterator<Element> it = root.elementIterator();
-            Store.rules = new ArrayList<>();
-            Store.ruleMap = new HashMap<>(18);
+            Store.ruleMap = new HashMap<>();
             while (it.hasNext()) {
-                AbstractRuleVisitor rule = createRule(it.next());
-                Store.rules.add(rule);
+                AbstractRuleVisitor rule = (AbstractRuleVisitor) createRule(it.next());
+                rules.add(rule);
                 Store.ruleMap.put(rule.getRuleName(), rule);
             }
-            Store.rules.sort(new Comparator<Rule>() {
+            rules.sort(new Comparator<Rule>() {
                 @Override
                 public int compare(Rule o1, Rule o2) {
                     AbstractRuleVisitor r1 = (AbstractRuleVisitor) o1;
@@ -62,18 +64,21 @@ public class RuleLink {
                     return r1.getLevel() - r2.getLevel();
                 }
             });
-            rules.addAll(Store.rules);
         } catch (DocumentException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        LOGGER.warn("文档是否为"+(document == null)+"");
-        LOGGER.info("读取成功");
+        if (rules.size() == 0) {
+            LOGGER.info("读取失败");
+        } else {
+            LOGGER.info("读取成功");
+        }
         return rules;
     }
 
-    private AbstractRuleVisitor createRule(Element element) {
+    /**
+     * 生成规则
+     */
+    private Rule createRule(Element element) {
         AbstractRuleVisitor rule = null;
         String ruleName = element.elementText("rule-name");
         String description = element.elementText("description");
@@ -100,45 +105,68 @@ public class RuleLink {
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
-        elementMap.put(ruleName, element);
         return rule;
     }
 
-    public void changeRuleXMLByMap(Map<String, Integer> rules) {
+
+    /**
+     * 保存配置修改
+     */
+    public void changeRuleXMLByMap(Map<String, Integer> rules) throws IOException {
+        //文档
+        Document document = null;
+        //索引表
+        Map<String, Element> elementMap = null;
+        try {
+            SAXReader reader = new SAXReader();
+            document = reader.read(FileUlits.readFileByJarContents(RULE_XML_PATH));
+            Element root = document.getRootElement();
+            Iterator<Element> it = root.elementIterator();
+            elementMap = new HashMap<>();
+            while (it.hasNext()) {
+                Element element = it.next();
+                String ruleName = element.elementText("rule-name");
+                elementMap.put(ruleName, element);
+            }
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+        if (document == null) {
+            LOGGER.error("配置写入失败");
+            return;
+        }
+
+        //更改值
         for (Map.Entry<String, Integer> entry : rules.entrySet()) {
-            changeRuleXML(entry.getKey(), entry.getValue());
+
+            Element element = elementMap.get(entry.getKey());
+            if (element == null) {
+                return;
+            }
+            Element ruleStatus = element.element("rule-status");
+            if (ruleStatus == null) {
+                return;
+            }
+            if (entry.getValue() == 1) {
+                ruleStatus.setText("true");
+            } else {
+                ruleStatus.setText("false");
+            }
         }
+        writeRuleXML(document);
     }
 
 
-    public void changeRuleXML(String key, Integer value) {
-        Element element = elementMap.get(key);
-        if (element == null) {
-            return;
-        }
-        Element ruleStatus = element.element("rule-status");
-        if (ruleStatus == null) {
-            return;
-        }
-        if (value == 1) {
-            ruleStatus.setText("true");
-        } else {
-            ruleStatus.setText("false");
-        }
-    }
-
-    public void writeRuleXML() throws IOException {
-        Resource resource = new ClassPathResource(RULE_XML_PATH);
+    public void writeRuleXML(Document document) throws IOException {
         XMLWriter xmlWriter = null;
         try {
-            LOGGER.warn("资源是否能获取:"+resource.getFile()+"");
-            xmlWriter = new XMLWriter(new PrintWriter(resource.getFile()));
-            LOGGER.warn("文档是否为"+(document == null)+"");
+            xmlWriter = new XMLWriter(new FileOutputStream(FileUlits.readFileByJarContents(RULE_XML_PATH)));
             xmlWriter.write(document);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if(xmlWriter!=null){
+        } finally {
+            if (xmlWriter != null) {
                 LOGGER.warn("关闭写入流");
                 xmlWriter.close();
             }

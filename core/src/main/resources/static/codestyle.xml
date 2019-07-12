@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<profiles version="8">
-    <profile kind="CodeFormatterProfile" name="GoogleStyle" version="8">
-        <!--在根标签之前插入新行-->
-        <setting id="" value=""/>
-    </profile>
-</profiles>

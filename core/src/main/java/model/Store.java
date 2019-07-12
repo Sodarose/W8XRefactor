@@ -18,23 +18,44 @@ import java.util.Map;
  */
 @Data
 public class Store {
-    //项目路径
+    /**
+     * 项目路径
+     */
     public static String path;
 
-    //保存项目路径
+    /**
+     * 保存项目路径
+     */
     public static String savePath;
-    //状态
-    public static boolean run;
 
+    /**
+     * 文件树
+     */
     public static TreeNode rootNode;
-    //项目
+
+    /**
+     * 项目根路径
+     */
     public static ProjectRoot projectRoot;
-    //解析器
+
+    /**
+     * 项目解析器
+     */
     public static JavaParserFacade javaParserFacade;
+
+    /**
+     * 编译解析器
+     */
     public static CombinedTypeSolver combinedTypeSolver;
-    //整个项目的问题代码片段
+
+    /**
+     * 问题代码
+     */
     public static IssueContext issueContext;
-    //索引列表
+
+    /**
+     * model索引表
+     */
     public static Map<String, JavaModel> javaModelMap;
 
     public static List<CompilationUnit> javaFiles;
@@ -51,10 +72,17 @@ public class Store {
      */
     public static Map<String, AbstractRuleVisitor> ruleMap;
 
-    //public static Map<String,String> pathMap; //路径映射
-
-    public static List<JsonObject> jsonObjectList; //写入json文件的信息
+    public static List<JsonObject> jsonObjectList;
 
     public static String modifyPath;
+
+    /**
+     * 格式化配置
+     */
+    public static Map<String, Object> codestyle;
+
+    /**
+     *
+     * */
 
 }

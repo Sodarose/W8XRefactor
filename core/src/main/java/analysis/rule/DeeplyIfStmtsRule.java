@@ -10,7 +10,6 @@ import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.*;
 import io.FileUlits;
-import io.ParserProject;
 import jdk.nashorn.internal.ir.IfNode;
 import model.Issue;
 import model.IssueContext;

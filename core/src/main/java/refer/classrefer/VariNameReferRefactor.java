@@ -7,7 +7,6 @@ import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import io.ParserProject;
 import model.Store;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import ulits.ImportDeclarationUtil;

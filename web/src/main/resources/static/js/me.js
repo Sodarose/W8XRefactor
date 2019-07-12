@@ -80,3 +80,28 @@ function refactor() {
         }
     })
 }
+function Rescan() {
+    $.ajax({
+        url: '/core/analysisagin',
+        type: 'get',
+        dataType: 'json',
+        beforeSend: function () {
+            layer.msg('扫描中', {
+                icon: 16
+                ,shade: 0.01
+                ,time:0
+            });
+        },
+        success: function (res) {
+            if(res.code === 200){
+                layer.msg( '扫描成功', {icon: 1});
+            }
+            if(res.code === 404){
+                layer.msg( '请你输入路径', {icon: 5});
+            }
+        }, error: function (res) {
+
+        }
+    });
+
+}

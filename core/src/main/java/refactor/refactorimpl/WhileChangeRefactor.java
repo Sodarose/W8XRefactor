@@ -1,8 +1,6 @@
 package refactor.refactorimpl;
 
-import analysis.rule.WhileChangeForRule;
-import com.github.javaparser.StaticJavaParser;
-import com.github.javaparser.ast.CompilationUnit;
+
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.VariableDeclarator;
@@ -12,11 +10,9 @@ import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.stmt.WhileStmt;
-import io.FileUlits;
 import model.Issue;
 import refactor.Refactor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,13 +28,17 @@ public class WhileChangeRefactor implements Refactor {
     }
 
     private void transFromsFor(WhileStmt whileStmt, Map<String, Object> data) {
+        //初始化条件
         List<VariableDeclarator> inits = (List<VariableDeclarator>) data.get("inits");
+        //更新条件
         List<Expression> updates = (List<Expression>) data.get("updates");
+        //比较条件
         Expression condition = (Expression) data.get("condition");
-        Node parent = (Node) data.get("parent");
-        if (!clean(parent, inits, updates, whileStmt.getBody())) {
+
+        if (!clean( inits, updates)) {
             return;
         }
+
         ForStmt forStmt = new ForStmt();
         //设置condition
         forStmt.setCompare(condition);
@@ -55,14 +55,21 @@ public class WhileChangeRefactor implements Refactor {
         whileStmt.getParentNode().get().replace(whileStmt, forStmt);
     }
 
-    private boolean clean(Node parent, List<VariableDeclarator> inits, List<Expression> updates, Statement body) {
+    /**
+     * 清理原来的初始化语句
+     * */
+    private boolean clean( List<VariableDeclarator> inits, List<Expression> updates) {
         for (VariableDeclarator ex : inits) {
             if(!ex.getParentNode().isPresent()){
                 return false;
             }
+
+            //优化
             VariableDeclarationExpr v = (VariableDeclarationExpr)ex.getParentNode().get();
             v.remove(ex);
+
             if(v.getVariables().size()==0){
+
                 ExpressionStmt stmt = (ExpressionStmt)v.getParentNode().get();
                 stmt.getParentNode().get().remove(stmt);
             }
