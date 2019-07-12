@@ -2,6 +2,7 @@ package com.w8x.web.api;
 
 
 import com.w8x.web.config.GitConfigDev;
+import com.w8x.web.model.ProjectConfig;
 import io.FileUlits;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -27,6 +28,9 @@ public class GithubDataGrabber {
     @Autowired
     GitConfigDev gitConfigDev;
 
+    @Autowired
+    ProjectConfig projectConfig;
+
     private static Logger LOGGER = LoggerFactory.getLogger(GithubDataGrabber.class);
 
     /**
@@ -34,14 +38,13 @@ public class GithubDataGrabber {
      */
     private void init() {
         ApplicationHome home = new ApplicationHome(getClass());
-        //目前用于测试 返回的是程序主目录
         File homeDir = home.getSource();
         // jar包存放的位置
-        String path = homeDir.getPath() + File.separator + "repository";
-        if (gitConfigDev.getPath() != null && !"".equals(gitConfigDev.getPath())) {
+        String path = homeDir.getParent() + File.separator + "repository";
+        if (projectConfig.getClonePath() != null && !"".equals(projectConfig.getClonePath())) {
             path = gitConfigDev.getPath();
         }
-        gitConfigDev.setPath(path);
+        projectConfig.setClonePath(path);
         File repository = new File(path);
         LOGGER.info("仓库地址：" + repository.getPath());
         if (!repository.exists()) {

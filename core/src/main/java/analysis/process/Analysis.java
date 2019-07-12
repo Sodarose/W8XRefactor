@@ -2,7 +2,6 @@ package analysis.process;
 
 import analysis.AbstractRuleVisitor;
 import analysis.Rule;
-import analysis.RuleLink;
 import io.ParserProjectDome;
 import model.IssueContext;
 import model.JavaModel;

@@ -8,6 +8,7 @@ import com.w8x.web.model.Code;
 import com.w8x.web.model.CodeShown;
 import com.w8x.web.model.IssueShow;
 import com.w8x.web.model.RuleModelVo;
+import com.w8x.web.ulits.RuleLink;
 import model.Issue;
 import model.JavaModel;
 import model.Store;
@@ -113,9 +114,19 @@ public class RefactCoreServiceImpl implements RefactCoreService {
 
     @Override
     public Code<String> setRuleByMap(Map<String, Integer> rules) throws IOException {
-        if (!analysisApi.setRules(rules)) {
-            return Code.createCode(403, "", "规则设置失败");
+        for (Map.Entry<String, Integer> entry : rules.entrySet()) {
+            AbstractRuleVisitor rule = Store.ruleMap.get(entry.getKey());
+            if (rule == null) {
+                continue;
+            }
+            if (entry.getValue() == 1) {
+                rule.setRuleStatus(true);
+            } else {
+                rule.setRuleStatus(false);
+            }
         }
+        //修改xml内容
+        RuleLink.newInstance().changeRuleXMLByMap(rules);
         return Code.createCode(200, "", "设置成功");
     }
 

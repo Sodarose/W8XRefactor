@@ -79,7 +79,7 @@ public class Store {
     /**
      * 格式化配置
      */
-    public static Map<String, Object> options;
+    public static Map<String, Object> codestyle;
 
     /**
      *
