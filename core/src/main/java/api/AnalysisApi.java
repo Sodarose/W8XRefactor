@@ -5,6 +5,8 @@ import analysis.RuleLink;
 import analysis.process.Analysis;
 import com.alibaba.fastjson.JSON;
 import model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ulits.SaveJson;
 import ulits.ThreadPoolUtils;
 
@@ -16,6 +18,8 @@ import java.util.Map;
 
 
 public class AnalysisApi {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(AnalysisApi.class);
 
     private static AnalysisApi instance;
 
@@ -31,7 +35,6 @@ public class AnalysisApi {
      */
     public void init() {
         Store.rules = RuleLink.newInstance().readRuleLinkByXML();
-        Store.run = false;
     }
 
     /**
@@ -42,12 +45,13 @@ public class AnalysisApi {
         if (!file.exists()) {
             return false;
         }
+        //分析
         Analysis analysis = new Analysis();
+        //扫描
         analysis.analysis(path);
         //数据处理
         organizeData();
-        Store.run = true;
-        saveProject();
+        //saveProject();
         return Store.javaModelMap != null;
     }
 
@@ -55,6 +59,9 @@ public class AnalysisApi {
      * 重新扫描
      */
     public boolean analysisagin() throws FileNotFoundException {
+        if (Store.path == null) {
+            return false;
+        }
         return analysis(Store.path);
     }
 
@@ -96,6 +103,7 @@ public class AnalysisApi {
 
     public boolean setRules(Map<String, Integer> rules) throws IOException {
         RuleLink ruleLink = new RuleLink();
+        //修改内存配置
         for (Map.Entry<String, Integer> entry : rules.entrySet()) {
             AbstractRuleVisitor rule = Store.ruleMap.get(entry.getKey());
             if (rule == null) {
@@ -106,10 +114,15 @@ public class AnalysisApi {
             } else {
                 rule.setRuleStatus(false);
             }
-            ruleLink.changeRuleXML(entry.getKey(), entry.getValue());
         }
+<<<<<<< HEAD
         ruleLink.writeRuleXML();
         return true;
+=======
+        //修改xml内容
+        ruleLink.changeRuleXMLByMap(rules);
+        return false;
+>>>>>>> kangkang
     }
 
 }

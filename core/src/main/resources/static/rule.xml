@@ -7,7 +7,7 @@
         <description>对于覆写的方法必须加@Override注释</description>
         <className>analysis.rule.OverwriteMethodRule</className>
         <solutionClassName>refactor.refactorimpl.OverwriteMethodRefactor</solutionClassName>
-        <rule-status>false</rule-status>
+        <rule-status>true</rule-status>
         <rule-message>对于覆写的方法必须加@Override注释</rule-message>
         <rule-level>1</rule-level>
         <example>
@@ -320,7 +320,7 @@
         <description>if深层嵌套</description>
         <className>analysis.rule.DeeplyIfStmtsRule</className>
         <solutionClassName>refactor.refactorimpl.DeeplyIfStmtsRefactor</solutionClassName>
-        <rule-status>false</rule-status>
+        <rule-status>true</rule-status>
         <rule-message>if深层嵌套超过三层</rule-message>
         <rule-level>10</rule-level>
         <example>

@@ -46,11 +46,6 @@ public class WebRedux {
         return refactCoreService.getJavaFileDetail(filePath);
     }
 
-    @GetMapping("/refactorAll")
-    @ResponseBody
-    Code<String> refactorAll() {
-        return refactCoreService.refactorAll();
-    }
 
     @GetMapping("/analysisagin")
     @ResponseBody
@@ -87,4 +82,6 @@ public class WebRedux {
     public boolean saveModify() throws IOException {
         return refactCoreService.saveModify();
     }
+
+
 }

@@ -5,7 +5,6 @@ import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.resolution.types.ResolvedType;
 import com.github.javaparser.symbolsolver.model.resolution.SymbolReference;
-import io.ParserProject;
 import model.Issue;
 import model.Store;
 import refactor.AbstractRefactor;

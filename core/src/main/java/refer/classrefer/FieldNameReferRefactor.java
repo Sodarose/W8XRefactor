@@ -7,7 +7,6 @@ import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import io.ParserProject;
 import model.Store;
 import ulits.ImportDeclarationUtil;
 

@@ -1,17 +1,18 @@
 package formatter;
 
-import java.text.Normalizer;
 import java.util.Map;
 
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
-import org.eclipse.jdt.internal.formatter.DefaultCodeFormatter;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.text.edits.TextEdit;
 
+/**
+ *  jdt 格式化代码
+ * */
 public class Formatter {
 
     public static String format(String source, Map<String, Object> options) {
