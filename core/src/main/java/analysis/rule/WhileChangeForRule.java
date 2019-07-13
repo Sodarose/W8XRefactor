@@ -8,12 +8,16 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.*;
+import com.github.javaparser.resolution.declarations.ResolvedReferenceTypeDeclaration;
 import com.github.javaparser.symbolsolver.javaparser.Navigator;
+import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserSymbolDeclaration;
+import com.github.javaparser.symbolsolver.model.resolution.SymbolReference;
 import io.FileUlits;
 import javassist.expr.Expr;
 import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
+import model.Store;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -55,8 +59,11 @@ public class WhileChangeForRule extends AbstractRuleVisitor {
      */
     private void check(List<WhileStmt> stmts) {
         for (WhileStmt stmt : stmts) {
+            //得到条件表达式
             Expression condition = stmt.getCondition();
+            //得到循环方法体
             Statement statement = stmt.getBody();
+
             if (!condition.isBinaryExpr()) {
                 continue;
             }
@@ -64,6 +71,7 @@ public class WhileChangeForRule extends AbstractRuleVisitor {
                 continue;
             }
             List<Expression> expres = new ArrayList<>();
+
             collectExpr(condition, expres);
             if (expres.size() == 0) {
                 continue;
@@ -81,11 +89,21 @@ public class WhileChangeForRule extends AbstractRuleVisitor {
             } else {
                 parent = stmt.getParentNode().get();
             }
+            //得到初始化函数
             List<VariableDeclarator> inits = collectInit(stmt, parent, expres);
             if (inits == null || inits.size() == 0) {
                 continue;
             }
+
+            //得到更新点
             List<Expression> updates = collectUpdate(inits, statement);
+            //检查
+            boolean result = checkUpdates(updates, stmt);
+
+            if (!result) {
+                continue;
+            }
+
             if (updates == null || updates.size() == 0) {
                 continue;
             }
@@ -103,6 +121,68 @@ public class WhileChangeForRule extends AbstractRuleVisitor {
             issue.setRuleName(getRuleName());
             getContext().getIssues().add(issue);
         }
+    }
+
+    private boolean checkUpdates(List<Expression> updates, WhileStmt stmt) {
+        for (Expression expr : updates) {
+            Expression expression = null;
+
+            if (expr instanceof AssignExpr) {
+                AssignExpr assignExpr = (AssignExpr) expr;
+                expression = assignExpr.getValue();
+
+            }
+
+            if (expr instanceof UnaryExpr) {
+                UnaryExpr unaryExpr = (UnaryExpr) expr;
+                expression = unaryExpr.getExpression();
+            }
+
+            SymbolReference symbolReference = null;
+            try {
+                symbolReference = Store.javaParserFacade.solve(expression);
+            } catch (Exception e) {
+            }
+            if (symbolReference == null) {
+                continue;
+            }
+            if (!symbolReference.isSolved()) {
+                return false;
+            }
+
+            if (!(symbolReference.getCorrespondingDeclaration() instanceof JavaParserSymbolDeclaration)) {
+                return false;
+            }
+
+            JavaParserSymbolDeclaration javaParser = (JavaParserSymbolDeclaration) symbolReference.
+                    getCorrespondingDeclaration();
+
+            if (!(javaParser.getWrappedNode() instanceof VariableDeclarator)) {
+                return false;
+            }
+            VariableDeclarator variableDeclarator = (VariableDeclarator) javaParser.getWrappedNode();
+            if (!variableDeclarator.getParentNode().isPresent()) {
+                return false;
+            }
+
+            VariableDeclarationExpr variableDeclarationExpr = (VariableDeclarationExpr)
+                    variableDeclarator.getParentNode().get();
+
+            if (!variableDeclarationExpr.getParentNode().isPresent()) {
+                return false;
+            }
+
+            if (!(variableDeclarationExpr.getParentNode().get() instanceof ExpressionStmt)) {
+                return false;
+            }
+
+            ExpressionStmt expressionStmt = (ExpressionStmt) variableDeclarationExpr.getParentNode().get();
+            //Integer k =(Integer) data.values().toArray()[0];
+            if (stmt.getBody().asBlockStmt().getStatements().contains(expressionStmt)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

@@ -155,32 +155,33 @@ public class JsonUtil {
         String  jsonPath = path+File.separator+"info.json";
         List<JsonObject> jsonObjects=readJson(jsonPath);
         for (JsonObject jsonObject:jsonObjects) {
-            if (jsonObject.getFileStatus().equals("file")) {
-                String modifyPath = jsonObject.getModifyPath();
-                //String copyPath = jsonObject.getCopyPath();
-                File modifyFile = new File(modifyPath);
-                //File copyFile = new File(copyPath);
-                File file = new File(path +File.separator+ jsonObject.getFileName());
-                if (modifyFile.isFile() ) {
-                    if (modifyFile.exists()) {
-                        modifyFile.delete();
-                    }
-                    //if (copyFile.exists()) {
-                      //  copyFile.delete();
-                    //}
-                    modifyPath = modifyPath.substring(0, modifyPath.lastIndexOf("\\") + 1) + jsonObject.getFileName();
-                    //copyPath = copyPath.substring(0, copyPath.lastIndexOf("\\") + 1) + jsonObject.getFileName();
-                    Files.copy(file.toPath(), new File(modifyPath).toPath());
-                    //Files.copy(file.toPath(), new File(copyPath).toPath());
+            if (!jsonObject.getFileStatus().equals("file")) {
+                if(jsonObject.getFileStatus().equals("dir")){
+                    String modifyPath = jsonObject.getModifyPath();
+                    //String copyPath = jsonObject.getCopyPath();
+                    File modifyFile = new File(modifyPath);
+                    //File copyFile = new File(copyPath);
+                    modifyFlag=modifyFile.renameTo(new File(modifyPath.substring(0,modifyPath.lastIndexOf("\\")+1)+jsonObject.getFileName()));
+                    //copyFlag=copyFile.renameTo(new File(copyPath.substring(0,copyPath.lastIndexOf("\\")+1)+jsonObject.getFileName()));
                 }
             }
-            if(jsonObject.getFileStatus().equals("dir")){
-                String modifyPath = jsonObject.getModifyPath();
-                //String copyPath = jsonObject.getCopyPath();
-                File modifyFile = new File(modifyPath);
-                //File copyFile = new File(copyPath);
-                modifyFlag=modifyFile.renameTo(new File(modifyPath.substring(0,modifyPath.lastIndexOf("\\")+1)+jsonObject.getFileName()));
-               //copyFlag=copyFile.renameTo(new File(copyPath.substring(0,copyPath.lastIndexOf("\\")+1)+jsonObject.getFileName()));
+
+            String modifyPath = jsonObject.getModifyPath();
+            //String copyPath = jsonObject.getCopyPath();
+            File modifyFile = new File(modifyPath);
+            //File copyFile = new File(copyPath);
+            File file = new File(path +File.separator+ jsonObject.getFileName());
+            if (modifyFile.isFile() ) {
+                if (modifyFile.exists()) {
+                    modifyFile.delete();
+                }
+                //if (copyFile.exists()) {
+                //  copyFile.delete();
+                //}
+                modifyPath = modifyPath.substring(0, modifyPath.lastIndexOf("\\") + 1) + jsonObject.getFileName();
+                //copyPath = copyPath.substring(0, copyPath.lastIndexOf("\\") + 1) + jsonObject.getFileName();
+                Files.copy(file.toPath(), new File(modifyPath).toPath());
+                //Files.copy(file.toPath(), new File(copyPath).toPath());
             }
         }
        return modifyFlag;

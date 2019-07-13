@@ -35,7 +35,7 @@ public class WhileChangeRefactor implements Refactor {
         //比较条件
         Expression condition = (Expression) data.get("condition");
 
-        if (!clean( inits, updates)) {
+        if (!clean(inits, updates)) {
             return;
         }
 
@@ -57,28 +57,28 @@ public class WhileChangeRefactor implements Refactor {
 
     /**
      * 清理原来的初始化语句
-     * */
-    private boolean clean( List<VariableDeclarator> inits, List<Expression> updates) {
+     */
+    private boolean clean(List<VariableDeclarator> inits, List<Expression> updates) {
         for (VariableDeclarator ex : inits) {
-            if(!ex.getParentNode().isPresent()){
+            if (!ex.getParentNode().isPresent()) {
                 return false;
             }
 
             //优化
-            VariableDeclarationExpr v = (VariableDeclarationExpr)ex.getParentNode().get();
+            VariableDeclarationExpr v = (VariableDeclarationExpr) ex.getParentNode().get();
             v.remove(ex);
 
-            if(v.getVariables().size()==0){
+            if (v.getVariables().size() == 0) {
 
-                ExpressionStmt stmt = (ExpressionStmt)v.getParentNode().get();
+                ExpressionStmt stmt = (ExpressionStmt) v.getParentNode().get();
                 stmt.getParentNode().get().remove(stmt);
             }
         }
         for (Expression ex : updates) {
-            if(!ex.getParentNode().isPresent()){
+            if (!ex.getParentNode().isPresent()) {
                 return false;
             }
-            ExpressionStmt stmt = (ExpressionStmt)ex.getParentNode().get();
+            ExpressionStmt stmt = (ExpressionStmt) ex.getParentNode().get();
             stmt.getParentNode().get().remove(stmt);
         }
         return true;

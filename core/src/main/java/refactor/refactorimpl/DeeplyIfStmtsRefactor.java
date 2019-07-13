@@ -132,7 +132,7 @@ public class DeeplyIfStmtsRefactor extends AbstractRefactor {
                 ifStmts.add(stmt.asIfStmt());
             }
             BlockStmt parent = (BlockStmt) stmt.getParentNode().get();
-            if (checkIFChange(parent, stmt) > 3) {
+            if (checkIFChange(parent, stmt) > 2) {
                 return;
             }
             IfStmt ifStmt = stmt.asIfStmt();
