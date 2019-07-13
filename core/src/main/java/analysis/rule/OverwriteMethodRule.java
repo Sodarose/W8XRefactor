@@ -22,11 +22,8 @@ import model.Issue;
 import model.IssueContext;
 import model.JavaModel;
 import model.Store;
-import refactor.refactorimpl.OverwriteMethodRefactor;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.lang.reflect.Method;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -43,7 +40,7 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
 
 
     /**
-     * 检查函数是否是继承或者实现的函数
+     * 检查函数是否有是继承或者实现的函数
      */
     private void checkMethod(JavaModel javaModel) {
         CompilationUnit unit = javaModel.getUnit();
@@ -69,12 +66,20 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
      * 得到一个类的其实现的接口或继承的父类的所有方法 向上递归
      */
     private void collectParentMethod(JavaModel javaModel, ClassOrInterfaceDeclaration clazz) {
+
         //拿到当前类的所有方法声明
         List<MethodDeclaration> methodDeclarations = clazz.findAll(MethodDeclaration.class);
+
+
+        //接口
         Set<MethodDeclaration> interfaceMethods = new HashSet<>();
-        //将当前类的所有类声明
-        List<ClassOrInterfaceType> declarations = clazz.getImplementedTypes();
+
+        //将当前类的所有接口和父类
+        List<ClassOrInterfaceType> declarations = new ArrayList<>();
+
+        declarations.addAll(clazz.getImplementedTypes());
         declarations.addAll(clazz.getExtendedTypes());
+
         declarations.stream().forEach(clazzType -> {
             collectMethod(clazzType, interfaceMethods);
         });
@@ -125,6 +130,7 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
         interfaceMethods.addAll(clazz.getMethods());
         List<ClassOrInterfaceType> declarations = clazz.getImplementedTypes();
         declarations.addAll(clazz.getExtendedTypes());
+
         declarations.stream().forEach(clazzType -> {
             collectMethod(clazzType, interfaceMethods);
         });
