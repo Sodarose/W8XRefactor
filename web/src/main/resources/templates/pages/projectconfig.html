@@ -105,6 +105,9 @@
             , done: function (res) {
                 //console.log(res)
                 layer.msg('上传成功', {icon: 1})
+                setTimeout(function () {
+                    window.location.reload();
+                },1000)
             }
         });
     });
@@ -142,16 +145,15 @@
 
     function select(){
         var codeName = $('.layui-this').text();
-        console.log(codeName)
+        //console.log(codeName)
         $.ajax({
             url: '/core/updateCodeStyleStatus',
             type: 'post',
             async: false,
             dataType: 'json',
             data:{
-                codeName:codeName,
-                //filename:'',
-                status:true
+                codename:codeName,
+                //status:true
             },
             success:function(res){
                 console.log(res)
@@ -171,14 +173,13 @@
     }
 
    function deletestyle(){
-        //layer.msg("asdf")
        var codeName = $('.layui-this').text();
         $.ajax({
             url:'/core/deleteCodeStyle',
             type:'post',
             dataType:'json',
             data:{
-                codeName:codeName,
+                codename:codeName,
             },
             success:function(res){
                 console.log(res)
