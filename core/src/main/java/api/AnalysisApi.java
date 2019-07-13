@@ -89,6 +89,11 @@ public class AnalysisApi {
             TransmissionThread transmissionThread = new TransmissionThread(entry.getValue());
             ThreadPoolUtils.execute(transmissionThread);
         }
+        try {
+            SaveJson.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
