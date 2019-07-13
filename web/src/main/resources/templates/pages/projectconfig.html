@@ -68,12 +68,12 @@
     <div class="layui-row">
         <div class="layui-col-xs12">
             <form class="layui-form" action="">
-                <div class="layui-input-inline" style="width: 422px;margin: 20px 0 20px 270px">
+                <div class="layui-input-inline" style="width: 320px;margin: 20px 0 20px 270px">
                     <div id="styledetail" style="margin-bottom: 10px;color: red"></div>
-                    <!--<input type="hidden" class="filename">-->
                     <select name="modules" id="moduleselect" lay-verify="required" lay-search="">
                     </select>
-                    <button type="button" class="layui-btn" onclick="select()" style="background-color: #00c0ef;margin: -74px 0 -14px 459px;width: 92px">选中</button>
+                    <button type="button" class="layui-btn" onclick="select()" style="background-color: #00c0ef;margin: -75px 0 -14px 347px;width: 92px">选中风格</button>
+                    <button type="button" class="layui-btn" onclick="deletestyle()" style="background-color: #00c0ef;margin: -107px 0 -14px 456px;width: 92px">删除风格</button>
                 </div>
             </form>
         </div>
@@ -103,10 +103,13 @@
             }
             , bindAction: '#uploadFileBtn'
             , done: function (res) {
-                console.log(res)
+                //console.log(res)
+                layer.msg('上传成功', {icon: 1})
+                setTimeout(function () {
+                    window.location.reload();
+                },1000)
             }
         });
-
     });
     $(document).ready(function () {
         $.ajax({
@@ -115,10 +118,8 @@
             async: false,
             dataType: 'json',
             success: function (res) {
-                //console.log(res.msg)
                 if (res.code == 200) {
                     var data = res.data
-                    //console.log(data.length)
                     var select = document.getElementById("moduleselect");
                     for (var i = 0; i < data.length; i++) {
                         var codeName = data[i].codeName;
@@ -127,13 +128,10 @@
                         var opt = document.createElement("option")
                         opt.innerHTML = codeName
                         select.options.add(opt)
-                        //console.log(codeName+filename+status)
                         if (status === true) {
                             opt.setAttribute("selected","true");
                             $('#styledetail').text("您目前选中的是：" + codeName);
-                            //$('.filename').val(filename)
                         }
-
                     }
                 }
                 if (res.code === 403) {
@@ -147,36 +145,59 @@
 
     function select(){
         var codeName = $('.layui-this').text();
-        //var filename = $('.filename').val();
-        console.log(codeName)
+        //console.log(codeName)
         $.ajax({
             url: '/core/updateCodeStyleStatus',
             type: 'post',
             async: false,
             dataType: 'json',
             data:{
-                codeName:codeName,
-                //filename:'',
-                status:true
+                codename:codeName,
+                //status:true
             },
             success:function(res){
                 console.log(res)
                 if(res.code===200){
                     layer.msg('修改风格成功', {icon: 1})
+                    setTimeout(function(){
+                        window.location.reload();
+                    },1000);
                 }
                 if (res.code===403){
                     layer.msg('修改风格失败', {icon: 5})
                 }
-                window.location.reload();
+            },
+            error:function(){
+            }
+        })
+    }
 
+   function deletestyle(){
+       var codeName = $('.layui-this').text();
+        $.ajax({
+            url:'/core/deleteCodeStyle',
+            type:'post',
+            dataType:'json',
+            data:{
+                codename:codeName,
+            },
+            success:function(res){
+                console.log(res)
+                if (res.code===200){
+                    layer.msg('删除代码风格成功', {icon: 1})
+                    setTimeout(function () {
+                        window.location.reload()
+                    },1000)
+                }
+                if (res.code===403){
+                    layer.msg('删除代码风格失败',{icon:5})
+                }
             },
             error:function(){
 
             }
-
         })
-
-    }
+   }
 
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form

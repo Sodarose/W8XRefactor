@@ -13,6 +13,7 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.resolution.UnsolvedSymbolException;
 import com.github.javaparser.resolution.declarations.ResolvedReferenceTypeDeclaration;
 import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserClassDeclaration;
 import com.github.javaparser.symbolsolver.javaparsermodel.declarations.JavaParserInterfaceDeclaration;
@@ -54,7 +55,7 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
 
         //遍历类声明
         for (ClassOrInterfaceDeclaration clazz : classOrInterfaceDeclarations) {
-            collectParentMethod(javaModel,clazz);
+            collectParentMethod(javaModel, clazz);
 
             //拿到当前类的接口的所有方法声明 递归查找父类方法
             //collectParentMethod(clazz, interfaceMethods);
@@ -65,9 +66,9 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
 
 
     /**
-     *  得到一个类的其实现的接口或继承的父类的所有方法 向上递归
-     * */
-    private void collectParentMethod(JavaModel javaModel,ClassOrInterfaceDeclaration clazz) {
+     * 得到一个类的其实现的接口或继承的父类的所有方法 向上递归
+     */
+    private void collectParentMethod(JavaModel javaModel, ClassOrInterfaceDeclaration clazz) {
         //拿到当前类的所有方法声明
         List<MethodDeclaration> methodDeclarations = clazz.findAll(MethodDeclaration.class);
         Set<MethodDeclaration> interfaceMethods = new HashSet<>();
@@ -77,15 +78,25 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
         declarations.stream().forEach(clazzType -> {
             collectMethod(clazzType, interfaceMethods);
         });
-        compareMethod(javaModel,methodDeclarations,interfaceMethods);
+        compareMethod(javaModel, methodDeclarations, interfaceMethods);
     }
 
     /**
-     *  递归收集
-     * */
+     * 递归收集
+     */
     private void collectMethod(ClassOrInterfaceType classType, Set<MethodDeclaration> interfaceMethods) {
         //得到完成名称
-        String qualifiedName = Store.javaParserFacade.getSymbolSolver().solveType(classType).getQualifiedName();
+        String qualifiedName = null;
+        try {
+            qualifiedName = Store.javaParserFacade.getSymbolSolver().solveType(classType).getQualifiedName();
+        } catch (UnsolvedSymbolException u) {
+
+        }
+
+        if (qualifiedName == null) {
+            return;
+        }
+
         //System.out.println(Store.combinedTypeSolver.tryToSolveType(qualifiedName));
         SymbolReference<ResolvedReferenceTypeDeclaration> result = Store.
                 combinedTypeSolver.tryToSolveType(qualifiedName);
@@ -96,19 +107,19 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
 
         //获得当前类 不管是接口还是类
         ClassOrInterfaceDeclaration clazz = null;
-        if(result.getCorrespondingDeclaration() instanceof  JavaParserInterfaceDeclaration){
+        if (result.getCorrespondingDeclaration() instanceof JavaParserInterfaceDeclaration) {
             JavaParserInterfaceDeclaration interfaceDeclaration = (JavaParserInterfaceDeclaration) result
                     .getCorrespondingDeclaration();
             clazz = interfaceDeclaration.getWrappedNode();
         }
 
-        if(result.getCorrespondingDeclaration() instanceof  JavaParserClassDeclaration){
+        if (result.getCorrespondingDeclaration() instanceof JavaParserClassDeclaration) {
             JavaParserClassDeclaration classDeclaration = (JavaParserClassDeclaration)
                     result.getCorrespondingDeclaration();
             clazz = classDeclaration.getWrappedNode();
         }
 
-        if(clazz==null){
+        if (clazz == null) {
             return;
         }
         interfaceMethods.addAll(clazz.getMethods());
@@ -120,19 +131,19 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
     }
 
     /**
-     *  找到被实现的方法
-     * */
-    private void compareMethod(JavaModel javaModel,List<MethodDeclaration> clazzMethods, Set<MethodDeclaration> overMethods ) {
+     * 找到被实现的方法
+     */
+    private void compareMethod(JavaModel javaModel, List<MethodDeclaration> clazzMethods, Set<MethodDeclaration> overMethods) {
         //去重
         Set<MethodDeclaration> methodDeclarationSet = new HashSet<>();
-        for(MethodDeclaration clazzMethod:clazzMethods){
-            for(MethodDeclaration overMethod:overMethods){
+        for (MethodDeclaration clazzMethod : clazzMethods) {
+            for (MethodDeclaration overMethod : overMethods) {
                 //不匹配
-                if(!compare(clazzMethod,overMethod)){
+                if (!compare(clazzMethod, overMethod)) {
                     continue;
                 }
                 //判断是否有Override注解
-                if(isHasOverrideAnnotation(clazzMethod)){
+                if (isHasOverrideAnnotation(clazzMethod)) {
                     continue;
                 }
                 methodDeclarationSet.add(clazzMethod);
@@ -146,8 +157,8 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
     }
 
     /**
-     *  判断是否有Override注解
-     * */
+     * 判断是否有Override注解
+     */
     private boolean isHasOverrideAnnotation(MethodDeclaration methodDeclaration) {
         List<AnnotationExpr> annotationExprs = methodDeclaration.getAnnotations();
         if (annotationExprs.size() == 0) {
@@ -164,8 +175,8 @@ public class OverwriteMethodRule extends AbstractRuleVisitor {
     }
 
     /**
-     *  比较方法是否一样
-     * */
+     * 比较方法是否一样
+     */
     private boolean compare(MethodDeclaration methodDeclaration, MethodDeclaration method) {
         //返回值是否一样
         if (!methodDeclaration.getType().asString().equals(method.getType().asString())) {

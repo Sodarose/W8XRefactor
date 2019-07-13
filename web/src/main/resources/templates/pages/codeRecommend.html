@@ -7,10 +7,9 @@
     <meta name="renderer" content="webkit">
     <title>W8X代码重构系统</title>
 
-    <script src="../src/layui.js" th:src="@{/layui/layui.js}"></script>
-    <script src="../src/layui.js" th:src="@{/js/me.js}"></script>
-    <link rel="stylesheet" href="../src/css/layui.css" th:href="@{/layui/css/layui.css}">
-    <script src="/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <!--默认样式-->
+    <link rel="stylesheet" href="../../layui/css/layui.css" />
+
     <style type="text/css">
 
         .layui-layout-admin .layui-header {
@@ -76,48 +75,6 @@
 </head>
 <body class="kit-theme">
 <div class="layui-layout layui-layout-admin kit-layout-admin" id="page-wrapper" v-cloak>
-    <div class="layui-header">
-        <div class="layui-logo" style="color:#fff">W8X代码重构系统</div>
-
-        <ul class="layui-nav layui-layout-left kit-nav">
-            <li class="layui-nav-item layui-action" data-workType="jurisdiction">
-                <a onclick="Rescan()">重新扫描</a>
-            </li>
-        </ul>
-    </div>
-    <div class="layui-side ">
-        <div class="layui-side-scroll layui-bg-black">
-            <!-- 左侧垂直导航区域-->
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-this ">
-                    <a href="javascript:;"data-id="1" data-title="扫描配置" data-url="/route/scannerconfig.html"
-                       class=" site-demo-active " data-type="tabAdd"><i class="layui-icon layui-icon-set-fill"></i><span style="margin-left: 41px">扫描配置</span></a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"data-id="2" data-title="项目配置" data-url="projectconfig.html"
-                       class="site-demo-active" data-type="tabAdd"><i class="layui-icon layui-icon-component"></i><span style="margin-left: 41px">项目配置</span></a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"data-id="3" data-title="扫描项目" data-url="/route/nofollow.html"
-                       class="site-demo-active" data-type="tabAdd"><i class="layui-icon layui-icon-search"></i><span style="margin-left: 41px">扫描项目</span></a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" data-id="4" data-title="扫描结果" data-url="/route/index.html"
-                       class="site-demo-active" data-type="tabAdd"><i class="layui-icon layui-icon-list"></i><span style="margin-left: 41px">扫描结果</span></a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"data-id="5" data-title="代码推荐" data-url="codeRecommend.html"
-                       class="site-demo-active" data-type="tabAdd"><i class="layui-icon layui-icon-code-circle"></i><span style="margin-left: 15px">智能代码生成</span></a>
-                </li>
-
-
-                <li class="layui-nav-item">
-                    <a href="javascript:;"data-id="6"  data-title="系统介绍" data-url="introduction.html"
-                       class="site-demo-active" data-type="tabAdd"> <i class="layui-icon layui-icon-about"> </i><span style="margin-left: 41px">系统介绍</span></a>
-                </li>
-            </ul>
-        </div>
-    </div>
 
     <!--tab标签-->
     <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin-left: 200px;margin-top: 1px;">
@@ -125,12 +82,12 @@
         <div class="layui-tab-content"></div>
     </div>
     <!-- 底部固定区域 -->
-    <div class="layui-footer" style="text-align:center;">
-        CopyRight © 2019<a href=""> 广东科技学院 </a>
-    </div>
+
 </div>
 
 
+<script src="../../js/jquery-3.3.1.min.js"></script>
+<script src="../../layui/layui.js"></script>
 <script>
     layui.use(['element', 'layer', 'jquery'], function () {
         var element = layui.element;

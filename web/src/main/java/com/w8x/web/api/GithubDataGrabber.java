@@ -7,6 +7,7 @@ import io.FileUlits;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,12 +79,14 @@ public class GithubDataGrabber {
             LOGGER.info("克隆本地成功");
             projectPath = file.getPath();
         } catch (InvalidRemoteException e) {
-            e.printStackTrace();
+
         } catch (TransportException e) {
-            e.printStackTrace();
+
         } catch (GitAPIException e) {
-            e.printStackTrace();
-        } finally {
+
+        } catch (JGitInternalException e){
+            LOGGER.info("网络发生波动 请重试");
+        }finally {
             if (git != null) {
                 git.close();
             }
