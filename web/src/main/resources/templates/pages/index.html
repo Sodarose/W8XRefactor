@@ -163,7 +163,7 @@
                     res.originalCode = contrast(res.originalCode, res.issueShows)
                    // res.originalCode = '<pre><code>'+res.originalCode+'</code></pre>'
                 }
-                res.originalCode = '<pre><code class="java">'+res.originalCode+'</code></pre>'
+               res.originalCode = '<pre><code class="java">'+res.originalCode+'</code></pre>'
                 $("#code").html(res.originalCode)
                 if (res.refactCode != null) {
                     $("#oldCode").addClass("layui-col-md6");
