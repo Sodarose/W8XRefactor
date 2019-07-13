@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ulits.DirCopy;
 import ulits.SaveJson;
 import ulits.ThreadPoolUtils;
 
@@ -35,6 +36,7 @@ public class AnalysisApi {
      * 项目扫描接口
      */
     public boolean analysis(String path) throws FileNotFoundException {
+        DirCopy.dirCopy(path);
         File file = new File(path);
         if (!file.exists()) {
             return false;
@@ -45,7 +47,7 @@ public class AnalysisApi {
         analysis.analysis(path);
         //数据处理
         organizeData();
-        //saveProject();
+        saveProject();
         return Store.javaModelMap != null;
     }
 
