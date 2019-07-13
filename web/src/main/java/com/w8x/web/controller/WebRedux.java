@@ -106,10 +106,9 @@ public class WebRedux {
         return refactCoreService.updateCodeStyleStatus(codeName);
     }
 
-    @PostMapping("/deleteCodeStyleStatus")
+    @PostMapping("/deleteCodeStyle")
     @ResponseBody
     public Code<String> deleteCodeStyleStatus(@RequestParam(name = "codename") String codeName) {
         return refactCoreService.deleteCodeStyle(codeName);
     }
-
 }

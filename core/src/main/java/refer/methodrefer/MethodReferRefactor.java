@@ -1,6 +1,7 @@
 package refer.methodrefer;
 
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import model.Store;
 import ulits.MethodCertainUtil;
@@ -16,6 +17,14 @@ public class MethodReferRefactor {
                 for (MethodCallExpr methodCallExpr : methodCallExprList) {
                     if (methodCallExpr.getNameAsString().equals(oldMethodName)) {
                         methodCallExpr.setName(newMethodName);
+                    }
+                }
+            }
+            List<Expression> expressionList = unit.findAll(Expression.class);
+            if(expressionList.isEmpty()){
+                for(Expression expression:expressionList){
+                    if(expression.isMethodCallExpr()){
+                        expression.asMethodCallExpr().setName(newMethodName);
                     }
                 }
             }
