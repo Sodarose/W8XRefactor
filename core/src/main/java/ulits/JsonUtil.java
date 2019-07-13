@@ -34,7 +34,7 @@ public class JsonUtil {
                 if(object != null) {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("modifyPath", object.getModifyPath());
-                    //jsonObject.put("copyPath",object.getCopyPath());
+                    jsonObject.put("copyPath",object.getCopyPath());
                     jsonObject.put("FileName", object.getFileName());
                     jsonObject.put("FileStatus", object.getFileStatus());
                     //jsonObject.put("javamodel", Store.javaModelMap.get(object.getCopyPath()));
@@ -157,10 +157,10 @@ public class JsonUtil {
         for (JsonObject jsonObject:jsonObjects) {
             if (jsonObject.getFileStatus().equals("file")) {
                 String modifyPath = jsonObject.getModifyPath();
-                //String copyPath = jsonObject.getCopyPath();
+                String copyPath = jsonObject.getCopyPath();
                 File modifyFile = new File(modifyPath);
                 //File copyFile = new File(copyPath);
-                File file = new File(path +File.separator+ jsonObject.getFileName());
+                File file = new File(copyPath);
                 if (modifyFile.isFile() ) {
                     if (modifyFile.exists()) {
                         modifyFile.delete();

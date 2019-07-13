@@ -11,20 +11,14 @@ import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeS
 import com.github.javaparser.utils.CollectionStrategy;
 import com.github.javaparser.utils.ParserCollectionStrategy;
 import com.github.javaparser.utils.SourceRoot;
-import model.IssueContext;
-import model.JavaModel;
-import model.Store;
-import model.TreeNode;
+import model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -48,7 +42,7 @@ public class ParserProjectDome {
         Store.javaFiles = new ArrayList<>();
         Store.javaModelMap = new HashMap<>();
         Store.treeNodeMap = new HashMap<>();
-        Store.jsonObjectList = new ArrayList<>();
+        Store.jsonObjectList = Collections.synchronizedList(new ArrayList<JsonObject>());
         Store.issueContext = null;
         loadProject(rootPath);
         initTypeSolver();
