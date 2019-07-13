@@ -36,7 +36,7 @@ public interface RefactCoreService {
 
     Code<String> uploadCodeStyle(MultipartFile file, String codeName, HttpServletRequest request);
 
-    Code<String> updateCodeStyleStatus(CodeStyle codeStyle);
+    Code<String> updateCodeStyleStatus(String codeName);
 
-    Code<String> deleteCodeStyle(CodeStyle codeStyle);
+    Code<String> deleteCodeStyle(String codeName);
 }

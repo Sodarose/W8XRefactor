@@ -8,9 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
+@ControllerAdvice
 public class WebExceptionHandler {
     private static Logger LOGGER = LoggerFactory.getLogger(WebExceptionHandler.class);
-    private static String ERROR_VIEW= "/error.html";
+    private static String ERROR_VIEW= "pages/404.html";
     @ExceptionHandler(value = RuntimeException.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest request, Exception e){
         LOGGER.info("出现错误 错误为"+e.getMessage());

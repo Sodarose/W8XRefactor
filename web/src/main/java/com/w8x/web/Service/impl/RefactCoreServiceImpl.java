@@ -3,6 +3,7 @@ package com.w8x.web.Service.impl;
 import analysis.AbstractRuleVisitor;
 import api.AnalysisApi;
 import com.alibaba.fastjson.JSON;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.w8x.web.Service.RefactCoreService;
 import com.w8x.web.api.GithubDataGrabber;
 import com.w8x.web.model.*;
@@ -71,9 +72,15 @@ public class RefactCoreServiceImpl implements RefactCoreService {
             List<IssueShow> issueShows = new ArrayList<>();
             for (Issue issue : vo.getIssues()) {
                 IssueShow issueShow = new IssueShow();
+                if(issue.getIssueNode() instanceof ClassOrInterfaceDeclaration){
+                    ClassOrInterfaceDeclaration clazz = (ClassOrInterfaceDeclaration) issue.getIssueNode();
+                    issue.setIssueNode(clazz.getName());
+                }
+
                 if (!issue.getIssueNode().getRange().isPresent()) {
                     continue;
                 }
+
                 issueShow.setBeginLine(issue.getIssueNode().getRange().get().begin.line);
                 issueShow.setEndLine(issue.getIssueNode().getRange().get().end.line);
                 issueShow.setIssueMessage(issue.getDescription());
@@ -144,7 +151,7 @@ public class RefactCoreServiceImpl implements RefactCoreService {
     }
 
     /**
-     * 上传配置文件
+     * 上传配置文件getJavaFileDetail
      */
     @Override
     public Code<String> uploadCodeStyle(MultipartFile file, String codeName, HttpServletRequest request) {
@@ -158,7 +165,7 @@ public class RefactCoreServiceImpl implements RefactCoreService {
             String path = "codestyle" + File.separator + fileName;
             codeStyle = new CodeStyle();
             codeStyle.setCodeName(codeName);
-            codeStyle.setFilename(path);
+            codeStyle.setFilename(fileName);
             codeStyle.setStatus(false);
             File doFile = FileUlits.readFileByJarContents(path);
             LOGGER.info(doFile.exists() ? "文件存在" : "文件不存在");
@@ -185,28 +192,9 @@ public class RefactCoreServiceImpl implements RefactCoreService {
         projectConfig.getCodeStyles().add(codeStyle);
 
         //更新json配置
-        File jsonFile = FileUlits.readFileByJarContents("configuration.json");
-        if (!jsonFile.exists()) {
+        if (saveJson()) {
             return Code.createCode(403, "", "上传失败");
         }
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(jsonFile)));
-            writer.write(JSON.toJSONString(projectConfig));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-
-                }
-            }
-        }
-        LOGGER.info("配置文件修改完毕");
         return Code.createCode(200, "", "上传成功");
     }
 
@@ -214,84 +202,90 @@ public class RefactCoreServiceImpl implements RefactCoreService {
      * 更新配置文件
      */
     @Override
-    public Code<String> updateCodeStyleStatus(CodeStyle codeStyle) {
+    public Code<String> updateCodeStyleStatus(String codeName) {
 
         CodeStyle code = null;
         //找到code
         for (CodeStyle codeStyleItem : projectConfig.getCodeStyles()) {
-            if (codeStyle.getCodeName().equals(codeStyle.getCodeName())) {
+            if (codeName.equals(codeStyleItem.getCodeName())) {
                 code = codeStyleItem;
                 break;
             }
         }
 
-        if(code==null){
-            Code.createCode(403, "", "更改错误");
+        if (code == null) {
+            return Code.createCode(403, "", "未找到");
         }
 
         //清除其余配置的状态
         projectConfig.getCodeStyles().stream().forEach(cxf -> {
             cxf.setStatus(false);
         });
-
+        //设置状态为选中
         code.setStatus(true);
 
         //更新json配置
-        File jsonFile = FileUlits.readFileByJarContents("configuration.json");
-        if (!jsonFile.exists()) {
-            return Code.createCode(403, "", "上传失败");
+        if (saveJson()) {
+            return Code.createCode(403, "", "配置文件更新失败");
         }
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(jsonFile)));
-            writer.write(JSON.toJSONString(projectConfig));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-
-                }
-            }
-        }
-        LOGGER.info("配置文件修改完毕");
-        return Code.createCode(200, "", "更改配置");
+        return Code.createCode(200, "", "更改配置成功");
     }
 
     /**
      * 删除配置文件
      */
     @Override
-    public Code<String> deleteCodeStyle(CodeStyle codeStyle) {
-        if("默认的谷歌代码风格".equals(codeStyle.getCodeName())){
-            return Code.createCode(403,"","不允许删除");
+    public Code<String> deleteCodeStyle(String codeName) {
+        //判断是否是默认风格 默认风格不允许删除
+        if ("默认的谷歌代码风格".equals(codeName)) {
+            return Code.createCode(403, "", "不允许删除");
         }
 
         CodeStyle code = null;
-        for(CodeStyle codeStyleItem:projectConfig.getCodeStyles()){
-            if(codeStyle.getCodeName().equals(codeStyleItem.getCodeName())){
+        for (CodeStyle codeStyleItem : projectConfig.getCodeStyles()) {
+            if (codeName.equals(codeStyleItem.getCodeName())) {
                 code = codeStyleItem;
                 break;
             }
         }
 
-        if(code==null){
-            Code.createCode(403, "", "删除错误");
+        if (code == null) {
+            return Code.createCode(403, "", "删除错误");
         }
 
-        boolean result =  projectConfig.getCodeStyles().remove(code);
-        if(!result){
-            return Code.createCode(403,"","删除错误");
+        if (code.isStatus()) {
+            return Code.createCode(403, "", "不允许删除正在使用的代码风格");
+        }
+
+        boolean result = projectConfig.getCodeStyles().remove(code);
+
+        /**
+         *  删除本地文件
+         * */
+        String path = "codestyle" + File.separator + code.getFilename();
+        File doFile = FileUlits.readFileByJarContents(path);
+        if (doFile.exists()) {
+            doFile.delete();
+        }
+
+        if (!result) {
+            return Code.createCode(403, "", "删除错误");
         }
 
         //更新json配置
+        if (saveJson()) {
+            return Code.createCode(403, "", "配置文件更新失败");
+        }
+        return Code.createCode(200, "", "更改配置成功");
+    }
+
+    /**
+     * 保存json配置
+     */
+    private boolean saveJson() {
         File jsonFile = FileUlits.readFileByJarContents("configuration.json");
         if (!jsonFile.exists()) {
-            return Code.createCode(403, "", "上传失败");
+            return true;
         }
         BufferedWriter writer = null;
         try {
@@ -311,7 +305,7 @@ public class RefactCoreServiceImpl implements RefactCoreService {
             }
         }
         LOGGER.info("配置文件修改完毕");
-        return Code.createCode(200, "", "删除成功");
+        return false;
     }
 
 }

@@ -1,6 +1,5 @@
 package com.w8x.web.controller;
 
-import com.w8x.web.BO.RuleObj;
 import com.w8x.web.BO.RulesConfig;
 import com.w8x.web.Service.RefactCoreService;
 import com.w8x.web.model.*;
@@ -70,13 +69,13 @@ public class WebRedux {
     }
 
     @PostMapping("/setAnalysisRules")
+    @ResponseBody
     Code<String> setRules(@RequestBody RulesConfig[] rules) throws IOException {
         Map<String, Integer> ruleMap = new HashMap<>();
         for (RulesConfig rulesConfig : rules) {
             ruleMap.put(rulesConfig.getRuleName(), rulesConfig.getStatus());
         }
         return refactCoreService.setRuleByMap(ruleMap);
-
     }
 
 
@@ -96,14 +95,21 @@ public class WebRedux {
     }
 
     @PostMapping("/uploadCodeStyle")
-    public Code<String> uploadCodeStyle(MultipartFile file,@RequestParam("codename") String codeName, HttpServletRequest request) {
-        return Code.createCode(200, "", "");
+    @ResponseBody
+    public Code<String> uploadCodeStyle(MultipartFile file, @RequestParam("codename") String codeName, HttpServletRequest request) {
+        return refactCoreService.uploadCodeStyle(file, codeName, request);
     }
 
     @PostMapping("/updateCodeStyleStatus")
     @ResponseBody
-    public Code<String> updateCodeStyleStatus(CodeStyle codeStyle) {
-        return Code.createCode(200, "", "");
+    public Code<String> updateCodeStyleStatus(@RequestParam(name = "codename") String codeName) {
+        return refactCoreService.updateCodeStyleStatus(codeName);
+    }
+
+    @PostMapping("/deleteCodeStyleStatus")
+    @ResponseBody
+    public Code<String> deleteCodeStyleStatus(@RequestParam(name = "codename") String codeName) {
+        return refactCoreService.deleteCodeStyle(codeName);
     }
 
 }
