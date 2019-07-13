@@ -103,7 +103,7 @@ public class WebRedux {
     @PostMapping("/updateCodeStyleStatus")
     @ResponseBody
     public Code<String> updateCodeStyleStatus(CodeStyle codeStyle) {
-        return Code.createCode(200, "", "");
+        return refactCoreService.updateCodeStyleStatus(codeStyle);
     }
 
 }

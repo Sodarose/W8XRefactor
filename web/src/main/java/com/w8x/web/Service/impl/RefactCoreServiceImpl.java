@@ -160,7 +160,7 @@ public class RefactCoreServiceImpl implements RefactCoreService {
             String path = "codestyle" + File.separator + fileName;
             codeStyle = new CodeStyle();
             codeStyle.setCodeName(codeName);
-            codeStyle.setFilename(path);
+            codeStyle.setFilename(fileName);
             codeStyle.setStatus(false);
             File doFile = FileUlits.readFileByJarContents(path);
             LOGGER.info(doFile.exists() ? "文件存在" : "文件不存在");
@@ -218,18 +218,18 @@ public class RefactCoreServiceImpl implements RefactCoreService {
      */
     @Override
     public Code<String> updateCodeStyleStatus(CodeStyle codeStyle) {
-
+        LOGGER.info(codeStyle.getCodeName());
         CodeStyle code = null;
         //找到code
         for (CodeStyle codeStyleItem : projectConfig.getCodeStyles()) {
-            if (codeStyle.getCodeName().equals(codeStyle.getCodeName())) {
+            if (codeStyle.getCodeName().equals(codeStyleItem.getCodeName())) {
                 code = codeStyleItem;
                 break;
             }
         }
 
         if(code==null){
-            Code.createCode(403, "", "更改错误");
+            return  Code.createCode(403, "", "更改错误");
         }
 
         //清除其余配置的状态

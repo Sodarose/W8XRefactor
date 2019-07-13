@@ -17,12 +17,12 @@
             color: #fff;
         }
 
-        #stylename{
+        #stylename {
             width: 398px;
             margin: 0px 0 20px 20px;
         }
 
-        #filename{
+        #filename {
             width: 270px;
             margin: -48px 0 0 420px;
         }
@@ -41,24 +41,24 @@
                         <form class="layui-form" action="">
                             <div class="layui-inline" style="margin: 20px 0 10px 140px;">
                                 <label class="layui-form-label" style="width: 114px;margin-right: 38px;">代码风格名</label>
-                                <input type="text" id="stylename" name="title"  class="layui-input" autocomplete="off" placeholder="代码风格名称">
-                            <div class="layui-inline" style="margin: 20px 0 10px 190px;">
-                                <label class="layui-form-label" style="width: 114px;margin-right: 38px;">代码风格</label>
-                                <div class="layui-input-inline" style="width: 325px;">
-                                    <select name="modules" lay-verify="required" lay-search="" id="moduleselect">
-                                    </select>
-                                </div>
+                                <input type="text" id="stylename" name="title" class="layui-input" autocomplete="off" placeholder="代码风格名称">
+                                <!--<div class="layui-inline" style="margin: 20px 0 10px 190px;">
+                                    <label class="layui-form-label" style="width: 114px;margin-right: 38px;">代码风格</label>
+                                    &lt;!&ndash;<div class="layui-input-inline" style="width: 325px;">
+
+                                    </div>&ndash;&gt;
+                                </div>-->
                             </div>
                         </form>
                     </div>
                 </div>
             </form>
-                <div >
-                    <button type="button" class="layui-btn" id="test3" style="background-color: #00c0ef;margin: 0 0 10px 270px"><i class="layui-icon"></i>上传文件</button>
-                    <input type="text" id="filename" name="title"  class="layui-input" autocomplete="off" placeholder="上传 *.xml 文件">
-                    <button type="button" class="layui-btn" id="uploadFileBtn" style="background-color: #00c0ef;margin: -50px 0 10px 727px;">开始上传</button>
-                </div>
-    </div>
+            <div>
+                <button type="button" class="layui-btn" id="test3" style="background-color: #00c0ef;margin: 0 0 10px 270px"><i class="layui-icon"></i>上传文件</button>
+                <input type="text" id="filename" name="title" class="layui-input" autocomplete="off" placeholder="上传 *.xml 文件">
+                <button type="button" class="layui-btn" id="uploadFileBtn" style="background-color: #00c0ef;margin: -50px 0 10px 727px;">开始上传</button>
+            </div>
+        </div>
     </div>
 
 </fieldset>
@@ -68,21 +68,46 @@
     <div class="layui-row">
         <div class="layui-col-xs12">
             <form class="layui-form" action="">
-                    <div class="layui-input-inline" style="width: 422px;margin: 20px 0 20px 270px">
-                        <div id="styledetail" style="margin-bottom: 10px;color: red"></div>
-                        <select name="modules" lay-verify="required" lay-search="">
-                            <option value="">直接选择或搜索选择</option>
-                            <option value="1">layer</option>
-                            <option value="2">form</option>
-                        </select>
-                        <button type="button" class="layui-btn" id="" style="background-color: #00c0ef;margin: -74px 0 -14px 459px;width: 92px">选中</button>
-                    </div>
+                <div class="layui-input-inline" style="width: 422px;margin: 20px 0 20px 270px">
+                    <div id="styledetail" style="margin-bottom: 10px;color: red"></div>
+                    <!--<input type="hidden" class="filename">-->
+                    <select name="modules" id="moduleselect" lay-verify="required" lay-search="">
+                    </select>
+                    <button type="button" class="layui-btn" onclick="select()" style="background-color: #00c0ef;margin: -74px 0 -14px 459px;width: 92px">选中</button>
+                </div>
             </form>
         </div>
     </div>
 </fieldset>
 
 <script>
+    layui.use('upload', function () {
+        var upload = layui.upload, $ = layui.jquery;
+        var uploadInst = upload.render({
+            elem: '#test3'
+            , url: '/core/uploadCodeStyle'
+            , auto: false
+            , accept: 'file' //普通文件
+            , exts: 'xml'
+            , field: 'file'
+            , data: {
+                codename: function () {
+                    return $('#stylename').val();
+                }
+            }
+            , choose: function (obj) {  //上传前选择回调方法
+                obj.preview(function (index, file, result) {
+                    var filename = file.name;
+                    $('#filename').val(filename);
+                });
+            }
+            , bindAction: '#uploadFileBtn'
+            , done: function (res) {
+                console.log(res)
+            }
+        });
+
+    });
     $(document).ready(function () {
         $.ajax({
             url: '/core/getCodeStyles',
@@ -90,110 +115,74 @@
             async: false,
             dataType: 'json',
             success: function (res) {
-                if(res.code === 200){
+                //console.log(res.msg)
+                if (res.code == 200) {
+                    var data = res.data
+                    //console.log(data.length)
                     var select = document.getElementById("moduleselect");
-                    for(var i=0;i<res.data.length;i++){
+                    for (var i = 0; i < data.length; i++) {
+                        var codeName = data[i].codeName;
+                        var filename = data[i].filename
+                        var status = data[i].status
                         var opt = document.createElement("option")
-                        opt.innerHTML = res.data[i].codeName
+                        opt.innerHTML = codeName
                         select.options.add(opt)
+                        //console.log(codeName+filename+status)
+                        if (status === true) {
+                            opt.setAttribute("selected","true");
+                            $('#styledetail').text("您目前选中的是：" + codeName);
+                            //$('.filename').val(filename)
+                        }
+
                     }
                 }
-                if(res.code === 403){
-                    layer.msg("没有配置文件",{icon:5})
+                if (res.code === 403) {
+                    layer.msg("没有配置文件", {icon: 5})
                 }
             },
-            error: function (e) {
+            error: function () {
             }
-        });
+        })
     })
-    layui.use('upload', function () {
-        var upload = layui.upload, $ = layui.jquery;
-        var uploadInst = upload.render({
-            elem: '#test3'
-            ,url: '/core/uploadCodeStyle'
-            , auto: false
-            , accept: 'file' //普通文件
-            , exts: 'xml'
-            ,field:'file'
-            ,data: {
-                codename: function(){
-                    return $('#stylename').val();
-                }
-            }
-            ,choose: function(obj){  //上传前选择回调方法
-                obj.preview(function(index,file,result){
-                    var filename = file.name;
-                    $('#filename').val(filename);
-                });
-            }
-            , bindAction: '#uploadFileBtn'
 
-            , done: function (res) {
+    function select(){
+        var codeName = $('.layui-this').text();
+        //var filename = $('.filename').val();
+        console.log(codeName)
+        $.ajax({
+            url: '/core/updateCodeStyleStatus',
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data:{
+                codeName:codeName,
+                //filename:'',
+                status:true
+            },
+            success:function(res){
                 console.log(res)
-            }
-        });
-
-    });
-$(document).ready(function () {
-    $.ajax({
-        url:'/core/getCodeStyles',
-        type:'get',
-        dataType:'json',
-        success:function(res){
-            console.log(res.msg)
-            if(res.code==200){
-                var data = res.data
-                //console.log(data.length)
-                for (var i = 0;i<data.length;i++){
-                    var codeName = data[i].codeName;
-                    var filename = data[i].filename
-                    var status = data[i].status
-                    //console.log(codeName+filename+status)
-                    if (status===true){
-                        //console.log(codeName)
-                        $('#styledetail').text("您目前选中的是："+codeName);
-                    }
+                if(res.code===200){
+                    layer.msg('修改风格成功', {icon: 1})
                 }
-            }
-        },
-        error:function(){
-        }
-    })
-})
+                if (res.code===403){
+                    layer.msg('修改风格失败', {icon: 5})
+                }
+                window.location.reload();
 
+            },
+            error:function(){
+
+            }
+
+        })
+
+    }
 
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
             , laydate = layui.laydate;
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-        //自定义验证规则
-        /*form.verify({
-            title: function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
-                }
-            }
-            , pass: [
-                /^[\S]{6,12}$/
-                , '密码必须6到12位，且不能出现空格'
-            ]
-            , content: function (value) {
-                layedit.sync(editIndex);
-            }
-        });*/
-
-        //监听指定开关
-        /*form.on('switch(switchTest)', function(data){
-            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });*/
 
         //监听提交
         form.on('submit(demo1)', function (data) {
@@ -203,16 +192,6 @@ $(document).ready(function () {
             return false;
         });
 
-        //表单初始赋值
-        /* form.val('example', {
-             "username": "贤心" // "name": "value"
-             ,"password": "123456"
-             ,"interest": 1
-             ,"like[write]": true //复选框选中状态
-             ,"close": true //开关状态
-             ,"sex": "女"
-             ,"desc": "我爱 layui"
-         })*/
     });
 </script>
 
