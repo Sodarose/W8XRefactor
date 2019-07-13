@@ -43,15 +43,19 @@ public class TransmissionThread implements Runnable {
         /*if (!file.exists()) {
             return;
         }*/
-        PrintWriter printWriter = null;
+        BufferedWriter writer = null;
         try {
-            printWriter = new PrintWriter(file);
-            printWriter.write(Formatter.format(javaModel.getUnit().toString(), Store.codestyle));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            writer.write(Formatter.format(javaModel.getUnit().toString(), Store.codestyle));
         } catch (IOException e) {
 
         } finally {
-            if (printWriter != null) {
-                printWriter.close();
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+
+                }
             }
         }
     }

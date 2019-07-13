@@ -94,6 +94,9 @@ public class ParserProjectDome {
      * 生成文件树以及索引表
      */
     private static void createFileTree(File file, TreeNode treeNode) throws FileNotFoundException {
+        if(file.getName().startsWith(".")){
+            return;
+        }
         if (file.isFile() && file.getName().endsWith(FILE_SUFFIX)) {
             String fileContent = FileUlits.readFile(file);
             CompilationUnit unit = StaticJavaParser.parse(file);
