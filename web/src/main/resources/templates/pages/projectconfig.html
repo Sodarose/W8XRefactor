@@ -42,6 +42,12 @@
                             <div class="layui-inline" style="margin: 20px 0 10px 140px;">
                                 <label class="layui-form-label" style="width: 114px;margin-right: 38px;">代码风格名</label>
                                 <input type="text" id="stylename" name="title"  class="layui-input" autocomplete="off" placeholder="代码风格名称">
+                            <div class="layui-inline" style="margin: 20px 0 10px 190px;">
+                                <label class="layui-form-label" style="width: 114px;margin-right: 38px;">代码风格</label>
+                                <div class="layui-input-inline" style="width: 325px;">
+                                    <select name="modules" lay-verify="required" lay-search="" id="moduleselect">
+                                    </select>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -77,6 +83,29 @@
 </fieldset>
 
 <script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/core/getCodeStyles',
+            type: 'get',
+            async: false,
+            dataType: 'json',
+            success: function (res) {
+                if(res.code === 200){
+                    var select = document.getElementById("moduleselect");
+                    for(var i=0;i<res.data.length;i++){
+                        var opt = document.createElement("option")
+                        opt.innerHTML = res.data[i].codeName
+                        select.options.add(opt)
+                    }
+                }
+                if(res.code === 403){
+                    layer.msg("没有配置文件",{icon:5})
+                }
+            },
+            error: function (e) {
+            }
+        });
+    })
     layui.use('upload', function () {
         var upload = layui.upload, $ = layui.jquery;
         var uploadInst = upload.render({
