@@ -16,6 +16,12 @@
             background-color: #00c0ef;
             color: #fff;
         }
+
+        #stylename{
+            width: 398px;
+            margin: 0px 0 20px 20px;
+        }
+
         #filename{
             width: 270px;
             margin: -48px 0 0 420px;
@@ -24,7 +30,7 @@
 </head>
 <body>
 
-<fieldset class="layui-elem-field" style="margin-top: 20px;height: 200px">
+<fieldset class="layui-elem-field" style="margin-top: 20px;height: 250px">
     <legend style="font-size: 15px;">上传代码风格</legend>
     <div class="layui-row">
         <div class="layui-col-xs12">
@@ -34,14 +40,8 @@
                     <div class="layui-input-block">
                         <form class="layui-form" action="">
                             <div class="layui-inline" style="margin: 20px 0 10px 140px;">
-                                <label class="layui-form-label" style="width: 114px;margin-right: 38px;">代码风格</label>
-                                <div class="layui-input-inline" style="width: 400px;">
-                                    <select name="modules" lay-verify="required" lay-search="">
-                                        <option value="">直接选择或搜索选择</option>
-                                        <option value="1">layer</option>
-                                        <option value="2">form</option>
-                                    </select>
-                                </div>
+                                <label class="layui-form-label" style="width: 114px;margin-right: 38px;">代码风格名</label>
+                                <input type="text" id="stylename" name="title"  class="layui-input" autocomplete="off" placeholder="代码风格名称">
                             </div>
                         </form>
                     </div>
@@ -62,20 +62,15 @@
     <div class="layui-row">
         <div class="layui-col-xs12">
             <form class="layui-form" action="">
-                <div class="layui-inline" style="margin:  20px 0 10px 10px;">
-                    <div class="layui-input-inline">
+                    <div class="layui-input-inline" style="width: 422px;margin: 20px 0 20px 270px">
+                        <div id="styledetail" style="margin-bottom: 10px;color: red"></div>
                         <select name="modules" lay-verify="required" lay-search="">
                             <option value="">直接选择或搜索选择</option>
                             <option value="1">layer</option>
                             <option value="2">form</option>
                         </select>
-
-                        <button class="layui-btn" lay-submit="" lay-filter="demo1" style="background-color: #00c0ef;margin-top: 15px;">立即提交</button>
-
-                        <button type="reset" class="layui-btn layui-btn-primary" style="margin-top: 15px;">重置</button>
-
+                        <button type="button" class="layui-btn" id="" style="background-color: #00c0ef;margin: -74px 0 -14px 459px;width: 92px">选中</button>
                     </div>
-                </div>
             </form>
         </div>
     </div>
@@ -86,10 +81,16 @@
         var upload = layui.upload, $ = layui.jquery;
         var uploadInst = upload.render({
             elem: '#test3'
-            ,url: '/upload/'
+            ,url: '/core/uploadCodeStyle'
             , auto: false
             , accept: 'file' //普通文件
             , exts: 'xml'
+            ,field:'file'
+            ,data: {
+                codename: function(){
+                    return $('#stylename').val();
+                }
+            }
             ,choose: function(obj){  //上传前选择回调方法
                 obj.preview(function(index,file,result){
                     var filename = file.name;
@@ -99,11 +100,38 @@
             , bindAction: '#uploadFileBtn'
 
             , done: function (res) {
-                //console.log(res)
+                console.log(res)
             }
         });
 
     });
+$(document).ready(function () {
+    $.ajax({
+        url:'/core/getCodeStyles',
+        type:'get',
+        dataType:'json',
+        success:function(res){
+            console.log(res.msg)
+            if(res.code==200){
+                var data = res.data
+                //console.log(data.length)
+                for (var i = 0;i<data.length;i++){
+                    var codeName = data[i].codeName;
+                    var filename = data[i].filename
+                    var status = data[i].status
+                    //console.log(codeName+filename+status)
+                    if (status===true){
+                        //console.log(codeName)
+                        $('#styledetail').text("您目前选中的是："+codeName);
+                    }
+                }
+            }
+        },
+        error:function(){
+        }
+    })
+})
+
 
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form

@@ -97,7 +97,7 @@ public class WebRedux {
 
     @PostMapping("/uploadCodeStyle")
     public Code<String> uploadCodeStyle(MultipartFile file,@RequestParam("codename") String codeName, HttpServletRequest request) {
-        return Code.createCode(200, "", "");
+        return refactCoreService.uploadCodeStyle(file,codeName,request);
     }
 
     @PostMapping("/updateCodeStyleStatus")

@@ -151,9 +151,11 @@ public class RefactCoreServiceImpl implements RefactCoreService {
         CodeStyle codeStyle = null;
         // 将文件下载到文件夹
         try {
-            if (file.isEmpty()) {
+           /* if (file.isEmpty()) {
+                LOGGER.info(file.getOriginalFilename());
                 return Code.createCode(403, "", "上传失败");
-            }
+            }*/
+            LOGGER.info(file.getOriginalFilename());
             String fileName = file.getOriginalFilename();
             String path = "codestyle" + File.separator + fileName;
             codeStyle = new CodeStyle();
@@ -164,6 +166,7 @@ public class RefactCoreServiceImpl implements RefactCoreService {
             LOGGER.info(doFile.exists() ? "文件存在" : "文件不存在");
             file.transferTo(doFile);
         } catch (IOException e) {
+            e.printStackTrace();
             return Code.createCode(403, "", "上传失败");
         }
 
