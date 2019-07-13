@@ -86,14 +86,8 @@ public class AnalysisApi {
 
     public void saveProject() {
         for (Map.Entry<String, JavaModel> entry : Store.javaModelMap.entrySet()) {
-            //这里可以改写写入路径
             TransmissionThread transmissionThread = new TransmissionThread(entry.getValue());
             ThreadPoolUtils.execute(transmissionThread);
-        }
-        try {
-            SaveJson.save();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
