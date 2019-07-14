@@ -55,22 +55,23 @@ public class DirNameRename {
             List<String> fileList = readFildName(parentPath);
             for (String filePath : fileList) {
                 int fileIndex = filePath.lastIndexOf("\\");
-                String newFilePath = newParentPath +"\\"+ filePath.substring(fileIndex + 1);
-                JavaModel model = modelMap.get(filePath);
-                model.setReadPath(newFilePath);
-                modelMap.remove(filePath);
-                modelMap.put(newFilePath,model);
-                //String modifypath=Store.pathMap.get(filePath);
-                //Store.pathMap.remove(filePath);
-                //Store.pathMap.put(newFilePath,modifypath);
-                //System.out.println(filePath);
-                //System.out.println(newFilePath);
-                TreeNode fileNode=treeNode.get(filePath);
-                //System.out.println(fileNode.getRealPath());
-                fileNode.setRealPath(newFilePath);
-                treeNode.remove(filePath);
-                treeNode.put(newFilePath,fileNode);
-
+                if(filePath.substring(0,fileIndex).equals(parentPath)) {
+                    String newFilePath = newParentPath + "\\" + filePath.substring(fileIndex + 1);
+                    JavaModel model = modelMap.get(filePath);
+                    model.setReadPath(newFilePath);
+                    modelMap.remove(filePath);
+                    modelMap.put(newFilePath, model);
+                    //String modifypath=Store.pathMap.get(filePath);
+                    //Store.pathMap.remove(filePath);
+                    //Store.pathMap.put(newFilePath,modifypath);
+                    //System.out.println(filePath);
+                    //System.out.println(newFilePath);
+                    TreeNode fileNode = treeNode.get(filePath);
+                    //System.out.println(fileNode.getRealPath());
+                    fileNode.setRealPath(newFilePath);
+                    treeNode.remove(filePath);
+                    treeNode.put(newFilePath, fileNode);
+                }
             }
             Store.treeNodeMap = treeNode;
             Store.javaModelMap=modelMap;

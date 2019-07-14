@@ -27,11 +27,12 @@ public class TransmissionThread implements Runnable {
         //BoyerMoore boyerMoore  =  new BoyerMoore();
        // int index=boyerMoore.match(modifyPath,Store.path);
         //String path= modifyPath.substring(index+2);
-        String path= modifyPath.substring(Store.path.lastIndexOf("\\")+1);
+        String path= modifyPath.substring(Store.path.lastIndexOf(File.separator)+1);
         jsonObject.setFileName(fileName);
         jsonObject.setFileStatus(fileStatus);
         Store.jsonObjectList.add(jsonObject);
-        String filePath = Store.modifyPath + File.separator +path.substring(0,path.lastIndexOf("\\"))+File.separator+ fileName;
+        //System.out.println(modifyPath);
+        String filePath = Store.modifyPath + File.separator +path.substring(0,path.lastIndexOf(File.separator))+File.separator+ fileName;
         jsonObject.setCopyPath(filePath);
         File file = new File(filePath);
         if (!file.getParentFile().exists()) {

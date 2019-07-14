@@ -16,6 +16,6 @@ public class ClassReferUtil {
         InterfaceImplementRefactor.implementRefactor(oldClassName,newClassName);
         ClassExtendsReferRefactor.extendsRefactor(oldClassName,newClassName);
         ClassImportReferRefactor.importRefactor(oldClassName,newClassName);
-
+        MethodCallExprReferRefactor.MethodCallExprRefactor(oldClassName,newClassName);
     }
 }

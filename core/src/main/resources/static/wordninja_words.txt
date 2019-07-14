@@ -14,7 +14,6 @@ as
 he
 on
 by
-s
 with
 from
 or
@@ -6210,6 +6209,7 @@ turtle
 choices
 petroleum
 formats
+uncaught
 hybrid
 memphis
 simplest
@@ -6614,6 +6614,7 @@ vandals
 cyprus
 campaigns
 alcoholic
+selector
 arabs
 regulations
 storyline
@@ -57092,7 +57093,7 @@ nahyan
 salish
 omim
 smalley
-selector
+00000
 iomhair
 meherabad
 equipping
