@@ -30,8 +30,8 @@ public class JsonUtil {
         //JSONObject root = new JSONObject();
         JSONArray array = new JSONArray();
         if(!jsonObjects.isEmpty()) {
-            for (JsonObject object : jsonObjects) {
-                if(object != null) {
+            for (int jsonIndex = 0;jsonIndex<jsonObjects.size();jsonIndex++) {
+                        JsonObject object = jsonObjects.get(jsonIndex);
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("modifyPath", object.getModifyPath());
                     jsonObject.put("copyPath",object.getCopyPath());
@@ -39,7 +39,7 @@ public class JsonUtil {
                     jsonObject.put("FileStatus", object.getFileStatus());
                     //jsonObject.put("javamodel", Store.javaModelMap.get(object.getCopyPath()));
                     array.add(jsonObject);
-                }
+
             }
             //root.put("content",array);
             String jsonString = formatJson(array.toString());

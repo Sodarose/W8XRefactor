@@ -25,7 +25,8 @@
     windows系统的运行：    
     在jar包所在目录中，shift+鼠标右键，选择在此处打开窗口。
     在命令行中输入 java -jar web-0.0.1-SNAPSHOT.jar
-    然后在浏览器中的地址中输入 http://localhost:8089/route/nofollow
+    然后在浏览器中的地址中输入 http://localhost:8089/route/login
+    登录，然后就进入主页了，点击扫描项目
     然后把项目的路径复制进文本框中，点击扫描项目代码就行了
 #测试
 
