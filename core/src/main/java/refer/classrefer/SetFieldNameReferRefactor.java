@@ -45,11 +45,14 @@ public class SetFieldNameReferRefactor {
                                                 Argumenttype.setName(newClassName);
                                                 objectCreationExpr.setTypeArguments(Argumenttype);
                                                 objectCreationExpr.removeTypeArguments();
+                                                variableDeclarator.setInitializer(objectCreationExpr);
                                             }
                                         }
                                     }
                                 }
                                 variableDeclarator.setType(type);
+                                fieldDeclaration.setVariable(0,variableDeclarator);
+                                //System.out.println(unit);
                             }
                         }
                     }

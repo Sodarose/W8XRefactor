@@ -153,23 +153,23 @@
                  res.originalCode = res.originalCode.replace('>', '&gt;')
                  res.originalCode = res.originalCode.replace(/\n/g, '<br>')
                  res.originalCode = res.originalCode.replace(/\s/g, '&nbsp;')
-                 // if (res.refactCode != null) {
-                 //     res.refactCode = res.refactCode.replace('<', '&lt;')
-                 //     res.refactCode = res.refactCode.replace('>', '&gt;')
-                 //     res.refactCode = res.refactCode.replace(/\n/g, '<br>')
-                 //     res.refactCode = res.refactCode.replace(/\s/g, '&nbsp;')
-                 // }
+                 if (res.refactCode != null) {
+                     res.refactCode = res.refactCode.replace('<', '&lt;')
+                     res.refactCode = res.refactCode.replace('>', '&gt;')
+                     res.refactCode = res.refactCode.replace(/\n/g, '<br>')
+                     res.refactCode = res.refactCode.replace(/\s/g, '&nbsp;')
+                 }
                 if (res.issueShows != null) {
                     res.originalCode = contrast(res.originalCode, res.issueShows)
-                   // res.originalCode = '<pre><code>'+res.originalCode+'</code></pre>'
+                  //res.originalCode = '<pre><code>'+res.originalCode+'</code></pre>'
                 }
-               res.originalCode = '<pre><code class="java">'+res.originalCode+'</code></pre>'
+              // res.originalCode = '<pre><code>'+res.originalCode+'</code></pre>'
                 $("#code").html(res.originalCode)
                 if (res.refactCode != null) {
                     $("#oldCode").addClass("layui-col-md6");
                     $("#oldCode").removeClass("layui-col-md10");
                     $("#newCode").css("display", "block");
-                    res.refactCode = '<pre><code class="java">'+res.refactCode+'</code></pre>'
+                    //res.refactCode = '<pre><code>'+res.refactCode+'</code></pre>'
                     $("#refactorcode").html(res.refactCode);
                 } else {
                     $("#newCode").css("display", "none");

@@ -42,11 +42,18 @@ public class SetVariNameReferRefactor {
                                                 Argumenttype.setName(newClassName);
                                                 objectCreationExpr.setTypeArguments(Argumenttype);
                                                 objectCreationExpr.removeTypeArguments();
+                                                node.setInitializer(objectCreationExpr);
                                             }
                                         }
                                     }
                                 }
                                 node.setType(type);
+                                var.setVariable(0,node);
+//                                System.out.println(6);
+//                                System.out.println(var);
+                               //System.out.println(unit);
+//                                System.out.println(6666);
+//                                System.out.println(unit);
                             }
                         }
                     }
@@ -54,5 +61,4 @@ public class SetVariNameReferRefactor {
             }
         }
     }
-    }
-
+}
